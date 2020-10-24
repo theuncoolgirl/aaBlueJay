@@ -9,11 +9,37 @@ This is the backend for the Flask React project.
 ```bash
 git clone https://github.com/appacademy-starters/react-project-starter.git --branch flask-project-starter --single-branch
 ```
-
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format
 2. Install dependencies
    ```bash
    pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
+   pipenv install alembic Flask-Migrate
    ```
+
+   Open psql and make the below
+   ---
+   Create user "bluejay" with password 'password'
+   create database bluejay_dev_db with owner bluejay
+   ---
+
+   If you dont have a .flaskenv in root make one and name put in the below
+   ---
+   FLASK_APP=starter_app
+   ---
+
+   create a .env and add below
+   ---
+   DATABASE_URL=postgresql://bluejay:password@localhost/bluejay_dev_db
+   SECRET_KEY=super_secret_key123124eqsdasdaswe221
+   ---
+
+   run the commands
+   pipenv shell
+   flask db init
+   flask db migrate
+   flask db upgrade
+
+   check to see if your data is made
 
 3. Create a **.env** file based on the example with proper settings for your
    development environment

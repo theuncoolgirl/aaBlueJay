@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(40), nullable=False)
     lastname = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(String(100), nullable=False)
+    hashed_password = db.Column(db.String(100), nullable=False)
     cash = db.Column(db.Integer, default=0)
 
     purchases = db.relationship("Purchase", back_populates="user")
@@ -58,7 +58,7 @@ class Purchase(db.Model):
     __tablename__ = "purchases"
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     purchaseDate = db.Column(db.DateTime, nullable=False,
                              server_default=db.text("CURRENT_TIMESTAMP"))
     purchasePrice = db.Column(db.Integer, nullable=False)
@@ -70,8 +70,8 @@ class Purchase(db.Model):
 class Recommendation(db.Model):
     __tablename__ = "recommendations"
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
-    friendId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    friendId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     tickerSymbol = db.Column(db.String(20), nullable=False)
     message = db.Column(db.String(500))
 
@@ -82,7 +82,7 @@ class UserList(db.Model):
     __tablename__ = "userlists"
 
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, ForeignKey("users.id"), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     listName = db.Column(db.String(50), nullable=False)
 
     user = db.relationship("User", back_populates="userlists")
@@ -94,28 +94,7 @@ class CurrencyList(db.Model):
     __tablename__ = "currencylists"
 
     id = db.Column(db.Integer, primary_key=True)
-    listId = db.Column(db.Integer, ForeignKey("userlists.id"), nullable=False)
+    listId = db.Column(db.Integer, db.ForeignKey("userlists.id"), nullable=False)
     tickerSymbol = db.Column(db.String(20), nullable=False)
 
     userlist = db.relationship("UserList", back_populates="currencylist")
-
-
-user1 = User(username="demo",
-             firstname="demo",
-             lastname="user",
-             email="demo@example.com",
-             cash=1000)
-user2 = User(username="",
-             firstname=""
-             lastname="",
-             cash=5000)
-user3 = User(username="",
-             firstname=""
-             lastname="")
-
-
-purchase1 = Purchase(id="1",
-                     userid="",
-                     #  purchaseDate="", DEFAULT
-                     purchasePrice="",
-                     purchaseQuantity="")
