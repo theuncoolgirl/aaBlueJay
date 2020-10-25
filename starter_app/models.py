@@ -5,14 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
 
-friend = db.Table(
-    'friends',
-    db.metadata,
-    db.Column("userId", db.Integer, db.ForeignKey("users.id")),
-    db.Column("friendId", db.Integer, db.ForeignKey("users.id"))
-)
-
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -24,14 +16,9 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(100), nullable=False)
     cash = db.Column(db.Integer, default=0)
 
+    recommendation = db.relationship("Recommendation", back_populates="user")
     purchases = db.relationship("Purchase", back_populates="user")
-    recommendations = db.relationship("Recommendation", back_populates="user")
     userlists = db.relationship("UserList", back_populates="user")
-
-    friends = db.relationship('User', secondary=friend,
-                              primaryjoin=id == friend.c.userId,
-                              secondaryjoin=id == friend.c.friendId
-                              )
 
     def to_dict(self):
         return {
@@ -52,6 +39,17 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Friend(db.Model):
+    __tablename__ = 'friends'
+
+    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"))
+    friendId = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    user = db.relationship("User", foreign_keys=userId)
+    friend = db.relationship("User", foreign_keys=friendId)
 
 
 class Purchase(db.Model):
@@ -75,7 +73,7 @@ class Recommendation(db.Model):
     tickerSymbol = db.Column(db.String(20), nullable=False)
     message = db.Column(db.String(500))
 
-    user = db.relationship("User", back_populates="recommendations")
+    user = db.relationship("User", back_populates="recommendation")
 
 
 class UserList(db.Model):

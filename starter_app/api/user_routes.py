@@ -1,9 +1,13 @@
 from flask import Blueprint, jsonify
-from starter_app.models import User
+from starter_app.models import User, Friend
 
 user_routes = Blueprint('users', __name__)
 
+
 @user_routes.route('/')
 def index():
-  response = User.query.all()
-  return { "users": [user.to_dict() for user in response]}
+    response = Friendship.query.filter(Friendship.userId == 1).all()
+    for friendship in response:
+        print(friendship.friend)
+    return {'daniel': 10}
+    # return {"users": [user.to_dict() for user in response]}
