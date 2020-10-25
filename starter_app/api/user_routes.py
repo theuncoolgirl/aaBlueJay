@@ -6,7 +6,7 @@ user_routes = Blueprint('users', __name__)
 
 @user_routes.route('/')
 def index():
-    response = Friendship.query.filter(Friendship.userId == 1).all()
+    response = Friend.query.filter(Friend.userId == 1).all()
     for friendship in response:
         print(friendship.friend)
     return {'daniel': 10}
