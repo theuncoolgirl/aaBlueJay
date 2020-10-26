@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(100), nullable=False)
     cash = db.Column(db.Integer, default=0)
 
-    recommendation = db.relationship("Recommendation", back_populates="user")
+    # recommendation = db.relationship("Recommendation", back_populates="user")
     purchases = db.relationship("Purchase", back_populates="user")
     userlists = db.relationship("UserList", back_populates="user")
 
@@ -73,7 +73,8 @@ class Recommendation(db.Model):
     tickerSymbol = db.Column(db.String(20), nullable=False)
     message = db.Column(db.String(500))
 
-    user = db.relationship("User", back_populates="recommendation")
+    user = db.relationship("User", foreign_keys=userId)
+    friend = db.relationship("User", foreign_keys=friendId)
 
 
 class UserList(db.Model):
@@ -92,7 +93,7 @@ class CurrencyList(db.Model):
     __tablename__ = "currencylists"
 
     id = db.Column(db.Integer, primary_key=True)
-    listId = db.Column(db.Integer, db.ForeignKey("userlists.id"), nullable=False)
+    listId = db.Column(db.Integer, db.ForeignKey("userlists.id"), nullable=False)  # noqa
     tickerSymbol = db.Column(db.String(20), nullable=False)
 
     userlist = db.relationship("UserList", back_populates="currencylist")

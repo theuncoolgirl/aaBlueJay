@@ -2,12 +2,15 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 
 import UserList from './components/UsersList';
+import LoginForm from './components/LoginForm'
 
 
 function App() {
 
+
   return (
     <BrowserRouter>
+        <LoginForm />
         <nav>
             <ul>
                 <li><NavLink to="/" activeclass="active">Home</NavLink></li>

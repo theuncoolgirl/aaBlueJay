@@ -1,5 +1,5 @@
 # from starter_app.models import User, Purchase, Recommendation, UserList, CurrencyList
-from starter_app.models import User, Friendship
+from starter_app.models import User, Friend
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
@@ -7,7 +7,7 @@ load_dotenv()
 
 with app.app_context():
     # db.drop_all()
-    # db.create_all()
+    db.create_all()
 
     user1 = User(username="demoperson",
                  firstname="demo",
@@ -27,11 +27,11 @@ with app.app_context():
                  email="money@money.com",
                  cash=5000)
 
-    f1 = Friendship(
+    f1 = Friend(
         userId=1,
         friendId=2,
     )
-    f2 = Friendship(
+    f2 = Friend(
         userId=1,
         friendId=3
     )
