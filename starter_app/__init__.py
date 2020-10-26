@@ -30,9 +30,9 @@ CORS(app)
 #         httponly=True)
 #     return response
 
-# @login.user_loader
-# def load_user(id):
-#     return User.query.get(int(id))
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 @app.route('/', defaults={'path': ''})
