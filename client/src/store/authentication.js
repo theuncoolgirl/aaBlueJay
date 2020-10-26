@@ -36,6 +36,7 @@ export const login = (email, password) => {
 
       if (response.ok) {
         const { user } = await response.json();
+        debugger
         //if the user is successfully logged in disatch the info to update state to the user
         dispatch(setUser(user));
       }
@@ -90,7 +91,7 @@ export const logout = () => async dispatch => {
 
 function loadUser() {
   //get token from browser then check if there is a browser
-  const authToken = Cookies.get("token");
+  const authToken = Cookies.get("session");
   if (authToken) {
     try {
       //gets the value from the cookie (index 0 is key, index 1 is the value)

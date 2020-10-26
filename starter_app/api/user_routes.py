@@ -19,13 +19,14 @@ def index():
 @user_routes.route("/login", methods=["POST"])
 def login():
     if current_user.is_authenticated:
-        return {'loggedin': 'works'}
+        return user.to_dict()
     data = request.json
-    user = User.query.filter(User.email == data.email).first()
-    if not user or not user.check_password(data.password):
+    user = User.query.filter(User.email == data['email']).first()
+    if not user or not user.check_password(data['password']):
         return {'login': 'failed'}
     login_user(user)
-    return {'login': 'success'}
+    return user.to_dict()
+    return {'test': 1}
 
 
 @user_routes.route('/logout', methods=["POST"])
