@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
+import * as AuthAction from './store/session';
+
 
 function App() {
 
+    const dispatch = useDispatch()
+    const loaduser = () => dispatch(AuthAction.loadUser())
+
+    useEffect(()=>{
+        loaduser()
+    // eslint-disable-next-line
+    }, [])
 
   return (
     <BrowserRouter>
