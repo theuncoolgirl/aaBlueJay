@@ -35,8 +35,7 @@ export const login = (email, password) => {
       });
 
       if (response.ok) {
-        const { user } = await response.json();
-        debugger
+        const user  = await response.json();
         //if the user is successfully logged in disatch the info to update state to the user
         dispatch(setUser(user));
       }
@@ -44,7 +43,7 @@ export const login = (email, password) => {
   };
 
 
-export const signup = (firstName, lastName, userName,email, password) => async dispatch => {
+export const signup = (firstName, lastName, userName, email, password) => async dispatch => {
     //genearte 2nd part of CSRF protection and save as token
     // debugger
     const XSRFTOKEN = await fetch('/api/auth/getToken')
@@ -90,8 +89,10 @@ export const logout = () => async dispatch => {
 
 
 function loadUser() {
+  console.log('in load user')
   //get token from browser then check if there is a browser
-  const authToken = Cookies.get("session");
+  const authToken = Cookies.get("token");
+  console.log(authToken)
   if (authToken) {
     try {
       //gets the value from the cookie (index 0 is key, index 1 is the value)
@@ -105,6 +106,7 @@ function loadUser() {
       //destructure data
       const { data } = payloadObj;
       //return user into as data (this will set the default state to the user)
+      debugger
       return data;
     } catch (e) {
       //any errors then remove the cookie
