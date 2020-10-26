@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
-import MyList from './components/List'
+import MyList from './components/WatchList'
 
 function App() {
 
@@ -22,9 +22,11 @@ function App() {
                     <UserList />
                 </Route>
 
+                <Route path="/list/watchlist">
+                    <MyList />
+                </Route>
                 <Route path="/">
                     <h1>My Home Page</h1>
-                    <MyList />
                 </Route>
             </Switch>
         </BrowserRouter>
