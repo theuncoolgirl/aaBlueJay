@@ -5,6 +5,7 @@ import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import * as AuthAction from './store/session';
+import LogoutButton from './components/LogoutButton';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                 <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                 <li><LoginForm /></li>
+                <LogoutButton />
             </ul>
         </nav>
         <Switch>

@@ -67,13 +67,13 @@ export const signup = (firstname, lastname, username, email, password, confirmpa
 
 export const logout = () => async dispatch => {
 
-  const XSRFTOKEN = await fetch('/api/auth/getToken')
+  const XSRFTOKEN = await fetch('/api/users/get_csrf')
   const token = (await XSRFTOKEN.json())
 
-  const res = await fetch('/api/auth/logout', {
-    method: "delete",
+  const res = await fetch('/api/users/logout', {
+    method: "POST",
     headers: {
-      'X-CSRFToken':token.XSRFTOKEN
+      'X-CSRFToken':token.csrfT
     },
   });
   if (res.ok) {

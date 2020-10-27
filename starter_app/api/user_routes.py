@@ -48,7 +48,13 @@ def sign_up():
     print(form.errors)
     if current_user.is_authenticated:
         return current_user.to_dict()
-    user = User(**request.json)
+    data = request.json
+    user = User(firstname=data['firstname'],
+                lastname=data['lastname'],
+                username=data['username'],
+                email=data['email'],
+                password=data['password'])
+    login_user(user)
     db.session.add(user)
     db.session.commit()
     return user.to_dict()
