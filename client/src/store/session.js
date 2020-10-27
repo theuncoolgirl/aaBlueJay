@@ -98,7 +98,6 @@ export default function reducer(state={}, action) {
     case REMOVE_USER:
       return {};
     default:
-      console.log('im here')
       return state;
   }
 }

@@ -4,7 +4,7 @@ from pycoingecko import CoinGeckoAPI
 from ..models import UserList, CurrencyList, db
 from sqlalchemy.orm import joinedload
 
-currency_routes = Blueprint('currencies', __name__)
+coin_routes = Blueprint('coins', __name__)
 cg = CoinGeckoAPI()
 
 
@@ -13,12 +13,12 @@ cg = CoinGeckoAPI()
 #     return {'test': 'test3'}
 
 
-@currency_routes.route("/", methods=["GET"])
-def currency():
-    currency_id, days, vs_currency = request.json.values()
+@coin_routes.route("/", methods=["PUT"])
+def coin():
+    coin_id, days, vs_currency = request.json.values()
 
     coin_data = cg.get_coin_by_id(
-        id=currency_id,
+        id=coin_id,
         localization="false",
         tickers="false",
         market_data="true",
@@ -28,42 +28,44 @@ def currency():
     )
 
     chart_data = cg.get_coin_ohlc_by_id(
-        id=currency_id,
+        id=coin_id,
         vs_currency=vs_currency,
         days=days
     )
 
     data = {**coin_data, "chart_data": chart_data}
 
-    res = {key: data[key] for key in data.keys() & {
-        'id',
-        'chart_data',
-        'description',
-        'market_data',
-        'name',
-        'symbol'
-    }}
+    # res = {key: data[key] for key in data.keys() & {
+    #     'id',
+    #     'chart_data',
+    #     'description',
+    #     'market_data',
+    #     'name',
+    #     'symbol'
+    # }}
 
-    # {...,
-    # description: {
-    # en: ACTUAL DESCRIPTION
-    # },
-    # ...
-    # }
-    print(res)
+    res =  {
+        'description': data['description']['en'],
+        'id': data['id'],
+        'name': data['name'],
+        'symbol': data['symbol'],
+        'current_price_usd': data['market_data']['current_price']['usd'],
+        'percent_change_usd': data['market_data']['market_cap_change_percentage_24h_in_currency']['usd'],
+        'price_change_usd': data['market_data']['price_change_24h_in_currency']['usd'],
+        'chart_data': data['chart_data']
+    }
     return res
-    # return data["chart_data"]
 
-    # chart_data,
-    # description[en],
-    # id,
-    # market_data[current_price][usd],
-    # market_data[high_24h],
-    # market_data[low_24h],
-    # market_data[market_cap_change_percentage_24h_in_currency][usd],
-    # market_data[price_change_24h_in_currency][usd],
-    # name,
-    # symbol = data.json.values()
+
+@currency_routes.route('/explore/<int:id>')
+def explore_load(id):
+    print(int(id))
+    coins = cg.get_coins_markets(vs_currency='usd',
+                                 per_page=50,
+                                 page=id
+                                )
+    return {'coins':coins}
+
 
 @currency_routes.route("/list", methods=["GET"])
 def list_route():
