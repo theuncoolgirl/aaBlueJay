@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
 import SignUpForm from './components/SignUpForm'
 import * as AuthAction from './store/session';
+import LogoutButton from './components/LogoutButton';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                 </ul>
+                <LogoutButton />
             </nav>
             <Switch>
                 <Route path="/users">
