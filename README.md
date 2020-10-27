@@ -41,10 +41,6 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
 
    check to see if your data is made
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
-
 5. Get into your pipenv, seed your database, and run your flask app
 
    ```bash

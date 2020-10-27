@@ -92,19 +92,27 @@ Most data for the setlist.fm clone will be pulled from the setlist.fm API, but a
     - userId (belongsTo Users.id)
     - currencyId (from coingecko API)
 
-## Paths
+## Frontend Routes
 - `/` Home/Landing Page (w/login form if user is not logged in)
 - `/signup` Signup Page
-- `/logout` Link to Logout, redirects to homepage
-- `/currency/${id}}` Currency Detail Page (directed from search)
-- `/list/watchlist` Watch List Page
+- `/currencies/${id}}` Currency Detail Page (directed from search)
+- `/lists` Watch List Page
 - `/explore/${page}` Explore Currencies Page
+
+## Backend Routes
+- `/` Home/Landing Page (w/login form if user is not logged in)
+- `/api/users/signup` Signup Page
+- `/api/users/logout` Link to Logout, redirects to homepage
+- `/api/currencies/${id}}` Currency Detail Page (directed from search)
+- `/api/lists` Watch List Page
+- `/api/explore/${page}` Explore Currencies Page
 
 ## Components
 Components to be organized as follows:
 - Root
     - App
         - NavBar
+            - Search
         - Main Component
         - Footer
 
@@ -112,21 +120,27 @@ The following components will render in between `NavBar` and `Footer` for their 
 - /
     - Homepage
         - [if not logged in] LoginForm
+        - [if logged in] redirects to `/lists`
 
 - /signup
     - SignupForm
 
-- /currency/${id}}
+- /currencies/${id}}
     - CurrencyDetails
         - CurrencyHeader
         - CurrencyPrices
         - CurrencyMarketChart
         - CurrencyAbout
 
-- /list/watchlist
-    - Lists
+- /lists
+    - [single watchlist implementation (MVP)] List
         - ListHeader
         - ListContents
+    - [multi watchlist implementation] List
+        - ListHeader
+        - ListContents
+        - ListSidebar
+            - Stock (symbol, minigraph, price)
 
 - /explore/${page}
     - ExploreCurrencies
@@ -134,6 +148,17 @@ The following components will render in between `NavBar` and `Footer` for their 
         - Pagination
 
 ## State Shape
-```
-TBD
+```JS
+{
+    session: {
+        // Session Data Here
+    },
+    currentCurrency: {
+        // Object data from coingecko API call
+    },
+    list: {
+        // Selected data for all currencies in watchlist
+    },
+    
+}
 ```

@@ -9,32 +9,37 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    user1 = User(username="demoperson",
-                 firstname="demo",
-                 lastname="user",
-                 email="demo@example.com",
-                 password="password",
-                 cash=1000)
-    user2 = User(username="demopersontwo",
-                 firstname="second",
-                 lastname="person",
-                 email="second@example.com",
-                 password="password")
-    user3 = User(username="moneyuser",
-                 firstname="money",
-                 lastname="user",
-                 password="password",
-                 email="money@money.com",
-                 cash=5000)
+    seeder = [
+        User(username="demoperson",
+             firstname="demo",
+             lastname="user",
+             email="demo@example.com",
+             password="password",
+             cash=1000),
+        User(username="demopersontwo",
+             firstname="second",
+             lastname="person",
+             email="second@example.com",
+             password="password"),
+        User(username="moneyuser",
+             firstname="money",
+             lastname="user",
+             password="password",
+             email="money@money.com",
+             cash=5000),
+        Friend(
+            userId=1,
+            friendId=2,
+        ),
+        Friend(
+            userId=1,
+            friendId=3
+        )
+    ]
 
-    f1 = Friend(
-        userId=1,
-        friendId=2,
-    )
-    f2 = Friend(
-        userId=1,
-        friendId=3
-    )
+    for seed in seeder:
+        db.session.add(seed)
+    db.session.commit()
     # purchase1 = Purchase(
     #     userid="",
     #     #  purchaseDate="", DEFAULT
@@ -49,6 +54,7 @@ with app.app_context():
     #                       friendId=3,
     #                       tickerSymbol="LTC",
     #                       message="Buy this one!!!")
+<<<<<<< HEAD
 
     db.session.add(user1)
     db.session.add(user2)
@@ -138,3 +144,5 @@ with app.app_context():
     CurrencyList(listId=3,
                  tickerSymbol="DAI")
     db.session.commit()
+=======
+>>>>>>> 0f78fc8d91623dd91494cff74913f011bc0a49c2
