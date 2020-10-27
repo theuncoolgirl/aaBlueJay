@@ -53,3 +53,13 @@ def coin():
         'chart_data': data['chart_data']
     }
     return res
+
+
+@currency_routes.route('/explore/<int:id>')
+def explore_load(id):
+    print(int(id))
+    coins = cg.get_coins_markets(vs_currency='usd',
+                                 per_page=50,
+                                 page=id
+                                )
+    return {'coins':coins}

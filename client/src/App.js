@@ -5,8 +5,9 @@ import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
 import LogoutButton from './components/LogoutButton';
-// import SignUpForm from './components/SignUpForm';
+import SignUpForm from './components/SignUpForm';
 import CoinDetails from './components/CoinDetails';
+import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 
 
@@ -28,12 +29,19 @@ function App() {
                 <ul>
                     <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                 </ul>
                 <LogoutButton />
             </nav>
             <Switch>
                 <Route path="/users">
                     <UserList />
+                </Route>
+                <Route path="/signup">
+                    <SignUpForm />
+                </Route>
+                <Route path="/explore/:id">
+                    <ExploreCurrencies />
                 </Route>
                 <Route path="/list/watchlist">
                     <MyList />
