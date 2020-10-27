@@ -13,7 +13,7 @@ function parseData(parse) {
         d.volume = +d.regularMarketVolume;
         
         console.log('inside parse func', d.date)
-        
+
 		return d;
 	};
 }

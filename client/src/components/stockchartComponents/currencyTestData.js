@@ -48,7 +48,7 @@
     "regularMarketPreviousClose":108.22,
     "regularMarketPrice":112.28,
     "regularMarketTime":{
-       "date":"2020-09-23 20:00:01.000000",
+       "date":"2020-09-20 20:00:01.000000",
        "timezone":"+00:00",
        "timezone_type":1
        },
@@ -843,7 +843,7 @@
 "sharesOutstanding":7567649792,
 "shortName":"Microsoft Corporation",
 "regularMarketTime":{
-    "date":"2020-09-26 20:00:01.000000",
+    "date":"2020-09-23 20:00:01.000000",
     "timezone":"+00:00",
     "timezone_type":1
     },
@@ -1173,7 +1173,7 @@
 "sharesOutstanding":7567649792,
 "shortName":"Microsoft Corporation",
 "regularMarketTime":{
-    "date":"2020-09-26 20:00:01.000000",
+    "date":"2020-09-30 20:00:01.000000",
     "timezone":"+00:00",
     "timezone_type":1
     },

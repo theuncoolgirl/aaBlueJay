@@ -3,11 +3,11 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
-
 import MyList from './components/WatchList'
 import SignUpForm from './components/SignUpForm'
 import * as AuthAction from './store/session';
 import LogoutButton from './components/LogoutButton';
+import ChartComponent from './components/stockchartComponents/ChartComponent'
 
 
 function App() {
@@ -22,7 +22,9 @@ function App() {
 
     return (
         <BrowserRouter>
-            <h2>chart will go here</h2>
+                <div className='stockchart'>
+                    <ChartComponent />
+                </div>
             <LoginForm />
             <nav>
                 <ul>
