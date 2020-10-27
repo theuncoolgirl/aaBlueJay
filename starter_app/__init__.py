@@ -11,6 +11,8 @@ from flask_migrate import Migrate
 from starter_app.config import Config
 
 app = Flask(__name__)
+if __name__  == "__main__": 
+    app.run(debug=True)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
@@ -23,14 +25,14 @@ login = LoginManager(app)
 CORS(app)
 
 
-# @app.after_request
-# def inject_csrf_token(response):
-#     response.set_cookie('csrf_token',
-#         generate_csrf(),
-#         secure=True if os.environ.get('FLASK_ENV') else False,
-#         samesite='Strict' if os.environ.get('FLASK_ENV') else None,
-#         httponly=True)
-#     return response
+@app.after_request
+def inject_csrf_token(response):
+    response.set_cookie('csrf_token',
+        generate_csrf(),
+        secure=True if os.environ.get('FLASK_ENV') else False,
+        samesite='Strict' if os.environ.get('FLASK_ENV') else None,
+        httponly=True)
+    return response
 
 @login.user_loader
 def load_user(id):

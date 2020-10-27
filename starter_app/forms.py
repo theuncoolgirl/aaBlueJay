@@ -15,6 +15,3 @@ class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirmpassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match')])  # noqa
-
-
-# new package for email validation needed pipenv install wtforms[email]
