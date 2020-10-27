@@ -22,6 +22,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <h2>chart will go here</h2>
             <LoginForm />
             <nav>
                 <ul>
