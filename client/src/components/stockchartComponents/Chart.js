@@ -13,6 +13,7 @@ import {Label} from "react-stockcharts/lib/annotation";
 
 class CandleStickStockScaleChart extends React.Component {
 	render() {
+		      // eslint-disable-next-line
 		const { type, data: initialData, width, ratio, margin } = this.props;
 		// candle styling that is passed into the candleStickSeries component below
         const candlesAppearance = {
@@ -37,7 +38,7 @@ class CandleStickStockScaleChart extends React.Component {
 		} = xScaleProvider(initialData);
 		const xExtents = [
 			xAccessor(last(data)),
-			//starting at index 0 of the data array ensures all data is initially loaded 
+			//starting at index 0 of the data array ensures all data is initially loaded
             xAccessor(data[0])
 
 		];
@@ -46,7 +47,7 @@ class CandleStickStockScaleChart extends React.Component {
 			<ChartCanvas height={400}
 				ratio={ratio}
 				width={width}
-				margin={{ left: 50, right: 50, top: 30, bottom: 60 }}
+				// margin={{ left: 50, right: 50, top: 30, bottom: 60 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
