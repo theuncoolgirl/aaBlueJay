@@ -8,15 +8,17 @@ import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
+import {Label} from "react-stockcharts/lib/annotation";
+
 
 class CandleStickStockScaleChart extends React.Component {
 	render() {
-		const { type, data: initialData, width, ratio } = this.props;
+		const { type, data: initialData, width, ratio, margin } = this.props;
 		// candle styling that is passed into the candleStickSeries component below
         const candlesAppearance = {
             wickStroke: "#000000",
             fill: function fill(d) {
-              return d.close > d.open ? "rgba(196, 205, 211, 0.8)" : "rgba(22, 22, 22, 0.8)";
+              return d.close > d.open ? "rgba(13, 238, 114, 0.3)" : "rgba(13, 255, 200, 1)";
             },
             stroke: "#000000",
             candleStrokeWidth: 1,
@@ -44,7 +46,7 @@ class CandleStickStockScaleChart extends React.Component {
 			<ChartCanvas height={400}
 				ratio={ratio}
 				width={width}
-				margin={{ left: 50, right: 50, top: 10, bottom: 30 }}
+				margin={{ left: 50, right: 50, top: 30, bottom: 60 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
@@ -53,6 +55,14 @@ class CandleStickStockScaleChart extends React.Component {
 				displayXAccessor={displayXAccessor}
 				xExtents={xExtents}
 			>
+				{/* title label */}
+				<Label x={width/2.5} y={30}
+					fontSize="30" text="MSFT" fontFamily='comic'/>
+
+				{/* xaxis label */}
+				<Label x={width/2.5} y={width/2.1}
+						// rotate={-90}
+						fontSize="20" text="volume" fontFamily='comic'/>
 
 				<Chart id={1} yExtents={d => [2000,80]}>
 					<XAxis axisAt="bottom" orient="bottom" ticks={6}/>

@@ -18,9 +18,7 @@ class ChartComponent extends React.Component {
 		}
 		return (
 			// typechooser supplies a dropdown to change some display options
-			<TypeChooser>
-				  {type => <ChartWrapper type={type} data={this.state.data} />}
-			</TypeChooser>
+				  <ChartWrapper type={"svg"} data={this.state.data} />
 		)
 	}
 }
