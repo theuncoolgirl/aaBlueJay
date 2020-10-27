@@ -25,9 +25,9 @@ function App() {
 
     return (
         <BrowserRouter>
-                <div className='stockchart'>
-                    <ChartComponent />
-                </div>
+            <div className='stockchart'>
+                <ChartComponent />
+            </div>
             <LoginForm />
             <nav>
                 <ul>
@@ -55,7 +55,7 @@ function App() {
                     <h1>My Home Page</h1>
                 </Route>
             </Switch>
-        </BrowserRouter>
+        </BrowserRouter >
     );
 }
 
