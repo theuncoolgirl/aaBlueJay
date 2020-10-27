@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 
+import * as AuthAction from './store/session';
 import MyList from './components/WatchList'
 import SignUpForm from './components/SignUpForm'
-import * as AuthAction from './store/session';
 import LogoutButton from './components/LogoutButton';
+import ExploreCurrencies from './components/ExploreCurrencies'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <ul>
                     <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                 </ul>
                 <LogoutButton />
             </nav>
@@ -36,6 +38,9 @@ function App() {
                 </Route>
                 <Route path="/signup">
                     <SignUpForm />
+                </Route>
+                <Route path="/explore/:id">
+                    <ExploreCurrencies />
                 </Route>
                 <Route path="/list/watchlist">
                     <MyList />

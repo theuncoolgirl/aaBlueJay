@@ -61,7 +61,7 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         return user.to_dict()
-    return {form.errors}
+    return form.errors
 
 
 @user_routes.route('/logout', methods=["POST"])

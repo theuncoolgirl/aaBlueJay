@@ -44,7 +44,7 @@ def test():
 
 #     # {...,
 #     # description: {
-#     # en: ACTUAL DESCRIPTION 
+#     # en: ACTUAL DESCRIPTION
 #     # },
 #     # ...
 #     # }
@@ -62,3 +62,12 @@ def test():
     # market_data[price_change_24h_in_currency][usd],
     # name,
     # symbol = data.json.values()
+
+@currency_routes.route('/explore/<int:id>')
+def explore_load(id):
+    print(int(id))
+    coins = cg.get_coins_markets(vs_currency='usd',
+                                 per_page=50,
+                                 page=id
+                                )
+    return {'coins':coins}

@@ -11,12 +11,12 @@ from flask_migrate import Migrate
 from starter_app.config import Config
 
 app = Flask(__name__)
-if __name__  == "__main__": 
+if __name__  == "__main__":
     app.run(debug=True)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
-app.register_blueprint(currency_routes, url_prefix='/api/currencies')
+app.register_blueprint(currency_routes, url_prefix='/api/coins')
 db.init_app(app)
 Migrate(app, db)
 login = LoginManager(app)
