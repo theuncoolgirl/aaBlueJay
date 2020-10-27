@@ -39,6 +39,9 @@ function CoinDetails(props) {
     // var parser = new DOMParser();
     // var doc = parser.parseFromString(description, 'text/html');
 
+    // const descriptionParser = (string) => {
+    //     const element = docu
+    // }
     return (
         <>
             <h1>Coin Details: </h1>
