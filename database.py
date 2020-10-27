@@ -1,12 +1,12 @@
 # from starter_app.models import User, Purchase, Recommendation, UserList, CurrencyList
-from starter_app.models import User, Friend
+from starter_app.models import User, Friend, UserList, CurrencyList
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
 
 
 with app.app_context():
-    # db.drop_all()
+    db.drop_all()
     db.create_all()
 
     user1 = User(username="demoperson",
@@ -59,4 +59,82 @@ with app.app_context():
     # db.session.add(rec1)
     # db.session.add(rec2)
 
+    User(username="UserTest",
+         firstname="TestFirstName",
+         lastname="TestLastName",
+         password="password",
+         email="test@test.com",
+         cash=50000),
+    Friend(
+        userId=3,
+        friendId=4),
+    Friend(
+        userId=2,
+        friendId=4),
+    UserList(userId=1,
+             listName="Watch List"),
+    UserList(userId=2,
+             listName="Watch List"),
+    UserList(userId=3,
+             listName="Watch List"),
+    UserList(userId=4,
+             listName="Watch List"),
+    CurrencyList(listId=1,
+                 tickerSymbol="ETH"),
+    CurrencyList(listId=1,
+                 tickerSymbol="XRP"),
+    CurrencyList(listId=1,
+                 tickerSymbol="LTC"),
+    CurrencyList(listId=1,
+                 tickerSymbol="USDT"),
+    CurrencyList(listId=1,
+                 tickerSymbol="BCH"),
+    CurrencyList(listId=1,
+                 tickerSymbol="BSV"),
+    CurrencyList(listId=1,
+                 tickerSymbol="XMR"),
+    CurrencyList(listId=1,
+                 tickerSymbol="EOS"),
+    CurrencyList(listId=2,
+                 tickerSymbol="BNB"),
+    CurrencyList(listId=2,
+                 tickerSymbol="BSV"),
+    CurrencyList(listId=2,
+                 tickerSymbol="USDT"),
+    CurrencyList(listId=2,
+                 tickerSymbol="LTC"),
+    CurrencyList(listId=2,
+                 tickerSymbol="ETH"),
+    CurrencyList(listId=1,
+                 tickerSymbol="TRX"),
+    CurrencyList(listId=2,
+                 tickerSymbol="XMR"),
+    CurrencyList(listId=2,
+                 tickerSymbol="ADA"),
+    CurrencyList(listId=2,
+                 tickerSymbol="XTZ"),
+    CurrencyList(listId=1,
+                 tickerSymbol="WBTC"),
+    CurrencyList(listId=3,
+                 tickerSymbol="XTZ"),
+    CurrencyList(listId=3,
+                 tickerSymbol="TRX"),
+    CurrencyList(listId=3,
+                 tickerSymbol="WBTC"),
+    CurrencyList(listId=3,
+                 tickerSymbol="LTC"),
+    CurrencyList(listId=3,
+                 tickerSymbol="DOT"),
+    CurrencyList(listId=3,
+                 tickerSymbol="BTC"),
+    CurrencyList(listId=3,
+                 tickerSymbol="ADA"),
+    CurrencyList(listId=3,
+                 tickerSymbol="ETH"),
+    CurrencyList(listId=3,
+                 tickerSymbol="FIL"),
+    CurrencyList(listId=3,
+                 tickerSymbol="VET"),
+    CurrencyList(listId=3,
+                 tickerSymbol="DAI")
     db.session.commit()
