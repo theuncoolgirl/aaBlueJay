@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 from flask import request
 from pycoingecko import CoinGeckoAPI
 from ..models import UserList, CurrencyList, db
+from sqlalchemy.orm import joinedload
 
 currency_routes = Blueprint('currencies', __name__)
 cg = CoinGeckoAPI()
@@ -67,9 +68,9 @@ def currency():
 @currency_routes.route("/list", methods=["GET"])
 def list_route():
     vs_currency, watchlist, user_id = request.json.values()
+    query = UserList.query.options(joinedload('currencylist')).filter(UserList.userId==user_id).first()
 
-    db.userListOfCurrencies = session.query(UserList).join(CurrencyList).filter(UserList.userId==user_id).first()
-    print(userListOfCurrencies)
+    print(query)
 
     coin_data = cg.get_coins_markets(
         vs_currency="usd"
