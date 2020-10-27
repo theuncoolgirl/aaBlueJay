@@ -34,7 +34,9 @@ function App() {
                 <Route path="/users">
                     <UserList />
                 </Route>
-
+                <Route path="/signup">
+                    <SignUpForm />
+                </Route>
                 <Route path="/list/watchlist">
                     <MyList />
                 </Route>
