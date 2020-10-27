@@ -1,3 +1,5 @@
 {
-  "python.pythonPath": ".venv/bin/python"
+  "python.pythonPath": ".venv/bin/python",
+  // "python.pythonPath": "/Users/jpa/Desktop/aaBlueJay/.venv/bin/python3.7",
+  // "git.ignoreLimitWarning": true
 }
