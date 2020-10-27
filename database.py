@@ -191,6 +191,7 @@ with app.app_context():
     db.session.commit()
 
 # stretch seeds
+# need to expand userlists
 # Purchase(userid=1,
 #                  purchasePrice=,
 #                  purchaseQuantity=),
