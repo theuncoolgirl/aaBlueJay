@@ -5,6 +5,7 @@ import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
 import LogoutButton from './components/LogoutButton';
+import ChartComponent from './components/stockchartComponents/ChartComponent'
 import SignUpForm from './components/SignUpForm';
 import CoinDetails from './components/CoinDetails';
 import ExploreCurrencies from './components/ExploreCurrencies'
@@ -24,6 +25,9 @@ function App() {
 
     return (
         <BrowserRouter>
+            <div className='stockchart'>
+                <ChartComponent />
+            </div>
             <LoginForm />
             <nav>
                 <ul>
@@ -51,7 +55,7 @@ function App() {
                     <h1>My Home Page</h1>
                 </Route>
             </Switch>
-        </BrowserRouter>
+        </BrowserRouter >
     );
 }
 
