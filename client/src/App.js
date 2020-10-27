@@ -15,9 +15,9 @@ function App() {
     const dispatch = useDispatch()
     const loaduser = () => dispatch(AuthAction.loadUser())
 
-    useEffect(()=>{
+    useEffect(() => {
         loaduser()
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -33,6 +33,9 @@ function App() {
             <Switch>
                 <Route path="/users">
                     <UserList />
+                </Route>
+                <Route path="/signup">
+                    <SignUpForm />
                 </Route>
 
                 <Route path="/list/watchlist">
