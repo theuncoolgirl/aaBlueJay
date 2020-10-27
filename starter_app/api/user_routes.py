@@ -48,15 +48,16 @@ def login():
 def sign_up():
     if current_user.is_authenticated:
         return current_user.to_dict()
-
-    form = SignUpForm(csrf_token=request.headers['x-Csrftoken'])
-    if form.validate_on_submit():
-        user = User(**request.json)
-        db.session.add(user)
-        db.session.commit()
-        return user.to_dict()
-    print(form.errors)
-    return form.errors
+    data = request.json
+    user = User(firstname=data['firstname'],
+                lastname=data['lastname'],
+                username=data['username'],
+                email=data['email'],
+                password=data['password'])
+    login_user(user)
+    db.session.add(user)
+    db.session.commit()
+    return user.to_dict()
 
 
 @user_routes.route('/logout', methods=["POST"])
