@@ -6,6 +6,7 @@ from flask_login import LoginManager
 
 from starter_app.models import db, User
 from starter_app.api.user_routes import user_routes
+from starter_app.api.currency_routes import currency_routes
 from flask_migrate import Migrate
 from starter_app.config import Config
 
@@ -13,6 +14,7 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(currency_routes, url_prefix='/api/currencies')
 db.init_app(app)
 Migrate(app, db)
 login = LoginManager(app)
@@ -30,9 +32,9 @@ CORS(app)
 #         httponly=True)
 #     return response
 
-# @login.user_loader
-# def load_user(id):
-#     return User.query.get(int(id))
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 @app.route('/', defaults={'path': ''})
