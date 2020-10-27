@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useParams, useHistory } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,10 +10,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-// import Pagination from "./Pagination.js"
 import Pagination from '@material-ui/lab/Pagination';
-import CurrenceyTableRow from "./CurrencyTableRow";
 
+import CurrenceyTableRow from "./CurrencyTableRow";
 import { explore_all_load } from '../store/explore'
 
 const useStyles = makeStyles({
@@ -37,7 +37,6 @@ const ExploreCurrencies = () => {
     const handleChange = (event, value) => {
         let page = Number(value)
         history.push(`/explore/${page}`)
-        // dispatch(explore_all_load(id))
     }
 
     if (!token) {
