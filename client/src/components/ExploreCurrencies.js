@@ -32,7 +32,8 @@ const ExploreCurrencies = () => {
 
     useEffect(()=>{
         dispatch(explore_all_load(id))
-    }, [id])
+      // eslint-disable-next-line
+      }, [id])
 
     const handleChange = (event, value) => {
         let page = Number(value)

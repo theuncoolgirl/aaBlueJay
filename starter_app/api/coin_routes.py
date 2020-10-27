@@ -57,9 +57,8 @@ def coin():
     return res
 
 
-@currency_routes.route('/explore/<int:id>')
+@coin_routes.route('/explore/<int:id>')
 def explore_load(id):
-    print(int(id))
     coins = cg.get_coins_markets(vs_currency='usd',
                                  per_page=50,
                                  page=id
@@ -67,7 +66,7 @@ def explore_load(id):
     return {'coins':coins}
 
 
-@currency_routes.route("/list", methods=["GET"])
+@coin_routes.route("/list", methods=["GET"])
 def list_route():
     vs_currency, watchlist, user_id = request.json.values()
     query = UserList.query.options(joinedload('currencylist')).filter(UserList.userId==user_id).first()
@@ -86,3 +85,9 @@ def list_route():
 
     # print(res)
     return res
+
+
+@coin_routes.route('/names')
+def load_names():
+    coin_names = cg.get_coins_list()
+    return {'coin_names': coin_names}

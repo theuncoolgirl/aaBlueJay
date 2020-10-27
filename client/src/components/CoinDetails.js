@@ -8,6 +8,7 @@ function CoinDetails(props) {
     // const [users, setUsers] = useState([]);
     const {
         updateCoinIdValue,
+        // eslint-disable-next-line
         receiveCoinDetails,
         getCoinDetails,
         description,
@@ -30,6 +31,7 @@ function CoinDetails(props) {
     useEffect(() => {
         updateCoinIdValue(coinId);
         getCoinDetails();
+    // eslint-disable-next-line
     }, []);
 
     // const description_parsed = document.createElement('span')

@@ -33,7 +33,6 @@ def login():
     data = request.json
     form = LoginForm(csrf_token=request.headers['x-Csrftoken'])
     if form.validate_on_submit():
-        print('here')
         data = request.json
         user = User.query.filter(User.email == data['email']).first()
         if not user or not user.check_password(data['password']):
@@ -46,10 +45,9 @@ def login():
 
 @user_routes.route("/signup", methods=["POST"])
 def sign_up():
-    print('here')
     if current_user.is_authenticated:
         return current_user.to_dict()
-    form = SignUpForm()
+    form = SignUpForm(csrf_token=request.headers['x-Csrftoken'])
     if form.validate_on_submit():
         data = request.json
         user = User(firstname=data['firstname'],
