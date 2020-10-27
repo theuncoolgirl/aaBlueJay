@@ -3,14 +3,6 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
-<<<<<<< HEAD
-
-import * as AuthAction from './store/session';
-import MyList from './components/WatchList'
-import SignUpForm from './components/SignUpForm'
-import LogoutButton from './components/LogoutButton';
-import ExploreCurrencies from './components/ExploreCurrencies'
-=======
 import MyList from './components/WatchList'
 import LogoutButton from './components/LogoutButton';
 import SignUpForm from './components/SignUpForm';
@@ -18,7 +10,6 @@ import CoinDetails from './components/CoinDetails';
 import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 
->>>>>>> 1d688f5a0327caeea4dcaeb3324e1e45a2e655b5
 
 
 function App() {
