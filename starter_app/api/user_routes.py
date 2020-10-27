@@ -20,32 +20,32 @@ def index():
 
 @user_routes.route('/load')
 def load_user():
-    return current_user.to_dict()
+    if current_user.is_authenticated:
+        return current_user.to_dict()
+    return {}
 
 
 @user_routes.route("/login", methods=["POST"])
 def login():
-    data = request.json
-    form = LoginForm(csrf_token=request.headers['x-Csrftoken'])
-    # form = LoginForm()
-    form.validate_on_submit()
-    print(form.errors)
     if current_user.is_authenticated:
         return current_user.to_dict()
+
     data = request.json
-    user = User.query.filter(User.email == data['email']).first()
-    if not user or not user.check_password(data['password']):
-        return {'login': 'failed'}
-    login_user(user)
-    return user.to_dict()
+    form = LoginForm(csrf_token=request.headers['x-Csrftoken'])
+    if form.validate_on_submit():
+        print('here')
+        data = request.json
+        user = User.query.filter(User.email == data['email']).first()
+        if not user or not user.check_password(data['password']):
+            return {'error': 'No match found for username and password.'}
+        login_user(user)
+        return user.to_dict()
+    print(form.errors)
+    return form.errors
 
 
 @user_routes.route("/signup", methods=["POST"])
 def sign_up():
-    print({**request.json})
-    form = SignUpForm(csrf_token=request.headers['x-Csrftoken'])
-    form.validate_on_submit()
-    print(form.errors)
     if current_user.is_authenticated:
         return current_user.to_dict()
     data = request.json

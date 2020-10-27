@@ -1,12 +1,11 @@
-# from starter_app.models import User, Purchase, Recommendation, UserList, CurrencyList
-from starter_app.models import User, Friend
+from starter_app.models import User, Friend, UserList, CurrencyList, Purchase, Recommendation  # noqa
 from starter_app import app, db
 from dotenv import load_dotenv
 load_dotenv()
 
 
 with app.app_context():
-    # db.drop_all()
+    db.drop_all()
     db.create_all()
 
     seeder = [
@@ -34,23 +33,251 @@ with app.app_context():
         Friend(
             userId=1,
             friendId=3
-        )
+        ),
+        User(username="UserTest",
+             firstname="TestFirstName",
+             lastname="TestLastName",
+             password="password",
+             email="test@test.com",
+             cash=50000),
+        Friend(
+            userId=3,
+            friendId=4),
+        Friend(
+            userId=2,
+            friendId=4),
+        UserList(userId=1,
+                 listName="Watch List"),
+        UserList(userId=2,
+                 listName="Watch List"),
+        UserList(userId=3,
+                 listName="Watch List"),
+        UserList(userId=4,
+                 listName="Watch List"),
+        CurrencyList(listId=1,
+                     tickerSymbol="ETH"),
+        CurrencyList(listId=1,
+                     tickerSymbol="XRP"),
+        CurrencyList(listId=1,
+                     tickerSymbol="LTC"),
+        CurrencyList(listId=1,
+                     tickerSymbol="USDT"),
+        CurrencyList(listId=1,
+                     tickerSymbol="BCH"),
+        CurrencyList(listId=1,
+                     tickerSymbol="BSV"),
+        CurrencyList(listId=1,
+                     tickerSymbol="XMR"),
+        CurrencyList(listId=1,
+                     tickerSymbol="EOS"),
+        CurrencyList(listId=2,
+                     tickerSymbol="BNB"),
+        CurrencyList(listId=2,
+                     tickerSymbol="BSV"),
+        CurrencyList(listId=2,
+                     tickerSymbol="USDT"),
+        CurrencyList(listId=2,
+                     tickerSymbol="LTC"),
+        CurrencyList(listId=2,
+                     tickerSymbol="ETH"),
+        CurrencyList(listId=1,
+                     tickerSymbol="TRX"),
+        CurrencyList(listId=2,
+                     tickerSymbol="XMR"),
+        CurrencyList(listId=2,
+                     tickerSymbol="ADA"),
+        CurrencyList(listId=2,
+                     tickerSymbol="XTZ"),
+        CurrencyList(listId=1,
+                     tickerSymbol="WBTC"),
+        CurrencyList(listId=3,
+                     tickerSymbol="XTZ"),
+        CurrencyList(listId=3,
+                     tickerSymbol="TRX"),
+        CurrencyList(listId=3,
+                     tickerSymbol="WBTC"),
+        CurrencyList(listId=3,
+                     tickerSymbol="LTC"),
+        CurrencyList(listId=3,
+                     tickerSymbol="DOT"),
+        CurrencyList(listId=3,
+                     tickerSymbol="BTC"),
+        CurrencyList(listId=3,
+                     tickerSymbol="ADA"),
+        CurrencyList(listId=3,
+                     tickerSymbol="ETH"),
+        CurrencyList(listId=3,
+                     tickerSymbol="FIL"),
+        CurrencyList(listId=3,
+                     tickerSymbol="VET"),
+        CurrencyList(listId=3,
+                     tickerSymbol="DAI"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="DAI"
+                       message="If you havent heard of this, you should try it!"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="VET"
+                       message="I like the symbol name. buy buy buy!"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="BTC"
+                       message="The one true king. bitcoin 4 lyfe"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="LTC"
+                       message="Good stuff"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="TRX"
+                       message="Trix are for kids"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="XTZ"
+                       message="Yo, check out the candle sticks on this one"),
+        Recommendation(userId=1,
+                       friendid=2
+                       tickerSymbol="ETH"
+                       message="This might be better then bitcoin..."),
+        Recommendation(userId=2,
+                       friendid=1
+                       tickerSymbol="WBTC"
+                       message="give it a shot"),
+        Recommendation(userId=2,
+                       friendid=1
+                       tickerSymbol=""
+                       message="yup"),
+        Recommendation(userId=2,
+                       friendid=1
+                       tickerSymbol="BNB"
+                       message="Great buy"),
+        Recommendation(userId=2,
+                       friendid=1
+                       tickerSymbol="ETH"
+                       message="So good"),
+        Recommendation(userId=2,
+                       friendid=3
+                       tickerSymbol="ETH"
+                       message="yasssssssss"),
+        Recommendation(userId=2,
+                       friendid=3
+                       tickerSymbol=""
+                       message=""),
+        Recommendation(userId=2,
+                       friendid=3
+                       tickerSymbol="BTC"
+                       message="Great price, buy now!"),
+        Recommendation(userId=2,
+                       friendid=4
+                       tickerSymbol="ETH"
+                       message="everyone gets a reccomendation"),
+        Recommendation(userId=2,
+                       friendid=4
+                       tickerSymbol=""
+                       message=""),
+        Recommendation(userId=2,
+                       friendid=4
+                       tickerSymbol="BTC"
+                       message="Great price buy now"),
+        Recommendation(userId=4,
+                       friendid=1
+                       tickerSymbol="BTC"
+                       message="TEST REC"),
     ]
 
     for seed in seeder:
         db.session.add(seed)
     db.session.commit()
-    # purchase1 = Purchase(
-    #     userid="",
-    #     #  purchaseDate="", DEFAULT
-    #     purchasePrice="",
-    #     purchaseQuantity="")
 
-    # rec1 = Recommendation(userId=1,
-    #                       friendId=2,
-    #                       tickerSymbol="BTC",
-    #                       message="Take a look at this trade!")
-    # rec2 = Recommendation(userId=2,
-    #                       friendId=3,
-    #                       tickerSymbol="LTC",
-    #                       message="Buy this one!!!")
+# stretch seeds
+# Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
+#         Purchase(userid=1,
+#                  purchasePrice=,
+#                  purchaseQuantity=),
