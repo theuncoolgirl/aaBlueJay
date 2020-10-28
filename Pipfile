@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 psycopg2-binary = "==2.8.6"
 pycodestyle = "*"
+
 pylint = "*"
 autopep8 = "*"
 

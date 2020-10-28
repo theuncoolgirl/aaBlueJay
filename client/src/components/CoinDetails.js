@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
+import ChartComponent from './stockchartComponents/ChartComponent'
 import { Grid } from '@material-ui/core';
 import useStyles from '../styles.js';
-
 
 function CoinDetails(props) {
     const classes = useStyles();
@@ -51,6 +51,7 @@ function CoinDetails(props) {
             paddingRight: 30,
             maxWidth: '60%',
         }}>
+            <ChartComponent className='stockchart' />
             <Grid
                 container
                 direction="row"

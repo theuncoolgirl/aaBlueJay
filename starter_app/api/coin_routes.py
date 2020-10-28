@@ -38,13 +38,16 @@ def coin():
     }
     return res
 
-
-@coin_routes.route("/explore/<int:id>")
+  
+@coin_routes.route('/explore/<int:id>')
 def explore_load(id):
-    coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
-    return {"coins": coins}
-
-
+    print(int(id))
+    coins = cg.get_coins_markets(vs_currency='usd',
+                                 per_page=50,
+                                 page=id)
+    return {'coins': coins}
+  
+  
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id = request.json.values()
