@@ -12,6 +12,7 @@ import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults'
 
 function App() {
 
@@ -44,6 +45,9 @@ function App() {
                 <Route path="/users">
                     <UserList />
                 </Route>
+                <Route path="/results">
+                    <SearchResults />
+                </Route>
                 <Route path="/signup">
                     <SignUpForm />
                 </Route>
@@ -54,6 +58,9 @@ function App() {
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                <Route path="/404">
+                    <h1>No Results found, please try again</h1>
+                </Route>
                 <Route path="/">
                     <h1>My Home Page</h1>
                 </Route>
