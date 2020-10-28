@@ -103,3 +103,15 @@ def delete_list_item():
     db.session.commit()
 
     return {"symbol": toDelete.tickerSymbol}
+
+
+@coin_routes.route("/list/add", methods=["POST"])
+def add_list_item():
+    listId = int(request.json["listId"])
+    # print(listId)
+
+    toAdd = CurrencyList(listId="")
+    db.session.add(toAdd)
+    db.session.commit()
+
+    return {"symbol": toDelete.tickerSymbol}
