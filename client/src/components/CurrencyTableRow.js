@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const CurrenceyTableRow = ({ row }) => {
     const history = useHistory()
@@ -15,6 +16,10 @@ const CurrenceyTableRow = ({ row }) => {
         history.push(`/coins/${coinId[0].id}`)
     }
 
+    const handleDelete = (e) => {
+
+    }
+
     return (
         <TableRow key={row.name}>
             <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
@@ -22,6 +27,7 @@ const CurrenceyTableRow = ({ row }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
+            <RemoveIcon onClick={handleDelete} />
         </TableRow>
     )
 }

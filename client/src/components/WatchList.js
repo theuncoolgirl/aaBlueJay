@@ -40,12 +40,8 @@ export default function BasicTable() {
   const userWatchlist = useSelector((state) => state.list.watchlist)
   const dispatch = useDispatch()
 
-  // const userWatchlist = null
   useEffect(() => {
-    console.log("WatchList - userId:", userId)
-    if (userId) {
-      dispatch(thunks.getUserWatchlist(userId));
-    }
+    dispatch(thunks.getUserWatchlist(userId));
   }, [userId]);
 
 

@@ -31,15 +31,6 @@ def coin():
 
     data = {**coin_data, "chart_data": chart_data}
 
-    # res = {key: data[key] for key in data.keys() & {
-    #     'id',
-    #     'chart_data',
-    #     'description',
-    #     'market_data',
-    #     'name',
-    #     'symbol'
-    # }}
-
     res = {
         "description": data["description"]["en"],
         "id": data["id"],
@@ -71,25 +62,28 @@ def list_route():
         .first()
     )
 
-    print("MY QUERY ================\n================", query.currencylist)
-
-    # print(query)
-
-    print("vsc,query,user_id======", vs_currency, query, user_id)
+    # print("vsc,query,user_id======", vs_currency, query, user_id)
     coin_data = cg.get_coins_markets(vs_currency="usd")
-    # print(coin_data)
     currencylist = [
-        currencylist.tickerSymbol.lower() for currencylist in query.currencylist
+        (currencylist.tickerSymbol.lower(), currencylist.id)
+        for currencylist in query.currencylist
     ]
-    print(currencylist)
-
+    # print(currencylist)
     res = dict()
     for item in coin_data:
-        print(item["symbol"])
-        if item["symbol"] in currencylist:
-            res[item["symbol"]] = item
+        for tup in currencylist:
+            if item["symbol"] == tup[0]:
+                res[item["symbol"]] = item
+                res[item["symbol"]]["symbolId"] = tup[1]
 
-    print(res)
+    # print("test", test["eth"]["symbolId"])
+    # res = dict()
+    # for item in coin_data:
+    #     if item["symbol"] in dict(currencylist).keys():
+    #         print(dict(currencylist).values())
+    #         res[item["symbol"]] = item
+    # res[item["symbol"]["id"]] = dict(currencylist)[item["symbol"]]
+    # print(res)
     return res
 
 
