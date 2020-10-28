@@ -8,11 +8,6 @@ coin_routes = Blueprint("coins", __name__)
 cg = CoinGeckoAPI()
 
 
-# @currency_routes.route('/')
-# def test():
-#     return {'test': 'test3'}
-
-
 @coin_routes.route("/", methods=["PUT"])
 def coin():
     coin_id, days, vs_currency = request.json.values()
@@ -31,26 +26,15 @@ def coin():
 
     data = {**coin_data, "chart_data": chart_data}
 
-    # res = {key: data[key] for key in data.keys() & {
-    #     'id',
-    #     'chart_data',
-    #     'description',
-    #     'market_data',
-    #     'name',
-    #     'symbol'
-    # }}
-
     res = {
-        "description": data["description"]["en"],
-        "id": data["id"],
-        "name": data["name"],
-        "symbol": data["symbol"],
-        "current_price_usd": data["market_data"]["current_price"]["usd"],
-        "percent_change_usd": data["market_data"][
-            "market_cap_change_percentage_24h_in_currency"
-        ]["usd"],
-        "price_change_usd": data["market_data"]["price_change_24h_in_currency"]["usd"],
-        "chart_data": data["chart_data"],
+        'description': data['description']['en'],
+        'id': data['id'],
+        'name': data['name'],
+        'symbol': data['symbol'],
+        'current_price_usd': data['market_data']['current_price'],
+        'percent_change_usd': data['market_data']['market_cap_change_percentage_24h_in_currency'],
+        'price_change_usd': data['market_data']['price_change_24h_in_currency'],
+        'chart_data': data['chart_data']
     }
     return res
 
@@ -70,18 +54,13 @@ def list_route():
         .filter(UserList.userId == user_id)
         .first()
     )
-
-    print("MY QUERY ================\n================", query.currencylist)
-
-    # print(query)
-
-    print("vsc,query,user_id======", vs_currency, query, user_id)
+    
+    
     coin_data = cg.get_coins_markets(vs_currency="usd")
     # print(coin_data)
     currencylist = [
         currencylist.tickerSymbol.lower() for currencylist in query.currencylist
     ]
-    print(currencylist)
 
     res = dict()
     for item in coin_data:
@@ -89,7 +68,7 @@ def list_route():
         if item["symbol"] in currencylist:
             res[item["symbol"]] = item
 
-    print(res)
+            
     return res
 
 
