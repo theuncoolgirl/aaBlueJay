@@ -1,13 +1,13 @@
 import React from 'react';
 import { getData } from "./utils"
 import ChartWrapper from './ChartResizer'
-
+// eslint-disable-next-line
 import { TypeChooser } from "react-stockcharts/lib/helper";
 
 class ChartComponent extends React.Component {
 	//fetches data after mounting, loading screen is shown until data fetched
 	componentDidMount() {
-	//get csv data parsed data (now object form) 
+	//get csv data parsed data (now object form)
     console.log('in mount', getData())
     const data = getData()
     this.setState({data})

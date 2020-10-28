@@ -57,7 +57,6 @@ def coin():
 
 @coin_routes.route("/explore/<int:id>")
 def explore_load(id):
-    # print(int(id))
     coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
     return {"coins": coins}
 
@@ -92,4 +91,9 @@ def list_route():
 
     print(res)
     return res
-    # return {"hi":"hi"}
+
+
+@coin_routes.route("/names")
+def load_names():
+    coin_names = cg.get_coins_list()
+    return {"coin_names": coin_names}
