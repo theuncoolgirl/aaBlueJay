@@ -16,7 +16,7 @@ const bitcoinSimple = {
   today: bitcoin.market_data.price_change_percentage_24h_in_currency.usd,
   marketCap: bitcoin.market_data.market_cap.usd
 }
-console.log(bitcoin.market_data.current_price.usd)
+// console.log(bitcoin.market_data.current_price.usd)
 
 const useStyles = makeStyles({
   table: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-console.log(bitcoinSimple)
+// console.log(bitcoinSimple)
 const rows = [
   bitcoinSimple,
 ];

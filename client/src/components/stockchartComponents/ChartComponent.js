@@ -1,24 +1,18 @@
 import React from 'react';
 import { getData } from "./utils"
+import { useDispatch, useSelector } from 'react-redux'
 import ChartWrapper from './ChartResizer'
 
-import { TypeChooser } from "react-stockcharts/lib/helper";
-
-class ChartComponent extends React.Component {
+const ChartComponent = (props) => {
 	//fetches data after mounting, loading screen is shown until data fetched
-	componentDidMount() {
-	//get csv data parsed data (now object form) 
-    console.log('in mount', getData())
-    const data = getData()
-    this.setState({data})
-	}
-	render() {
-		if (this.state == null) {
-			return <div>Loading...</div>
-		}
+	// //get csv data parsed data (now object form) 
+	const chartData = useSelector(state => state.coin.chart_data)
+
+	if (chartData == null) {
+		return <div>Loading...</div>
+	} else {
 		return (
-			// typechooser supplies a dropdown to change some display options
-				  <ChartWrapper type={"svg"} data={this.state.data} />
+			<ChartWrapper type={"svg"} data={chartData} />
 		)
 	}
 }

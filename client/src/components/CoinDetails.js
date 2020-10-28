@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // import { useState } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
-
+import ChartComponent from './stockchartComponents/ChartComponent'
 
 function CoinDetails(props) {
     // const [users, setUsers] = useState([]);
@@ -44,6 +44,7 @@ function CoinDetails(props) {
     // }
     return (
         <>
+            <ChartComponent className='stockchart' />
             <h1>Coin Details: </h1>
             <h2>{coinId}</h2>
             { name ?

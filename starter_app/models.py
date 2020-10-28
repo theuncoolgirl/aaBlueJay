@@ -1,6 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import create_engine
+
+# engine = create_engine(
+#     'postgresql+psycopg2://bluejay:password@localhost:5433/bluejay_dev_db')
+# engine.connect()
+
 
 db = SQLAlchemy()
 
@@ -9,6 +16,7 @@ db = SQLAlchemy()
 #     db.metadata,
 
 # )
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
