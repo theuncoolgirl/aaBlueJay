@@ -4,6 +4,7 @@ import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
 import { Grid } from '@material-ui/core';
 import useStyles from '../styles.js';
+import CoinModal from './CoinModal';
 
 function CoinDetails(props) {
     const classes = useStyles();
@@ -74,11 +75,9 @@ function CoinDetails(props) {
                         <li>Current price: ${current_price_usd.usd.toFixed(3)}</li>
                         : null}
                     {displayChangeData(price_change_usd, percent_change_usd)}
-                    {chart_data.length > 0 ?
-                        <li className="5">{chart_data}</li>
-                        : null}
                 </ul>
                 : <h2>Loading...</h2>}
+            <CoinModal />
         </div>
     );
 }

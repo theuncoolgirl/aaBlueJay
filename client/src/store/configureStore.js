@@ -13,15 +13,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducer = combineReducers({
   session,
   explore,
-<<<<<<< HEAD
-  coin
-=======
   coin,
   list,
   search,
   purchase,
   friends
->>>>>>> main
 });
 
 const storeEnhancer = composeEnhancers(applyMiddleware(thunk));
