@@ -90,8 +90,10 @@ class UserList(db.Model):
     listName = db.Column(db.String(50), nullable=False)
 
     user = db.relationship("User", back_populates="userlists")
+    currencylist = db.relationship("CurrencyList", foreign_keys=userId)
     currencylist = db.relationship(
         "CurrencyList", back_populates="userlist")
+    # currencylist = db.relationship("CurrencyList", foreign_keys=userId)
 
 
 class CurrencyList(db.Model):
