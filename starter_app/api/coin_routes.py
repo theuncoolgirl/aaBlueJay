@@ -41,18 +41,6 @@ def coin():
     # }}
 
     res = {
-<<<<<<< HEAD
-        'description': data['description']['en'],
-        'id': data['id'],
-        'name': data['name'],
-        'symbol': data['symbol'],
-        'current_price_usd': data['market_data']['current_price']['usd'],
-        'percent_change_usd': data['market_data']
-        ['market_cap_change_percentage_24h_in_currency']['usd'],
-        'price_change_usd': data['market_data']['price_change_24h_in_currency']
-        ['usd'],
-        'chart_data': data['chart_data']
-=======
         "description": data["description"]["en"],
         "id": data["id"],
         "name": data["name"],
@@ -63,27 +51,10 @@ def coin():
         ]["usd"],
         "price_change_usd": data["market_data"]["price_change_24h_in_currency"]["usd"],
         "chart_data": data["chart_data"],
->>>>>>> main
     }
     return res
 
 
-<<<<<<< HEAD
-@coin_routes.route('/explore/<int:id>')
-def explore_load(id):
-    print(int(id))
-    coins = cg.get_coins_markets(vs_currency='usd',
-                                 per_page=50,
-                                 page=id)
-    return {'coins': coins}
-
-
-@coin_routes.route("/list", methods=["GET"])
-def list_route():
-    vs_currency, watchlist, user_id = request.json.values()
-    query = UserList.query.options(joinedload('currencylist')).filter(
-        UserList.userId == user_id).first()
-=======
 @coin_routes.route("/explore/<int:id>")
 def explore_load(id):
     coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
@@ -93,7 +64,6 @@ def explore_load(id):
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id = request.json.values()
->>>>>>> main
 
     query = (
         UserList.query.options(joinedload("currencylist"))
