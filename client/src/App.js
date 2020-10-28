@@ -42,6 +42,7 @@ function App() {
                     <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'}/></NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
+                    <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
                 </ul>
                 <LogoutButton />
             </nav>
@@ -61,7 +62,7 @@ function App() {
                 <Route path="/explore/:id">
                     <ExploreCurrencies />
                 </Route>
-                <Route path="/list/watchlist">
+                <Route exact path="/list/watchlist">
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />

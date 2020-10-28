@@ -93,6 +93,7 @@ class UserList(db.Model):
     currencylist = db.relationship("CurrencyList", foreign_keys=userId)
     currencylist = db.relationship(
         "CurrencyList", back_populates="userlist")
+    # currencylist = db.relationship("CurrencyList", foreign_keys=userId)
 
 
 class CurrencyList(db.Model):
