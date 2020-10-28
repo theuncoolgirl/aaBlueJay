@@ -24,8 +24,8 @@ table: {
 
 const ExploreCurrencies = () => {
     const { id } = useParams();
-    const dispatch = useDispatch()
     let history = useHistory();
+    const dispatch = useDispatch()
     const token = useSelector(state => state.session.id);
     const rows = useSelector(state => state.explore)
     const classes = useStyles();

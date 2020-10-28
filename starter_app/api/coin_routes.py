@@ -62,8 +62,8 @@ def explore_load(id):
     coins = cg.get_coins_markets(vs_currency='usd',
                                  per_page=50,
                                  page=id
-                                )
-    return {'coins':coins}
+                                 )
+    return {'coins': coins}
 
 
 @coin_routes.route("/list", methods=["GET"])

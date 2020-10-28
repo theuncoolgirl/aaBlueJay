@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
@@ -12,12 +12,16 @@ import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults'
+import FriendList from './components/FriendList'
+
 
 function App() {
 
     const dispatch = useDispatch()
     const loaduser = () => dispatch(AuthAction.loadUser())
     const load_all_coins = () => dispatch(load_coin_names())
+    const id = useSelector(state => state.session.id);
 
     useEffect(() => {
         loaduser()
@@ -32,6 +36,7 @@ function App() {
             </div> */}
             <LoginForm />
             <SearchBar />
+            <NavLink to="/friends">Friends</NavLink>
             <nav>
                 <ul>
                     <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'}/></NavLink></li>
@@ -41,8 +46,14 @@ function App() {
                 <LogoutButton />
             </nav>
             <Switch>
+                <Route path="/friends">
+                    <FriendList />
+                </Route>
                 <Route path="/users">
                     <UserList />
+                </Route>
+                <Route path="/results">
+                    <SearchResults />
                 </Route>
                 <Route path="/signup">
                     <SignUpForm />
@@ -54,6 +65,9 @@ function App() {
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                <Route path="/404">
+                    <h1>No Results found, please try again</h1>
+                </Route>
                 <Route path="/">
                     <h1>My Home Page</h1>
                 </Route>
