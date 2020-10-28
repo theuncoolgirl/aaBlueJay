@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-// import { useState } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
+import { Grid } from '@material-ui/core';
+import useStyles from '../styles.js';
 
 
 function CoinDetails(props) {
-    // const [users, setUsers] = useState([]);
+    const classes = useStyles();
     const {
         updateCoinIdValue,
         // eslint-disable-next-line
@@ -34,17 +35,6 @@ function CoinDetails(props) {
         // eslint-disable-next-line
     }, [coinId]);
 
-    // const description_parsed = document.createElement('span')
-    // description_parsed.innerHTML = description
-    // console.log("description parsed: ", description_parsed)
-
-    // var parser = new DOMParser();
-    // var doc = parser.parseFromString(description, 'text/html');
-
-    // const descriptionParser = (string) => {
-    //     const element = docu
-    // }
-
     const displayChangeData = (priceChange, percentChange) => {
         if (priceChange.usd) {
             if (priceChange.usd > 0) {
@@ -56,8 +46,21 @@ function CoinDetails(props) {
     }
 
     return (
-        <>
-            <h1>Coin Details: </h1>
+        <div className={classes.grow} style={{
+            paddingLeft: 30,
+            paddingRight: 30,
+            maxWidth: '60%',
+        }}>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                spacing={3}
+            >
+                <Grid item xs={8}></Grid>
+                <Grid item xs={4}></Grid>
+            </Grid>
             <h2>{coinId}</h2>
             {name ?
                 <ul>
@@ -70,13 +73,12 @@ function CoinDetails(props) {
                         <li>Current price: ${current_price_usd.usd.toFixed(3)}</li>
                         : null}
                     {displayChangeData(price_change_usd, percent_change_usd)}
-                    {console.log("Chart Data: ", chart_data)}
                     {chart_data.length > 0 ?
                         <li className="5">{chart_data}</li>
                         : null}
                 </ul>
                 : <h2>Loading...</h2>}
-        </>
+        </div>
     );
 }
 

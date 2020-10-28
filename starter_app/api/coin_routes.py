@@ -27,7 +27,6 @@ def coin():
         vs_currency=vs_currency,
         days=days
     )
-    print("Chart Data: ", chart_data)
 
     data = {**coin_data, "chart_data": chart_data}
 
@@ -59,19 +58,15 @@ def list_route():
     query = UserList.query.options(joinedload('currencylist')).filter(
         UserList.userId == user_id).first()
 
-    print(query)
-
     coin_data = cg.get_coins_markets(
         vs_currency="usd"
     )
-    print(coin_data)
 
     res = dict()
     for item in coin_data:
         if item["id"] in watchlist:
             res[item["id"]] = item
 
-    # print(res)
     return res
 
 
