@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-// import { useState } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
+import { Grid } from '@material-ui/core';
+import useStyles from '../styles.js';
 
 function CoinDetails(props) {
-    // const [users, setUsers] = useState([]);
+    const classes = useStyles();
     const {
         updateCoinIdValue,
         // eslint-disable-next-line
@@ -31,38 +32,54 @@ function CoinDetails(props) {
     useEffect(() => {
         updateCoinIdValue(coinId);
         getCoinDetails();
-    // eslint-disable-next-line
-    }, []);
+        // eslint-disable-next-line
+    }, [coinId]);
 
-    // const description_parsed = document.createElement('span')
-    // description_parsed.innerHTML = description
-    // console.log("description parsed: ", description_parsed)
+    const displayChangeData = (priceChange, percentChange) => {
+        if (priceChange.usd) {
+            if (priceChange.usd > 0) {
+                return <li>+${priceChange.usd.toFixed(2)} (+{percentChange.usd.toFixed(2)}%) Today</li>
+            } else {
+                return <li>-${Math.abs(priceChange.usd).toFixed(2)} (-{Math.abs(percentChange.usd).toFixed(2)}%) Today</li>
+            }
+        } else return null
+    }
 
-    // var parser = new DOMParser();
-    // var doc = parser.parseFromString(description, 'text/html');
-
-    // const descriptionParser = (string) => {
-    //     const element = docu
-    // }
     return (
-        <>
+        <div className={classes.grow} style={{
+            paddingLeft: 30,
+            paddingRight: 30,
+            maxWidth: '60%',
+        }}>
             <ChartComponent className='stockchart' />
-            <h1>Coin Details: </h1>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                spacing={3}
+            >
+                <Grid item xs={8}></Grid>
+                <Grid item xs={4}></Grid>
+            </Grid>
             <h2>{coinId}</h2>
             {name ?
                 <ul>
                     <li>Name: {name}</li>
                     <li>Symbol: {symbol}</li>
-                    <li>Description: <span dangerouslySetInnerHTML={{ __html: description }} ></span></li>
-                    <li>Current price: ${current_price_usd}</li>
-                    {percent_change_usd > 0 ?
-                        <li>+${price_change_usd.toFixed(2)} (+{percent_change_usd.toFixed(2)}%) Today</li> :
-                        <li>-${Math.abs(price_change_usd).toFixed(2)} (-{Math.abs(percent_change_usd).toFixed(2)}%) Today</li>
-                    }
-                    <li>{chart_data}</li>
+                    {description !== "" ?
+                        <li>Description: <span dangerouslySetInnerHTML={{ __html: description }} ></span></li>
+                        : null}
+                    {current_price_usd.usd ?
+                        <li>Current price: ${current_price_usd.usd.toFixed(3)}</li>
+                        : null}
+                    {displayChangeData(price_change_usd, percent_change_usd)}
+                    {chart_data.length > 0 ?
+                        <li className="5">{chart_data}</li>
+                        : null}
                 </ul>
                 : <h2>Loading...</h2>}
-        </>
+        </div>
     );
 }
 
