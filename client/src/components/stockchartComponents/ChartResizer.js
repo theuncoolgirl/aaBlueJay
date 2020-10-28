@@ -6,7 +6,7 @@ import Chart from './Chart'
 function ChartWrapper (props) {
   const [ref, { width, height }] = useDimensions()
   return (
-    <div ref={ref} style={{ width: '100%', height: '50%' }}>
+    <div ref={ref} style={{ width: '50%', height: '50%' }}>
       <Chart
         {...props}
         height={height}

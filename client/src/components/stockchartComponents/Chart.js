@@ -8,24 +8,25 @@ import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
-import {Label} from "react-stockcharts/lib/annotation";
-
+import { Label } from "react-stockcharts/lib/annotation";
+import {
+	CrossHairCursor,
+} from "react-stockcharts/lib/coordinates";
 
 class CandleStickStockScaleChart extends React.Component {
 	render() {
-		      // eslint-disable-next-line
-		const { type, data: initialData, width, ratio, margin } = this.props;
+		const { type, data: initialData, width, ratio} = this.props;
 		// candle styling that is passed into the candleStickSeries component below
-        const candlesAppearance = {
-            wickStroke: "#000000",
-            fill: function fill(d) {
-              return d.close > d.open ? "rgba(13, 238, 114, 0.3)" : "rgba(13, 255, 200, 1)";
-            },
-            stroke: "#000000",
-            candleStrokeWidth: 1,
-            widthRatio: 0.8,
-            opacity: 1,
-		  }
+		const candlesAppearance = {
+			wickStroke: "#000000",
+			fill: function fill(d) {
+				return d.close > d.open ? "rgba(13, 238, 114, 0.3)" : "rgba(13, 255, 200, 1)";
+			},
+			stroke: "#000000",
+			candleStrokeWidth: 1,
+			widthRatio: 0.8,
+			opacity: 1,
+		}
 		//discontinous time scaler option does not show days without data (candles) which are ignored for a more cohesive graph
 		//useful for stock data that doesn't display weekends
 		const xScaleProvider = discontinuousTimeScaleProvider
@@ -38,8 +39,8 @@ class CandleStickStockScaleChart extends React.Component {
 		} = xScaleProvider(initialData);
 		const xExtents = [
 			xAccessor(last(data)),
-			//starting at index 0 of the data array ensures all data is initially loaded
-            xAccessor(data[0])
+			//starting at index 0 of the data array ensures all data is initially loaded 
+			xAccessor(data[0])
 
 		];
 
@@ -47,7 +48,7 @@ class CandleStickStockScaleChart extends React.Component {
 			<ChartCanvas height={400}
 				ratio={ratio}
 				width={width}
-				// margin={{ left: 50, right: 50, top: 30, bottom: 60 }}
+				margin={{ left: 50, right: 50, top: 20, bottom: 40 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
@@ -57,20 +58,21 @@ class CandleStickStockScaleChart extends React.Component {
 				xExtents={xExtents}
 			>
 				{/* title label */}
-				<Label x={width/2.5} y={30}
-					fontSize="30" text="MSFT" fontFamily='comic'/>
+				<Label x={width / 2.5} y={20}
+					fontSize={30} text="MSFT" fontFamily='comic' />
 
 				{/* xaxis label */}
-				<Label x={width/2.5} y={width/2.1}
-						// rotate={-90}
-						fontSize="20" text="volume" fontFamily='comic'/>
+				<Label x={width / 2.5} y={325}
+					// rotate={-90}
+					fontSize={20} text="date" fontFamily='comic' />
 
-				<Chart id={1} yExtents={d => [2000,80]}>
-					<XAxis axisAt="bottom" orient="bottom" ticks={6}/>
+				<Chart id={1} yExtents={d => [d.high + 50, d.low - 50]}>
+					<XAxis axisAt="bottom" orient="bottom" ticks={6} />
 					<YAxis axisAt="left" orient="left" ticks={5} />
 					{/* comp that displays all candle stick data */}
 					<CandlestickSeries {...candlesAppearance} />
 				</Chart>
+				<CrossHairCursor />
 			</ChartCanvas>
 		);
 	}
@@ -86,6 +88,7 @@ CandleStickStockScaleChart.propTypes = {
 
 CandleStickStockScaleChart.defaultProps = {
 	type: "svg",
+	width: 666
 };
 CandleStickStockScaleChart = fitWidth(CandleStickStockScaleChart);
 

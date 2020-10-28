@@ -1,3 +1,4 @@
+import {DataToCsv} from '../components/stockchartComponents/utils'
 const UPDATE_COIN_ID_VALUE = "bluejay/coin/UPDATE_COIN_ID_VALUE";
 const RECEIVE_COIN_DETAILS = "bluejay/coin/RECEIVE_COIN_DETAILS";
 
@@ -9,19 +10,22 @@ export const actions = {
     receiveCoinDetails
 };
 
+
 const getCoinDetails = () => {
     return async (dispatch, getState) => {
         const { coin: { coinId, days, vs_currency } } = getState();
-        console.log("fetch request: ", JSON.stringify({ coinId, days, vs_currency }))
         const response = await fetch('/api/coins/', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ coinId, days, vs_currency }),
         });
-        console.log("response: ", response)
         try {
             if (response.status >= 200 && response.status < 400) {
                 const data = await response.json();
+                // console.log("data: ", data)
+                data.chart_data = DataToCsv(data.chart_data)
+                // data.chart_data = csvParse(csv2, parseData2(parseDate))
+                // console.log('updated data', data);
                 dispatch(receiveCoinDetails(data))
             } else {
                 console.error('Bad response');
