@@ -10,8 +10,8 @@ const loadAll = (purchases) => {
 export const load_purchase_history = (id) => async dispatch => {
     const res = await fetch(`/api/users/purchases/${id}`)
     if (res.ok) {
-        const currencies = await res.json()
-        dispatch(loadAll(currencies))
+        const history = await res.json()
+        dispatch(loadAll(history))
       }
 }
 

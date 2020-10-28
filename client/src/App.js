@@ -13,7 +13,7 @@ import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
-import PurchaseHistory from './components/PurchaseHistory'
+import FriendList from './components/FriendList'
 
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
             </div> */}
             <LoginForm />
             <SearchBar />
+            <NavLink to="/friends">Friends</NavLink>
             <nav>
                 <ul>
                     <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'}/></NavLink></li>
@@ -45,6 +46,9 @@ function App() {
                 <LogoutButton />
             </nav>
             <Switch>
+                <Route path="/friends">
+                    <FriendList />
+                </Route>
                 <Route path="/users">
                     <UserList />
                 </Route>

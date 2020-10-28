@@ -79,3 +79,12 @@ def purchase_history(id):
     purchases = Purchase.query.filter(Purchase.userId == id).all()
     print(purchases)
     return {'test': 1}
+
+@user_routes.route('/friends/<int:id>')
+def friends_load(id):
+    friends = Friend.query.filter(Friend.userId == id).all()
+    # for x in friends:
+    #     print(x.friend.to_dict())
+    res = [x.friend.to_dict() for x in friends]
+    print(res)
+    return {'friends': res}

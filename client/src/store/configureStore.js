@@ -5,6 +5,7 @@ import coin from "./coin";
 import explore from './explore';
 import search from './search_coins'
 import purchase from './purchase'
+import friends from './friends'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -13,7 +14,8 @@ const reducer = combineReducers({
   explore,
   coin,
   search,
-  purchase
+  purchase,
+  friends
 });
 
 const storeEnhancer = composeEnhancers(applyMiddleware(thunk));
