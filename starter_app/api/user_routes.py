@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from starter_app.models import User, Friend
+from starter_app.models import User, Friend, Purchase
 from flask_login import current_user, login_user, logout_user
 from flask import request
 from ..models import User, db
@@ -33,7 +33,6 @@ def login():
     data = request.json
     form = LoginForm(csrf_token=request.headers['x-Csrftoken'])
     if form.validate_on_submit():
-        print('here')
         data = request.json
         user = User.query.filter(User.email == data['email']).first()
         if not user or not user.check_password(data['password']):
@@ -46,10 +45,9 @@ def login():
 
 @user_routes.route("/signup", methods=["POST"])
 def sign_up():
-    print('here')
     if current_user.is_authenticated:
         return current_user.to_dict()
-    form = SignUpForm()
+    form = SignUpForm(csrf_token=request.headers['x-Csrftoken'])
     if form.validate_on_submit():
         data = request.json
         user = User(firstname=data['firstname'],
@@ -74,3 +72,19 @@ def logout():
 def get_csrf_token():
     form = LoginForm()
     return {'csrfT': form.csrf_token._value()}
+
+
+@user_routes.route('/purchases/<int:id>')
+def purchase_history(id):
+    purchases = Purchase.query.filter(Purchase.userId == id).all()
+    print(purchases)
+    return {'test': 1}
+
+@user_routes.route('/friends/<int:id>')
+def friends_load(id):
+    friends = Friend.query.filter(Friend.userId == id).all()
+    # for x in friends:
+    #     print(x.friend.to_dict())
+    res = [x.friend.to_dict() for x in friends]
+    print(res)
+    return {'friends': res}

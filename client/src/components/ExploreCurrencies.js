@@ -24,15 +24,16 @@ table: {
 
 const ExploreCurrencies = () => {
     const { id } = useParams();
-    const dispatch = useDispatch()
     let history = useHistory();
+    const dispatch = useDispatch()
     const token = useSelector(state => state.session.id);
     const rows = useSelector(state => state.explore)
     const classes = useStyles();
 
     useEffect(()=>{
         dispatch(explore_all_load(id))
-    }, [id])
+      // eslint-disable-next-line
+      }, [id])
 
     const handleChange = (event, value) => {
         let page = Number(value)
