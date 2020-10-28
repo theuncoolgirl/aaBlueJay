@@ -4,6 +4,7 @@ import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
 import { Button, Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
+import CoinModal from './CoinModal';
 
 function CoinDetails(props) {
     const classes = useStyles();
@@ -107,8 +108,8 @@ function CoinDetails(props) {
                         : null}
                 </Grid>
             </Grid>
-
-        </div >
+            <CoinModal />
+        </div>
     );
 }
 
