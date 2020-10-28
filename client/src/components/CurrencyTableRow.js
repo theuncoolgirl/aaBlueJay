@@ -1,14 +1,14 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-const CurrenceyTableRow = ({row}) => {
+const CurrenceyTableRow = ({ row }) => {
     const history = useHistory()
     const coins = useSelector(state => state.search)
 
-    const handleClick = (e) =>{
+    const handleClick = (e) => {
         const coinId = coins.filter(coin => {
             return (coin.name === e.target.innerHTML.trim())
         })
