@@ -4,7 +4,7 @@ from pycoingecko import CoinGeckoAPI
 from ..models import UserList, CurrencyList, db
 from sqlalchemy.orm import joinedload
 
-coin_routes = Blueprint('coins', __name__)
+coin_routes = Blueprint("coins", __name__)
 cg = CoinGeckoAPI()
 
 
@@ -24,14 +24,10 @@ def coin():
         market_data="true",
         community_data="false",
         developer_data="false",
-        sparkline="false"
+        sparkline="false",
     )
 
-    chart_data = cg.get_coin_ohlc_by_id(
-        id=coin_id,
-        vs_currency=vs_currency,
-        days=days
-    )
+    chart_data = cg.get_coin_ohlc_by_id(id=coin_id, vs_currency=vs_currency, days=days)
 
     data = {**coin_data, "chart_data": chart_data}
 
@@ -44,45 +40,56 @@ def coin():
     #     'symbol'
     # }}
 
-    res =  {
-        'description': data['description']['en'],
-        'id': data['id'],
-        'name': data['name'],
-        'symbol': data['symbol'],
-        'current_price_usd': data['market_data']['current_price']['usd'],
-        'percent_change_usd': data['market_data']['market_cap_change_percentage_24h_in_currency']['usd'],
-        'price_change_usd': data['market_data']['price_change_24h_in_currency']['usd'],
-        'chart_data': data['chart_data']
+    res = {
+        "description": data["description"]["en"],
+        "id": data["id"],
+        "name": data["name"],
+        "symbol": data["symbol"],
+        "current_price_usd": data["market_data"]["current_price"]["usd"],
+        "percent_change_usd": data["market_data"][
+            "market_cap_change_percentage_24h_in_currency"
+        ]["usd"],
+        "price_change_usd": data["market_data"]["price_change_24h_in_currency"]["usd"],
+        "chart_data": data["chart_data"],
     }
     return res
 
 
-@coin_routes.route('/explore/<int:id>')
+@coin_routes.route("/explore/<int:id>")
 def explore_load(id):
-    print(int(id))
-    coins = cg.get_coins_markets(vs_currency='usd',
-                                 per_page=50,
-                                 page=id
-                                )
-    return {'coins':coins}
+    # print(int(id))
+    coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
+    return {"coins": coins}
 
 
-@coin_routes.route("/list", methods=["GET"])
+@coin_routes.route("/list", methods=["PUT"])
 def list_route():
-    vs_currency, watchlist, user_id = request.json.values()
-    query = UserList.query.options(joinedload('currencylist')).filter(UserList.userId==user_id).first()
+    vs_currency, user_id = request.json.values()
 
-    print(query)
-
-    coin_data = cg.get_coins_markets(
-        vs_currency="usd"
+    query = (
+        UserList.query.options(joinedload("currencylist"))
+        .filter(UserList.userId == user_id)
+        .first()
     )
-    print(coin_data)
+
+    print("MY QUERY ================\n================", query.currencylist)
+
+    # print(query)
+
+    print("vsc,query,user_id======", vs_currency, query, user_id)
+    coin_data = cg.get_coins_markets(vs_currency="usd")
+    # print(coin_data)
+    currencylist = [
+        currencylist.tickerSymbol.lower() for currencylist in query.currencylist
+    ]
+    print(currencylist)
 
     res = dict()
     for item in coin_data:
-        if item["id"] in watchlist:
-            res[item["id"]] = item
+        print(item["symbol"])
+        if item["symbol"] in currencylist:
+            res[item["symbol"]] = item
 
-    # print(res)
+    print(res)
     return res
+    # return {"hi":"hi"}

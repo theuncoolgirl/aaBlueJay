@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,6 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { thunks } from '../store/list';
+import CurrenceyTableRow from './CurrencyTableRow';
 
 import bitcoin from '../test data/bit'
 const bitcoinSimple = {
@@ -16,7 +19,12 @@ const bitcoinSimple = {
   today: bitcoin.market_data.price_change_percentage_24h_in_currency.usd,
   marketCap: bitcoin.market_data.market_cap.usd
 }
-console.log(bitcoin.market_data.current_price.usd)
+// console.log(bitcoin.market_data.current_price.usd)
+// const rows = [
+//   bitcoinSimple,
+// ];
+
+
 
 const useStyles = makeStyles({
   table: {
@@ -24,13 +32,22 @@ const useStyles = makeStyles({
   },
 });
 
-console.log(bitcoinSimple)
-const rows = [
-  bitcoinSimple,
-];
 
 export default function BasicTable() {
   const classes = useStyles();
+
+  const userId = useSelector((state) => state.session.id)
+  const userWatchlist = useSelector((state) => state.list.watchlist)
+  const dispatch = useDispatch()
+
+  // const userWatchlist = null
+  useEffect(() => {
+    console.log("WatchList - userId:", userId)
+    if (userId) {
+      dispatch(thunks.getUserWatchlist(userId));
+    }
+  }, [userId]);
+
 
   return (
     <TableContainer component={Paper}>
@@ -45,16 +62,8 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.symbol}</TableCell>
-              <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.today}</TableCell>
-              <TableCell align="right">{row.marketCap}</TableCell>
-            </TableRow>
+          {userWatchlist.map((row) => (
+            <CurrenceyTableRow row={row} />
           ))}
         </TableBody>
       </Table>
