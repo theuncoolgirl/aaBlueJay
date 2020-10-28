@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useParams, useHistory } from 'react-router-dom';
 
@@ -24,8 +24,8 @@ table: {
 
 const ExploreCurrencies = () => {
     const { id } = useParams();
-    const dispatch = useDispatch()
     let history = useHistory();
+    const dispatch = useDispatch()
     const token = useSelector(state => state.session.id);
     const rows = useSelector(state => state.explore)
     const classes = useStyles();
