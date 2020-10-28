@@ -31,8 +31,8 @@ function CoinDetails(props) {
     useEffect(() => {
         updateCoinIdValue(coinId);
         getCoinDetails();
-    // eslint-disable-next-line
-    }, []);
+        // eslint-disable-next-line
+    }, [coinId]);
 
     // const description_parsed = document.createElement('span')
     // description_parsed.innerHTML = description
@@ -44,6 +44,17 @@ function CoinDetails(props) {
     // const descriptionParser = (string) => {
     //     const element = docu
     // }
+
+    const displayChangeData = (priceChange, percentChange) => {
+        if (priceChange.usd) {
+            if (priceChange.usd > 0) {
+                return <li>+${priceChange.usd.toFixed(2)} (+{percentChange.usd.toFixed(2)}%) Today</li>
+            } else {
+                return <li>-${Math.abs(priceChange.usd).toFixed(2)} (-{Math.abs(percentChange.usd).toFixed(2)}%) Today</li>
+            }
+        } else return null
+    }
+
     return (
         <>
             <h1>Coin Details: </h1>
@@ -52,13 +63,17 @@ function CoinDetails(props) {
                 <ul>
                     <li>Name: {name}</li>
                     <li>Symbol: {symbol}</li>
-                    <li>Description: <span dangerouslySetInnerHTML={{ __html: description }} ></span></li>
-                    <li>Current price: ${current_price_usd}</li>
-                    {percent_change_usd > 0 ?
-                        <li>+${price_change_usd.toFixed(2)} (+{percent_change_usd.toFixed(2)}%) Today</li> :
-                        <li>-${Math.abs(price_change_usd).toFixed(2)} (-{Math.abs(percent_change_usd).toFixed(2)}%) Today</li>
-                    }
-                    <li>{chart_data}</li>
+                    {description !== "" ?
+                        <li>Description: <span dangerouslySetInnerHTML={{ __html: description }} ></span></li>
+                        : null}
+                    {current_price_usd.usd ?
+                        <li>Current price: ${current_price_usd.usd.toFixed(3)}</li>
+                        : null}
+                    {displayChangeData(price_change_usd, percent_change_usd)}
+                    {console.log("Chart Data: ", chart_data)}
+                    {chart_data.length > 0 ?
+                        <li className="5">{chart_data}</li>
+                        : null}
                 </ul>
                 : <h2>Loading...</h2>}
         </>
