@@ -52,7 +52,7 @@ function CoinDetails(props) {
                 <ul>
                     <li>Name: {name}</li>
                     <li>Symbol: {symbol}</li>
-                    <li>Description: <div dangerouslySetInnerHTML={{ __html: description }}/></li>
+                    <li>Description: {description}</li>
                     <li>Current price: ${current_price_usd}</li>
                     {percent_change_usd > 0 ?
                         <li>+${price_change_usd.toFixed(2)} (+{percent_change_usd.toFixed(2)}%) Today</li> :

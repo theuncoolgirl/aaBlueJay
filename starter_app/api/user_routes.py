@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from starter_app.models import User, Friend
+from starter_app.models import User, Friend, Purchase
 from flask_login import current_user, login_user, logout_user
 from flask import request
 from ..models import User, db
@@ -72,3 +72,10 @@ def logout():
 def get_csrf_token():
     form = LoginForm()
     return {'csrfT': form.csrf_token._value()}
+
+
+@user_routes.route('/purchases/<int:id>')
+def purchase_history(id):
+    purchases = Purchase.query.filter(Purchase.userId == id).all()
+    print(purchases)
+    return {'test': 1}

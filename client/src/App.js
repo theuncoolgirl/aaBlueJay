@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
@@ -13,12 +13,15 @@ import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
+import PurchaseHistory from './components/PurchaseHistory'
+
 
 function App() {
 
     const dispatch = useDispatch()
     const loaduser = () => dispatch(AuthAction.loadUser())
     const load_all_coins = () => dispatch(load_coin_names())
+    const id = useSelector(state => state.session.id);
 
     useEffect(() => {
         loaduser()
