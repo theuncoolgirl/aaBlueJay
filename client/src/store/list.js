@@ -1,19 +1,18 @@
 const GET_USER_WATCHLIST = 'bluejay/list/GET_USER_WATCHLIST'
+const DELETE_LIST_ITEM = 'bluejay/list/DELETE_LIST_ITEM'
 
 const updateUserWatchlist = value => ({ type: GET_USER_WATCHLIST, value })
+const deleteListItem = value => ({ type: DELETE_LIST_ITEM, value })
 
 export const actions = {
-  updateUserWatchlist
+  updateUserWatchlist,
+  deleteListItem
 };
 
 // const userId = getState().auth.user._id;
 
 const getUserWatchlist = (userId) => async (dispatch, getState) => {
-  // will hit reducer
-  // const userId = useSelecter((state) => state.session.id);
-  // const dummyWatchList = ["bitcoin", "ethereum"]
   console.log("ID:", userId)
-  // dispatch(setItemsLoading());
   let res = await fetch("/api/coins/list", {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -35,20 +34,43 @@ const getUserWatchlist = (userId) => async (dispatch, getState) => {
   }
 };
 
-
+const deleteWatchlistItem = (listId) => async dispatch => {
+  let res = await fetch("/api/coins/list/delete", {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      'listId': listId,
+    })
+  })
+  if (res.status >= 200 && res.status < 400) {
+    const data = await res.json();
+    dispatch(deleteListItem(data))
+    return data
+  } else {
+    console.error('Bad response');
+  }
+}
 
 export const thunks = {
-  getUserWatchlist
+  getUserWatchlist,
+  deleteWatchlistItem
 }
 
 function reducer(state = { watchlist: [] }, action) {
+  let newState;
   switch (action.type) {
     case GET_USER_WATCHLIST:
-      const newState = Object.values(action.value)
+      newState = Object.values(action.value)
       return {
         ...state,
         watchlist: newState
       };
+    case DELETE_LIST_ITEM:
+      newState = { ...state }
+      const filteredList = newState.watchlist.filter(listItem => {
+        return listItem.symbol !== action.value.symbol.toLowerCase()
+      })
+      return { watchlist: filteredList }
     default:
       return state;
   }

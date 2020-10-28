@@ -14,7 +14,6 @@ export const actions = {
 const getCoinDetails = () => {
     return async (dispatch, getState) => {
         const { coin: { coinId, days, vs_currency } } = getState();
-        // console.log("fetch request: ", JSON.stringify({ coinId, days, vs_currency }))
         const response = await fetch('/api/coins/', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
