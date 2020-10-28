@@ -1,15 +1,18 @@
 const GET_USER_WATCHLIST = 'bluejay/list/GET_USER_WATCHLIST'
 const DELETE_LIST_ITEM = 'bluejay/list/DELETE_LIST_ITEM'
 const ADD_LIST_ITEM = 'bluejay/list/ADD_LIST_ITEM'
+const GET_ALL_LISTS = 'bluejay/list/GET_ALL_LISTS'
 
 const updateUserWatchlist = value => ({ type: GET_USER_WATCHLIST, value })
 const deleteListItem = value => ({ type: DELETE_LIST_ITEM, value })
 const addListItem = value => ({ type: ADD_LIST_ITEM, value })
+const getAllLists = value => ({ type: GET_ALL_LISTS, value })
 
 export const actions = {
   updateUserWatchlist,
   deleteListItem,
-  addListItem
+  addListItem,
+  getAllLists
 };
 
 // const userId = getState().auth.user._id;
@@ -54,19 +57,35 @@ const deleteWatchlistItem = (listId) => async dispatch => {
   }
 }
 
-const addWatchlistItem = (listId, symbol) => async dispatch => {
+const addWatchlistItem = (coinSymbol, listId) => async dispatch => {
   let res = await fetch("/api/coins/list/add", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       'listId': listId,
-      'symbol': symbol,
-      // 'listName': listName
+      'symbol': coinSymbol
     })
   })
   if (res.status >= 200 && res.status < 400) {
     const data = await res.json();
-    dispatch(addListItem(data))
+    // dispatch(addListItem(data))
+    return data
+  } else {
+    console.error('Bad response');
+  }
+}
+
+const getAllUserLists = (userId) => async dispatch => {
+  let res = await fetch("/api/coins/list/all", {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "user_id": userId
+    })
+  })
+  if (res.status >= 200 && res.status < 400) {
+    const data = await res.json();
+    dispatch(getAllLists(data))
     return data
   } else {
     console.error('Bad response');
@@ -76,10 +95,11 @@ const addWatchlistItem = (listId, symbol) => async dispatch => {
 export const thunks = {
   getUserWatchlist,
   deleteWatchlistItem,
-  addWatchlistItem
+  addWatchlistItem,
+  getAllUserLists
 }
 
-function reducer(state = { watchlist: [] }, action) {
+function reducer(state = { watchlist: [], lists: [] }, action) {
   let newState;
   switch (action.type) {
     case GET_USER_WATCHLIST:
@@ -94,11 +114,15 @@ function reducer(state = { watchlist: [] }, action) {
         return listItem.symbol !== action.value.symbol.toLowerCase()
       })
       return { watchlist: filteredList }
-    case ADD_LIST_ITEM:
+    // case ADD_LIST_ITEM:
+    //   newState = { ...state }
+    //   newState.watchlist = [...newState.watchlist, action.value.newListItem]
+    //   debugger
+    //   return newState
+    case GET_ALL_LISTS:
       newState = { ...state }
-      newState.watchlist = [...newState, action.value.newListItem]
-      debugger
-      return newState
+      newState.lists = [...newState.lists, action.value.lists]
+      return { lists: [...action.value.lists] }
     default:
       return state;
   }

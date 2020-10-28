@@ -3,13 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunks } from '../store/list'
 
-const AddListItem = () => {
+const AddListItem = ({ listTitle, listId }) => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.session.id);
-  const { coinId } = useParams()
+  const coinSymbol = useSelector(state => state.coin.symbol)
+  //   const { coinId } = useParams()
 
   const handleAdd = (e) => {
-    dispatch(thunks.addWatchListItem(userId, coinId))
+    dispatch(thunks.addWatchlistItem(coinSymbol, listId))
   }
 
   if (!userId) {
@@ -17,9 +18,9 @@ const AddListItem = () => {
   }
 
   return (
-    <div>
-      <button onClick={handleAdd}>Add to List</button>
-    </div>
+    <span>
+      <button onClick={handleAdd}>{`Add to ${listTitle}`}</button>
+    </span>
   );
 }
 

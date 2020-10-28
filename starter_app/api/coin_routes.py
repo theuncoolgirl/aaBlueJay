@@ -27,27 +27,27 @@ def coin():
     data = {**coin_data, "chart_data": chart_data}
 
     res = {
-        'description': data['description']['en'],
-        'id': data['id'],
-        'name': data['name'],
-        'symbol': data['symbol'],
-        'current_price_usd': data['market_data']['current_price'],
-        'percent_change_usd': data['market_data']['market_cap_change_percentage_24h_in_currency'],
-        'price_change_usd': data['market_data']['price_change_24h_in_currency'],
-        'chart_data': data['chart_data']
+        "description": data["description"]["en"],
+        "id": data["id"],
+        "name": data["name"],
+        "symbol": data["symbol"],
+        "current_price_usd": data["market_data"]["current_price"],
+        "percent_change_usd": data["market_data"][
+            "market_cap_change_percentage_24h_in_currency"
+        ],
+        "price_change_usd": data["market_data"]["price_change_24h_in_currency"],
+        "chart_data": data["chart_data"],
     }
     return res
 
-  
-@coin_routes.route('/explore/<int:id>')
+
+@coin_routes.route("/explore/<int:id>")
 def explore_load(id):
     print(int(id))
-    coins = cg.get_coins_markets(vs_currency='usd',
-                                 per_page=50,
-                                 page=id)
-    return {'coins': coins}
-  
-  
+    coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
+    return {"coins": coins}
+
+
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id = request.json.values()
@@ -95,10 +95,26 @@ def delete_list_item():
 @coin_routes.route("/list/add", methods=["POST"])
 def add_list_item():
     listId = int(request.json["listId"])
+    symbol = request.json["symbol"]
     # print(listId)
 
-    toAdd = CurrencyList(listId="")
+    if CurrencyList.query.filter(
+        CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbol
+    ).first():
+        return {"message": "This coin is already in this list"}
+
+    toAdd = CurrencyList(listId=listId, tickerSymbol=symbol)
+
     db.session.add(toAdd)
     db.session.commit()
 
-    return {"symbol": toDelete.tickerSymbol}
+    return {"message": toAdd.tickerSymbol + "was added"}
+
+
+@coin_routes.route("/list/all", methods=["PUT"])
+def get_user_lists():
+    user_id = int(request.json["user_id"])
+    user_lists = UserList.query.filter(UserList.userId == user_id).all()
+    print(user_lists[0].listName)
+    listNames = [(name.listName, name.id) for name in user_lists]
+    return {"lists": listNames}
