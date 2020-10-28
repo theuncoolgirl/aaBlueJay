@@ -48,11 +48,11 @@ function CoinDetails(props) {
         <>
             <h1>Coin Details: </h1>
             <h2>{coinId}</h2>
-            { name ?
+            {name ?
                 <ul>
                     <li>Name: {name}</li>
                     <li>Symbol: {symbol}</li>
-                    <li>Description: {description}</li>
+                    <li>Description: <span dangerouslySetInnerHTML={{ __html: description }} ></span></li>
                     <li>Current price: ${current_price_usd}</li>
                     {percent_change_usd > 0 ?
                         <li>+${price_change_usd.toFixed(2)} (+{percent_change_usd.toFixed(2)}%) Today</li> :
