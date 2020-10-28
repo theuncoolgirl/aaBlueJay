@@ -8,11 +8,6 @@ coin_routes = Blueprint('coins', __name__)
 cg = CoinGeckoAPI()
 
 
-# @currency_routes.route('/')
-# def test():
-#     return {'test': 'test3'}
-
-
 @coin_routes.route("/", methods=["PUT"])
 def coin():
     coin_id, days, vs_currency = request.json.values()
@@ -35,15 +30,6 @@ def coin():
     print("Chart Data: ", chart_data)
 
     data = {**coin_data, "chart_data": chart_data}
-
-    # res = {key: data[key] for key in data.keys() & {
-    #     'id',
-    #     'chart_data',
-    #     'description',
-    #     'market_data',
-    #     'name',
-    #     'symbol'
-    # }}
 
     res = {
         'description': data['description']['en'],
