@@ -57,21 +57,20 @@ def list_route():
         .filter(UserList.userId == user_id)
         .first()
     )
-    
-    
+
     coin_data = cg.get_coins_markets(vs_currency="usd")
-    # print(coin_data)
     currencylist = [
-        currencylist.tickerSymbol.lower() for currencylist in query.currencylist
+        (currencylist.tickerSymbol.lower(), currencylist.id)
+        for currencylist in query.currencylist
     ]
 
     res = dict()
     for item in coin_data:
-        print(item["symbol"])
-        if item["symbol"] in currencylist:
-            res[item["symbol"]] = item
+        for tup in currencylist:
+            if item["symbol"] == tup[0]:
+                res[item["symbol"]] = item
+                res[item["symbol"]]["symbolId"] = tup[1]
 
-            
     return res
 
 
@@ -79,3 +78,15 @@ def list_route():
 def load_names():
     coin_names = cg.get_coins_list()
     return {"coin_names": coin_names}
+
+
+@coin_routes.route("/list/delete", methods=["DELETE"])
+def delete_list_item():
+    listId = int(request.json["listId"])
+    # print(listId)
+    toDelete = CurrencyList.query.get(listId)
+    print(toDelete.tickerSymbol)
+    db.session.delete(toDelete)
+    db.session.commit()
+
+    return {"symbol": toDelete.tickerSymbol}

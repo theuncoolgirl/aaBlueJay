@@ -40,12 +40,8 @@ export default function BasicTable() {
   const userWatchlist = useSelector((state) => state.list.watchlist)
   const dispatch = useDispatch()
 
-  // const userWatchlist = null
   useEffect(() => {
-    console.log("WatchList - userId:", userId)
-    if (userId) {
-      dispatch(thunks.getUserWatchlist(userId));
-    }
+    dispatch(thunks.getUserWatchlist(userId));
   }, [userId]);
 
 
@@ -63,7 +59,7 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {userWatchlist.map((row) => (
-            <CurrenceyTableRow row={row} />
+            <CurrenceyTableRow row={row} deleteIcon={true} />
           ))}
         </TableBody>
       </Table>
