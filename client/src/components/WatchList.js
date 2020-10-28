@@ -59,7 +59,7 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {userWatchlist.map((row) => (
-            <CurrenceyTableRow row={row} />
+            <CurrenceyTableRow row={row} deleteIcon={true} />
           ))}
         </TableBody>
       </Table>

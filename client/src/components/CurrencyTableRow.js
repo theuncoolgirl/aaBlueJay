@@ -1,12 +1,14 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import RemoveIcon from '@material-ui/icons/Remove';
+import { thunks } from '../store/list'
 
-const CurrenceyTableRow = ({ row }) => {
+const CurrenceyTableRow = ({ row, deleteIcon }) => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const coins = useSelector(state => state.search)
 
     const handleClick = (e) => {
@@ -17,7 +19,8 @@ const CurrenceyTableRow = ({ row }) => {
     }
 
     const handleDelete = (e) => {
-
+        const currencyListId = Number(e.target.id)
+        dispatch(thunks.deleteWatchlistItem(currencyListId))
     }
 
     return (
@@ -27,7 +30,7 @@ const CurrenceyTableRow = ({ row }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
-            <RemoveIcon onClick={handleDelete} />
+            {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
         </TableRow>
     )
 }

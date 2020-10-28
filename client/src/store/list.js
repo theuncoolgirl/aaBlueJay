@@ -44,7 +44,7 @@ const deleteWatchlistItem = (listId) => async dispatch => {
   })
   if (res.status >= 200 && res.status < 400) {
     const data = await res.json();
-    dispatch(updateUserWatchlist(data))
+    dispatch(deleteListItem(data))
     return data
   } else {
     console.error('Bad response');
@@ -57,13 +57,20 @@ export const thunks = {
 }
 
 function reducer(state = { watchlist: [] }, action) {
+  let newState;
   switch (action.type) {
     case GET_USER_WATCHLIST:
-      const newState = Object.values(action.value)
+      newState = Object.values(action.value)
       return {
         ...state,
         watchlist: newState
       };
+    case DELETE_LIST_ITEM:
+      newState = { ...state }
+      const filteredList = newState.watchlist.filter(listItem => {
+        return listItem.symbol !== action.value.symbol.toLowerCase()
+      })
+      return { watchlist: filteredList }
     default:
       return state;
   }

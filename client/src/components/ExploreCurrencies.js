@@ -16,37 +16,37 @@ import CurrenceyTableRow from "./CurrencyTableRow";
 import { explore_all_load } from '../store/explore'
 
 const useStyles = makeStyles({
-table: {
+  table: {
     minWidth: 650,
-},
+  },
 });
 
 
 const ExploreCurrencies = () => {
-    const { id } = useParams();
-    let history = useHistory();
-    const dispatch = useDispatch()
-    const token = useSelector(state => state.session.id);
-    const rows = useSelector(state => state.explore)
-    const classes = useStyles();
+  const { id } = useParams();
+  let history = useHistory();
+  const dispatch = useDispatch()
+  const token = useSelector(state => state.session.id);
+  const rows = useSelector(state => state.explore)
+  const classes = useStyles();
 
-    useEffect(()=>{
-        dispatch(explore_all_load(id))
-      // eslint-disable-next-line
-      }, [id])
+  useEffect(() => {
+    dispatch(explore_all_load(id))
+    // eslint-disable-next-line
+  }, [id])
 
-    const handleChange = (event, value) => {
-        let page = Number(value)
-        history.push(`/explore/${page}`)
-    }
+  const handleChange = (event, value) => {
+    let page = Number(value)
+    history.push(`/explore/${page}`)
+  }
 
-    if (!token) {
-        return <Redirect to="/" />;
-    }
+  if (!token) {
+    return <Redirect to="/" />;
+  }
 
-    return (
-        <>
-        <TableContainer component={Paper}>
+  return (
+    <>
+      <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -58,15 +58,16 @@ const ExploreCurrencies = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <CurrenceyTableRow row={row}/>
-            ))}
+            {rows.map((row) => {
+              return < CurrenceyTableRow row={row} deleteIcon={false} />
+            }
+            )}
           </TableBody>
         </Table>
       </TableContainer>
       <Pagination count={100} onChange={handleChange} showFirstButton showLastButton />
-      </>
-    )
+    </>
+  )
 }
 
 export default ExploreCurrencies
