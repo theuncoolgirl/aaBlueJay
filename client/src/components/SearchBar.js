@@ -18,7 +18,6 @@ export default function ComboBox() {
 
   const handleEnter = (e) =>{
       if (e.key === 'Enter') {
-          console.log(e.target.value)
           const results = coins.filter(coin => {
             return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
                     ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
@@ -27,8 +26,6 @@ export default function ComboBox() {
             return ((coin.name.toLowerCase() === (e.target.value.toLowerCase().trim()))
             ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
           })
-          console.log(results.length)
-          console.log(exactResults.length)
 
           if (results.length === 0) {
             history.push(`/404`)
