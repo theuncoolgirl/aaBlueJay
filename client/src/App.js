@@ -30,15 +30,15 @@ function App() {
 
     return (
         <>
-        {!id && <div>Loading...</div>}
+        {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
         {id && (<BrowserRouter>
-            <LoginForm />
             <SearchBar />
+            {/* <LoginForm /> */}
             <NavLink to="/friends">Friends</NavLink>
                     <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
             <nav>
                 <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="/logo.png" height={'50px'} /></NavLink></li>
+                    <li><NavLink to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'50px'} /></NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
                 </ul>
