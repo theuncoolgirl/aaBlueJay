@@ -52,14 +52,14 @@ function CoinDetails(props) {
 
     return (
 
-        <Container className={classes.container} justify="space-around">
+        <Container maxWidth="md">
             <Grid
                 container
                 direction="row"
-                justify="space-around"
+                justify="center"
                 alignItems="flex-start"
                 spacing={6}
-                style={{ maxWidth: "80%" }}
+                style={{ margin: 0 }}
             >
                 <Grid item xs={8}>
                     {
