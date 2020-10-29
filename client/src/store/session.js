@@ -92,6 +92,9 @@ export const loadUser = () => async dispatch => {
 export default function reducer(state={}, action) {
   switch (action.type) {
     case LOAD_USER:
+      // if (action.user == {}){
+      //   return state
+      // }
       return action.user
     case SET_USER:
       return action.user;

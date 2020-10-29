@@ -29,15 +29,17 @@ function App() {
     }, [])
 
     return (
-        <BrowserRouter>
+        <>
+        {!id && <div>Loading...</div>}
+        {id && (<BrowserRouter>
             <LoginForm />
             <SearchBar />
             <NavLink to="/friends">Friends</NavLink>
+                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
             <nav>
                 <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
+                    <li><NavLink to="/" activeclass="active"><img src="/logo.png" height={'50px'} /></NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                     <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
                 </ul>
                 <LogoutButton />
@@ -65,11 +67,12 @@ function App() {
                 <Route path="/404">
                     <h1>No Results found, please try again</h1>
                 </Route>
-                <Route path="/">
+                <Route exact={true} path="/">
                     <h1>My Home Page</h1>
                 </Route>
             </Switch>
-        </BrowserRouter >
+        </BrowserRouter >)}
+    </>
     );
 }
 

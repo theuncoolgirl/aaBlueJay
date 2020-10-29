@@ -18,7 +18,6 @@ export const load_friends = (id) => async dispatch => {
 export default function reducer(state=[], action) {
     switch (action.type) {
       case LOAD_ALL_FRIENDS:
-        console.log(action.friends.friends)
         return action.friends.friends;
       default:
         return state;

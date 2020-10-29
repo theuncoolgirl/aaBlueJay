@@ -12,7 +12,7 @@ const LoginForm = () =>{
     const token = useSelector(state => state.session.id);
 
     if (token) {
-        return <Redirect to="/" />;
+        return null
     }
 
     const updateEmail = (e) => {
