@@ -13,21 +13,6 @@ import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
 import { Spark } from './SparkLine'
 
-import bitcoin from '../test data/bit'
-const bitcoinSimple = {
-  name: bitcoin.name,
-  symbol: bitcoin.symbol,
-  price: bitcoin.market_data.current_price.usd,
-  today: bitcoin.market_data.price_change_percentage_24h_in_currency.usd,
-  marketCap: bitcoin.market_data.market_cap.usd
-}
-// console.log(bitcoin.market_data.current_price.usd)
-// const rows = [
-//   bitcoinSimple,
-// ];
-
-
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -45,12 +30,9 @@ export default function BasicTable() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(thunks.getAllUserLists(userId));
     dispatch(thunks.getUserWatchlist(userId, listName));
   }, [userId, listName]);
 
-  // const myList = useSelector(state => state.list.watchlist)
-  // const stocks = myList ? myList : []
 
   return (
     <TableContainer component={Paper}>

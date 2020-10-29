@@ -96,13 +96,18 @@ def load_names():
 
 @coin_routes.route("/list/delete", methods=["DELETE"])
 def delete_list_item():
-    listId = request.json["listId"]
-    symbolToDelete = request.json["symbolToDelete"]
-    print(listId, symbolToDelete)
-    toDelete = CurrencyList.query.filter(
-        CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbolToDelete
-    ).first()
-    print("list to delete ========", toDelete)
+#     listId = request.json["listId"]
+#     symbolToDelete = request.json["symbolToDelete"]
+#     print(listId, symbolToDelete)
+#     toDelete = CurrencyList.query.filter(
+#         CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbolToDelete
+#     ).first()
+#     print("list to delete ========", toDelete)
+
+    listId = int(request.json["listId"])
+    toDelete = CurrencyList.query.get(listId)
+    print(toDelete.tickerSymbol)
+
     db.session.delete(toDelete)
     db.session.commit()
 
@@ -113,7 +118,6 @@ def delete_list_item():
 def add_list_item():
     listId = int(request.json["listId"])
     symbol = request.json["symbol"]
-    # print(listId)
 
     if CurrencyList.query.filter(
         CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbol

@@ -4,18 +4,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import create_engine
 
-# engine = create_engine(
-#     'postgresql+psycopg2://bluejay:password@localhost:5433/bluejay_dev_db')
-# engine.connect()
-
-
 db = SQLAlchemy()
-
-# friend = db.Table(
-#     'friends',
-#     db.metadata,
-
-# )
 
 
 class User(db.Model, UserMixin):
@@ -29,7 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(100), nullable=False)
     cash = db.Column(db.Integer, default=0)
 
-    # recommendation = db.relationship("Recommendation", back_populates="user")
+    # recommendations = db.relationship("Recommendation", back_populates="user")    # noqa
     purchases = db.relationship("Purchase", back_populates="user")
     userlists = db.relationship("UserList", back_populates="user")
 
@@ -72,8 +61,9 @@ class Purchase(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     purchaseDate = db.Column(db.DateTime, nullable=False,
                              server_default=db.text("CURRENT_TIMESTAMP"))
-    purchasePrice = db.Column(db.Integer, nullable=False)
-    purchaseQuantity = db.Column(db.Integer, nullable=False)
+    purchasePrice = db.Column(db.Float, nullable=False)
+    purchaseQuantity = db.Column(db.Float, nullable=False)
+    tickerSymbol = db.Column(db.String(20), nullable=False)
 
     user = db.relationship("User", back_populates="purchases")
 
@@ -98,10 +88,8 @@ class UserList(db.Model):
     listName = db.Column(db.String(50), nullable=False)
 
     user = db.relationship("User", back_populates="userlists")
-    currencylist = db.relationship("CurrencyList", foreign_keys=userId)
     currencylist = db.relationship(
         "CurrencyList", back_populates="userlist")
-    # currencylist = db.relationship("CurrencyList", foreign_keys=userId)
 
 
 class CurrencyList(db.Model):

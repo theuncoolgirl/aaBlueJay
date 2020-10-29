@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
-import { Button, Divider, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 
@@ -19,7 +19,7 @@ function CoinDetails(props) {
         current_price_usd,
         percent_change_usd,
         price_change_usd,
-        chart_data,
+        // chart_data,
         match: {
             params: {
                 coinId
@@ -52,20 +52,14 @@ function CoinDetails(props) {
 
     return (
 
-        <div className={classes.grow} style={{
-            paddingLeft: 30,
-            paddingRight: 30,
-            maxWidth: '80%',
-            marginTop: 30,
-        }}>
-
-
+        <Container maxWidth="md">
             <Grid
                 container
                 direction="row"
-                justify="space-around"
+                justify="center"
                 alignItems="flex-start"
                 spacing={6}
+                style={{ margin: 0 }}
             >
                 <Grid item xs={8}>
                     {
@@ -109,7 +103,7 @@ function CoinDetails(props) {
                 </Grid>
             </Grid>
             <CoinModal />
-        </div>
+        </Container >
     );
 }
 
