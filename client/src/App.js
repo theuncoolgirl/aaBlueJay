@@ -13,7 +13,7 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
-
+import NotFound from './components/NotFound'
 
 function App() {
 
@@ -65,7 +65,7 @@ function App() {
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
                 <Route path="/404">
-                    <h1>No Results found, please try again</h1>
+                    <NotFound />
                 </Route>
                 <Route exact={true} path="/">
                     <h1>My Home Page</h1>
