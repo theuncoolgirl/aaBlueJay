@@ -15,7 +15,7 @@ import {
 
 class CandleStickStockScaleChart extends React.Component {
 	render() {
-		const { type, data: initialData, width, ratio} = this.props;
+		const { type, data: initialData, width, ratio } = this.props;
 		// candle styling that is passed into the candleStickSeries component below
 		const candlesAppearance = {
 			wickStroke: "#000000",
