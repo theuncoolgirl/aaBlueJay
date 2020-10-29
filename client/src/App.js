@@ -31,7 +31,14 @@ function App() {
 
     return (
         <>
-            {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
+            {!id && <BrowserRouter>
+            <LoginForm />
+            <Switch>
+            <Route path="/signup">
+                        <SignUpForm />
+            </Route>
+            </Switch>
+            </BrowserRouter>}
             {id && (<BrowserRouter>
                 <Navigation />
                 <SearchBar />
