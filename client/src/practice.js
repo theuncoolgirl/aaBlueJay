@@ -116,6 +116,6 @@ export const newRes = res.map(marketData => {
   }
 })
 // console.log(newRes)
-var t = new Date(1370001284000);
+// var t = new Date(1370001284000);
 // var formatted = t.format("dd.mm.yyyy");
 // console.log(t)
