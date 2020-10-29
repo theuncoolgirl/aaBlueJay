@@ -61,8 +61,9 @@ class Purchase(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     purchaseDate = db.Column(db.DateTime, nullable=False,
                              server_default=db.text("CURRENT_TIMESTAMP"))
-    purchasePrice = db.Column(db.Integer, nullable=False)
-    purchaseQuantity = db.Column(db.Integer, nullable=False)
+    purchasePrice = db.Column(db.Float, nullable=False)
+    purchaseQuantity = db.Column(db.Float, nullable=False)
+    tickerSymbol = db.Column(db.String(20), nullable=False)
 
     user = db.relationship("User", back_populates="purchases")
 
