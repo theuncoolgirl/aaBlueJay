@@ -33,7 +33,6 @@ function App() {
         {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
         {id && (<BrowserRouter>
             <SearchBar />
-            {/* <LoginForm /> */}
             <NavLink to="/friends">Friends</NavLink>
                     <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
             <nav>
