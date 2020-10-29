@@ -90,7 +90,8 @@ def add_purchase():
     data = request.json
     purchase = Purchase(userId=data['userId'],
                         purchasePrice=data['purchasePrice'],
-                        purchaseQuantity=data['purchaseQuantity'])
+                        purchaseQuantity=data['purchaseQuantity'],
+                        tickerSymbol=data['tickerSymbol'])
     # increase amount of cash in bank by the
     # amount of the share/currency purchases
     user = User.query.filter(User.id == data['userId']).first()
@@ -102,9 +103,15 @@ def add_purchase():
     print(purchase.to_dict())
     return {'purchase': purchase.to_dict()}
 
-# @user_routes.route('/purchases/<int:id>/delete', methods=["DELETE"])
-# def delete_purchase(id):
-    
+
+@user_routes.route('/purchases/<int:id>/delete', methods=["DELETE"])
+def delete_purchase(id):
+    purchaseToDelete = Purchase.query.filter(Purchase.id == id).first()
+    # print(purchaseToDelete.to_dict())
+    db.session.delete(purchaseToDelete)
+    db.session.commit()
+    return {'purchase': purchaseToDelete.to_dict()}
+
 
 @user_routes.route('/friends/<int:id>')
 def friends_load(id):

@@ -10,28 +10,30 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const BuyingPower = () => {
     const dispatch = useDispatch()
+
+    const [currentStockId, setCurrentStockId] = useState('')
+    const [selectedTickerSymbol, setSelectedTickerSymbol] = useState('')
+
     const bank = useSelector(state => state.session.cash)
-    const [stocksHeld, setStocksHeld] = useState([
-        'dogecoin',
-        'bitcoin'
-    ])
-    const [currentStock, setCurrentStock] = useState('')
     const currentUserId = useSelector(state => state.session.id)
-    const currentTime = new Date()
+    const purchaseTickerSymbols = useSelector(state => state.purchase)
+
     const classes = useStyles()
 
-    const handleChange = (event) => {
-        setCurrentStock(event.target.value);
+    const handleChange = (e) => {
+        //ticker symbol and id in db is stored in the select menu item value as an array so you need to index
+        //it to get the specific value -- an example would be [28, "ewt"]
+        setCurrentStockId(e.target.value[0])
+        setSelectedTickerSymbol(e.target.value[1])
     };
 
     const buyStock = (e) => {
         //hard coded price qty and price for now
-        dispatch(addPurchase(currentUserId, 200, 3))
+        dispatch(addPurchase(currentUserId, selectedTickerSymbol, 200, 3))
     }
 
     const deleteStock = (e) => {
-        // dispatch(deletePurchase(currentUserId, ))
-        console.log(currentStock)
+        dispatch(deletePurchase(currentUserId, currentStockId))
     }
 
     return (
@@ -45,15 +47,15 @@ const BuyingPower = () => {
                     <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        value={currentStock}
+                        value={currentStockId}
                         onChange={handleChange}
                         label="currency"
                     >
                         <MenuItem value="">
-                            <em>Select One</em>
+                            <em>None</em>
                         </MenuItem>
-                        {stocksHeld.map((stock, i) => {
-                            return <MenuItem key={i} value={stock}>{stock}</MenuItem>
+                        {purchaseTickerSymbols.map((purchase, i) => {
+                            return <MenuItem key={i} value={[purchase.id, purchase.tickerSymbol]}>{purchase.tickerSymbol}</MenuItem>
                         }
                         )}
 
@@ -66,7 +68,6 @@ const BuyingPower = () => {
                     Delete Stock
                 </Button>
             </form>
-            <h4>the current time is: <br /> {`${new Date()}`}</h4>
         </>
     )
 }

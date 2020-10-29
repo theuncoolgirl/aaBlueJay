@@ -72,9 +72,10 @@ class Purchase(db.Model):
             "userId": self.userId,
             "purchaseDate": self.purchaseDate,
             "purchasePrice": self.purchasePrice,
-            "purchaseQuantity": self.purchaseQuantity
+            "purchaseQuantity": self.purchaseQuantity,
+            "tickerSymbol": self.tickerSymbol
         }
-        
+
 
 class Recommendation(db.Model):
     __tablename__ = "recommendations"
@@ -94,7 +95,7 @@ class UserList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     listName = db.Column(db.String(50), nullable=False)
-    
+
     user = db.relationship("User", back_populates="userlists")
     currencylist = db.relationship(
         "CurrencyList", back_populates="userlist")

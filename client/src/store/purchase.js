@@ -17,9 +17,10 @@ const buy = (purchase) => {
   }
 }
 
-const removePurchase = () => {
+const removePurchase = (purchase) => {
   return {
-    type: DELETE_PURCHASE
+    type: DELETE_PURCHASE,
+    purchase
   }
 }
 
@@ -33,11 +34,12 @@ export const load_purchase_history = (id) => async dispatch => {
   }
 }
 
-export const addPurchase = (userId, purchasePrice, purchaseQuantity) => async dispatch => {
+export const addPurchase = (userId, tickerSymbol, purchasePrice, purchaseQuantity) => async dispatch => {
   const body = {
     userId,
     purchasePrice,
-    purchaseQuantity
+    purchaseQuantity,
+    tickerSymbol
   }
   console.log('in add purchase')
   try {
@@ -79,6 +81,7 @@ export const deletePurchase = (userId, purchaseId) => async dispatch => {
     }
 
     const { purchase } = await res.json()
+    console.log('in thunk', purchase)
     dispatch(removePurchase(purchase))
   } catch (e) {
     console.log(e)
@@ -93,6 +96,9 @@ export default function reducer(state = [], action) {
       return action.purchases;
     case ADD_PURCHASE:
       return [...state, action.purchase]
+    case DELETE_PURCHASE:
+      const newState = state.filter( purchase => purchase.id != action.purchase.id)
+      return newState
     default:
       return state;
   }

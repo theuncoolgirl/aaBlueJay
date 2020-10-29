@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(40),
-        height: theme.spacing(55),
+        height: theme.spacing(50),
       },
     },
     formControl: {
