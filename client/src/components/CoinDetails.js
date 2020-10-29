@@ -51,7 +51,7 @@ function CoinDetails(props) {
             paddingRight: 30,
             maxWidth: '60%',
         }}>
-            <ChartComponent className='stockchart' />
+            <ChartComponent coinId={coinId} className='stockchart' />
             <Grid
                 container
                 direction="row"
@@ -73,10 +73,10 @@ function CoinDetails(props) {
                     {current_price_usd.usd ?
                         <li>Current price: ${current_price_usd.usd.toFixed(3)}</li>
                         : null}
-                    {displayChangeData(price_change_usd, percent_change_usd)}
+                    {/* {displayChangeData(price_change_usd, percent_change_usd)}
                     {chart_data.length > 0 ?
                         <li className="5">{chart_data}</li>
-                        : null}
+                        : null} */}
                 </ul>
                 : <h2>Loading...</h2>}
         </div>

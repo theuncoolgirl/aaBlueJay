@@ -13,10 +13,33 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
+import BuyingPower from './components/BuyingPower'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import PurchaseHistory from './components/PurchaseHistory'
 
+export const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      '& > *': {
+        margin: theme.spacing(1),
+        width: theme.spacing(40),
+        height: theme.spacing(50),
+      },
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 160,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+      }
+  }));
 
 function App() {
-
+    const classes = useStyles()
     const dispatch = useDispatch()
     const loaduser = () => dispatch(AuthAction.loadUser())
     const load_all_coins = () => dispatch(load_coin_names())
@@ -30,15 +53,24 @@ function App() {
 
     return (
         <BrowserRouter>
+            <PurchaseHistory/>
             <LoginForm />
             <SearchBar />
             <NavLink to="/friends">Friends</NavLink>
+            <div className={classes.root}>
+                <Paper elevation={2}>
+                    <div className='buying-power'>
+                        <BuyingPower />
+                    </div>
+                </Paper>
+            </div>
             <nav>
                 <ul>
                     <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'}/></NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                     <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
+                    <li><NavLink to="/coins/litecoin" activeclass="active">coins</NavLink></li>
                 </ul>
                 <LogoutButton />
             </nav>
@@ -62,11 +94,11 @@ function App() {
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                <Route path="/404">
-                    <h1>No Results found, please try again</h1>
-                </Route>
                 <Route path="/">
                     <h1>My Home Page</h1>
+                </Route>
+                <Route path="/404">
+                    <h1>No Results found, please try again</h1>
                 </Route>
             </Switch>
         </BrowserRouter >

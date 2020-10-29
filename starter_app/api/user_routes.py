@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from starter_app.models import User, Friend, Purchase
 from flask_login import current_user, login_user, logout_user
 from flask import request
-from ..models import User, db
+from ..models import User, db, Purchase
 from ..forms import LoginForm, SignUpForm
 
 user_routes = Blueprint('users', __name__)
@@ -78,7 +78,22 @@ def get_csrf_token():
 def purchase_history(id):
     purchases = Purchase.query.filter(Purchase.userId == id).all()
     print(purchases)
-    return {'test': 1}
+    res = [purchase.to_dict() for purchase in purchases]
+    return {'purchases': res}
+
+
+@user_routes.route('/purchases/new', methods=["POST"])
+def add_purchase():
+    data = request.json
+    purchase = Purchase(userId=data['userId'],
+                        purchasePrice=data['purchasePrice'],
+                        purchaseQuantity=data['purchaseQuantity'])
+    db.session.add(purchase)
+    db.session.commit()
+    # purchase = Purchase.query.order_by(Purchase.purchaseDate.desc()).first()
+    print(purchase.to_dict())
+    return {'purchase': purchase.to_dict()}
+
 
 @user_routes.route('/friends/<int:id>')
 def friends_load(id):

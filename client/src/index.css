@@ -7,3 +7,17 @@
     box-shadow: 0px 5px 7px 0px rgba(97, 97, 97, 0.26);
     margin: 0 auto;
 } */
+.buying-power{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px
+}
+h4{
+    text-align: center;
+}
+
+.buying-power-form{
+    display: flex;
+    flex-direction: column;
+}

@@ -15,12 +15,12 @@ import {
 
 class CandleStickStockScaleChart extends React.Component {
 	render() {
-		const { type, data: initialData, width, ratio} = this.props;
+		const { type, data: initialData, width, ratio, coinId} = this.props;
 		// candle styling that is passed into the candleStickSeries component below
 		const candlesAppearance = {
 			wickStroke: "#000000",
 			fill: function fill(d) {
-				return d.close > d.open ? "rgba(13, 238, 114, 0.3)" : "rgba(13, 255, 200, 1)";
+				return d.close > d.open ? "rgba(0, 255,0, 1)" : "rgba(255, 0, 0, 1)";
 			},
 			stroke: "#000000",
 			candleStrokeWidth: 1,
@@ -50,7 +50,7 @@ class CandleStickStockScaleChart extends React.Component {
 				width={width}
 				margin={{ left: 50, right: 50, top: 20, bottom: 40 }}
 				type={type}
-				seriesName="MSFT"
+				seriesName={`${coinId}`}
 				data={data}
 				xScale={xScale}
 				xAccessor={xAccessor}
@@ -59,7 +59,7 @@ class CandleStickStockScaleChart extends React.Component {
 			>
 				{/* title label */}
 				<Label x={width / 2.5} y={20}
-					fontSize={30} text="MSFT" fontFamily='comic' />
+					fontSize={30} text={`${coinId}`} fontFamily='comic' />
 
 				{/* xaxis label */}
 				<Label x={width / 2.5} y={325}

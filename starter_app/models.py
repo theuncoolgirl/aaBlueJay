@@ -2,12 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import create_engine
-
-# engine = create_engine(
-#     'postgresql+psycopg2://bluejay:password@localhost:5433/bluejay_dev_db')
-# engine.connect()
-
 
 db = SQLAlchemy()
 
@@ -77,6 +71,15 @@ class Purchase(db.Model):
 
     user = db.relationship("User", back_populates="purchases")
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "purchaseDate": self.purchaseDate,
+            "purchasePrice": self.purchasePrice,
+            "purchaseQuantity": self.purchaseQuantity
+        }
+        
 
 class Recommendation(db.Model):
     __tablename__ = "recommendations"
