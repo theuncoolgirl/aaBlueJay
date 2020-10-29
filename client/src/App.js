@@ -13,6 +13,7 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
+import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 
 function App() {
@@ -30,49 +31,50 @@ function App() {
 
     return (
         <>
-        {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
-        {id && (<BrowserRouter>
-            <SearchBar />
-            {/* <LoginForm /> */}
-            <NavLink to="/friends">Friends</NavLink>
-                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
-            <nav>
-                <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'50px'} /></NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
-                </ul>
-                <LogoutButton />
-            </nav>
-            <Switch>
-                <Route path="/friends">
-                    <FriendList />
-                </Route>
-                <Route path="/users">
-                    <UserList />
-                </Route>
-                <Route path="/results">
-                    <SearchResults />
-                </Route>
-                <Route path="/signup">
-                    <SignUpForm />
-                </Route>
-                <Route path="/explore/:id">
-                    <ExploreCurrencies />
-                </Route>
-                <Route exact path="/list/watchlist">
-                    <MyList />
-                </Route>
-                <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                <Route path="/404">
-                    <NotFound />
-                </Route>
-                <Route exact={true} path="/">
-                    <h1>My Home Page</h1>
-                </Route>
-            </Switch>
-        </BrowserRouter >)}
-    </>
+            {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
+            {id && (<BrowserRouter>
+                <Navigation />
+                <SearchBar />
+                {/* <LoginForm /> */}
+                <NavLink to="/friends">Friends</NavLink>
+                <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'50px'} /></NavLink></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
+                    </ul>
+                    <LogoutButton />
+                </nav>
+                <Switch>
+                    <Route path="/friends">
+                        <FriendList />
+                    </Route>
+                    <Route path="/users">
+                        <UserList />
+                    </Route>
+                    <Route path="/results">
+                        <SearchResults />
+                    </Route>
+                    <Route path="/signup">
+                        <SignUpForm />
+                    </Route>
+                    <Route path="/explore/:id">
+                        <ExploreCurrencies />
+                    </Route>
+                    <Route exact path="/list/watchlist">
+                        <MyList />
+                    </Route>
+                    <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                    <Route path="/404">
+                        <NotFound />
+                    </Route>
+                    <Route exact={true} path="/">
+                        <h1>My Home Page</h1>
+                    </Route>
+                </Switch>
+            </BrowserRouter >)}
+        </>
     );
 }
 
