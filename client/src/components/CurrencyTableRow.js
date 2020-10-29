@@ -39,7 +39,7 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
-            {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
+            {deleteIcon ? <TableCell align="center"> <RemoveIcon onClick={handleDelete} id={row.symbolId} /> </TableCell> : null}
         </TableRow>
     )
 }
