@@ -13,8 +13,11 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
+import { thunks } from './store/list';
+import DisplayLists from './components/DisplayLists'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
+
 
 function App() {
 
@@ -26,22 +29,34 @@ function App() {
     useEffect(() => {
         loaduser()
         load_all_coins()
+        dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
     }, [])
 
     return (
         <>
             {!id && <BrowserRouter>
-            <LoginForm />
-            <Switch>
-            <Route path="/signup">
+                <LoginForm />
+                <Switch>
+                    <Route path="/signup">
                         <SignUpForm />
-            </Route>
-            </Switch>
+                    </Route>
+                </Switch>
             </BrowserRouter>}
             {id && (<BrowserRouter>
-                <Navigation />
-                {/* <LoginForm /> */}
+                <LoginForm />
+                <SearchBar />
+                <DisplayLists />
+                <NavLink to="/friends">Friends</NavLink>
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
+                        <li><NavLink to="/list/Watch List" activeclass="active">Watchlist</NavLink></li>
+                    </ul>
+                    <LogoutButton />
+                </nav>
                 <Switch>
                     <Route path="/friends">
                         <FriendList />
@@ -58,7 +73,8 @@ function App() {
                     <Route path="/explore/:id">
                         <ExploreCurrencies />
                     </Route>
-                    <Route exact path="/list/watchlist">
+                    <Route exact path="/list/:listName">
+
                         <MyList />
                     </Route>
                     <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />

@@ -87,6 +87,7 @@ export default function ComboBox() {
     })
     history.push(`/coins/${coinId[0].id}`)
   }
+
   const handleEnter = (e) =>{
       if (e.key === 'Enter') {
           const results = coins.filter(coin => {
@@ -98,13 +99,13 @@ export default function ComboBox() {
             ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
           })
 
-          if (results.length === 0) {
-            history.push(`/404`)
-          } else if (exactResults.length === 1) {
-            history.push(`/coins/${exactResults[0].id}`)
-          } else {
-            history.push(`/results`, results)
-          }
+
+      if (results.length === 0) {
+        history.push(`/404`)
+      } else if (exactResults.length === 1) {
+        history.push(`/coins/${exactResults[0].id}`)
+      } else {
+        history.push(`/results`, results)
       }
   }
 
