@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 
 db = SQLAlchemy()
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -17,7 +18,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(100), nullable=False)
     cash = db.Column(db.Integer, default=0)
 
-    # recommendation = db.relationship("Recommendation", back_populates="user")
+    # recommendations = db.relationship("Recommendation", back_populates="user")    # noqa
     purchases = db.relationship("Purchase", back_populates="user")
     userlists = db.relationship("UserList", back_populates="user")
 
