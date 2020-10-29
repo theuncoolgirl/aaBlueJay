@@ -88,12 +88,20 @@ def add_purchase():
     purchase = Purchase(userId=data['userId'],
                         purchasePrice=data['purchasePrice'],
                         purchaseQuantity=data['purchaseQuantity'])
+    # increase amount of cash in bank by the
+    # amount of the share/currency purchases
+    user = User.query.filter(User.id == data['userId']).first()
+    print('my user ===========', user)
+    user.cash = user.cash + int(data['purchasePrice'])
     db.session.add(purchase)
     db.session.commit()
     # purchase = Purchase.query.order_by(Purchase.purchaseDate.desc()).first()
     print(purchase.to_dict())
     return {'purchase': purchase.to_dict()}
 
+# @user_routes.route('/purchases/<int:id>/delete', methods=["DELETE"])
+# def delete_purchase(id):
+    
 
 @user_routes.route('/friends/<int:id>')
 def friends_load(id):

@@ -33,7 +33,8 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "firstname": self.firstname,
             "lastname": self.lastname,
-            "email": self.email
+            "email": self.email,
+            "cash": self.cash
         }
 
     @property
@@ -99,7 +100,7 @@ class UserList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     listName = db.Column(db.String(50), nullable=False)
-
+    
     user = db.relationship("User", back_populates="userlists")
     currencylist = db.relationship("CurrencyList", foreign_keys=userId)
     currencylist = db.relationship(

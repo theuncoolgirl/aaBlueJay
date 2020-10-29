@@ -17,6 +17,8 @@ import BuyingPower from './components/BuyingPower'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import PurchaseHistory from './components/PurchaseHistory'
+import Navigation from './components/Navigation'
+import NotFound from './components/NotFound'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(40),
-        height: theme.spacing(50),
+        height: theme.spacing(55),
       },
     },
     formControl: {
@@ -37,8 +39,6 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
       }
   }));
-import Navigation from './components/Navigation'
-import NotFound from './components/NotFound'
 
 function App() {
     const classes = useStyles()
@@ -55,7 +55,6 @@ function App() {
 
     return (
         <>
-            <PurchaseHistory/>
             <div className={classes.root}>
                 <Paper elevation={2}>
                     <div className='buying-power'>
@@ -67,6 +66,7 @@ function App() {
             {id && (<BrowserRouter>
                 <Navigation />
                 <SearchBar />
+                <PurchaseHistory/>
                 {/* <LoginForm /> */}
                 <NavLink to="/friends">Friends</NavLink>
                 <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
