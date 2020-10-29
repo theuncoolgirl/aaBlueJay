@@ -30,8 +30,8 @@ const getUserWatchlist = (userId) => async (dispatch, getState) => {
   try {
     if (res.status >= 200 && res.status < 400) {
       const data = await res.json();
-      dispatch(updateUserWatchlist(data))
-      return data
+      dispatch(updateUserWatchlist(data.watchlist))
+      return data.watchlist
     } else {
       console.error('Bad response');
     }

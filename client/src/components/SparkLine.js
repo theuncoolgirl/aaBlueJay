@@ -15,8 +15,8 @@ export const Spark = () => {
       {stocks.map((stock) => (
         <Sparklines data={plotData(stock)}>
           <SparklinesLine style={{ fill: "none" }} />
-          <SparklinesSpots />
-          {/* <SparklinesBars /> */}
+          {/* <SparklinesSpots /> */}
+          <SparklinesBars />
         </Sparklines>
       ))}
     </div>
