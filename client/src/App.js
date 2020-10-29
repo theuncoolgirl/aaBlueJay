@@ -34,18 +34,7 @@ function App() {
             {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
             {id && (<BrowserRouter>
                 <Navigation />
-                <SearchBar />
                 {/* <LoginForm /> */}
-                <NavLink to="/friends">Friends</NavLink>
-                <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
-                <nav>
-                    <ul>
-                        <li><NavLink to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'50px'} /></NavLink></li>
-                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                        <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
-                    </ul>
-                    <LogoutButton />
-                </nav>
                 <Switch>
                     <Route path="/friends">
                         <FriendList />
