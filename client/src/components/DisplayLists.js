@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { thunks } from '../store/list';
 import { useDispatch, useSelector } from 'react-redux'
 import AddListItem from './AddListItem'
@@ -10,8 +10,9 @@ const DisplayLists = () => {
 
   useEffect(() => {
     dispatch(thunks.getAllUserLists(userId));
+    // eslint-disable-next-line
   }, [userId]);
-  console.log(userLists)
+
   return (
     <>
       {userLists.map(list => <div>{list[0]} <AddListItem listTitle={list[0]} listId={list[1]} /></div>)}

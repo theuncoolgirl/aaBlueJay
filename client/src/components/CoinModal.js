@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import AddListItem from './AddListItem';
-import { useSelector } from 'react-redux';
 import DisplayLists from './DisplayLists'
 
 function rand() {
@@ -33,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal() {
   const classes = useStyles();
-  const userLists = Object.keys(useSelector(state => state.list))
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);

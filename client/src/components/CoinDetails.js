@@ -19,7 +19,7 @@ function CoinDetails(props) {
         current_price_usd,
         percent_change_usd,
         price_change_usd,
-        chart_data,
+        // chart_data,
         match: {
             params: {
                 coinId
