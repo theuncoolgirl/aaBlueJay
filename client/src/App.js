@@ -13,8 +13,8 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
-import { Spark } from './components/SparkLine';
-
+import { thunks } from './store/list';
+import DisplayLists from './components/DisplayLists'
 
 function App() {
 
@@ -26,51 +26,63 @@ function App() {
     useEffect(() => {
         loaduser()
         load_all_coins()
+        dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
     }, [])
 
     return (
-        <BrowserRouter>
-            <LoginForm />
-            <SearchBar />
-            <NavLink to="/friends">Friends</NavLink>
-            <nav>
-                <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
-                    <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
-                </ul>
-                <LogoutButton />
-            </nav>
-            <Switch>
-                <Route path="/friends">
-                    <FriendList />
-                </Route>
-                <Route path="/users">
-                    <UserList />
-                </Route>
-                <Route path="/results">
-                    <SearchResults />
-                </Route>
-                <Route path="/signup">
-                    <SignUpForm />
-                </Route>
-                <Route path="/explore/:id">
-                    <ExploreCurrencies />
-                </Route>
-                <Route exact path="/list/watchlist">
-                    <MyList />
-                </Route>
-                <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                <Route path="/404">
-                    <h1>No Results found, please try again</h1>
-                </Route>
-                <Route path="/">
-                    <h1>My Home Page</h1>
-                </Route>
-            </Switch>
-        </BrowserRouter >
+        <>
+            {!id && <BrowserRouter>
+                <LoginForm />
+                <Switch>
+                    <Route path="/signup">
+                        <SignUpForm />
+                    </Route>
+                </Switch>
+            </BrowserRouter>}
+            {id && (<BrowserRouter>
+                <LoginForm />
+                <SearchBar />
+                <DisplayLists />
+                <NavLink to="/friends">Friends</NavLink>
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
+                        <li><NavLink to="/list/Watch List" activeclass="active">Watchlist</NavLink></li>
+                    </ul>
+                    <LogoutButton />
+                </nav>
+                <Switch>
+                    <Route path="/friends">
+                        <FriendList />
+                    </Route>
+                    <Route path="/users">
+                        <UserList />
+                    </Route>
+                    <Route path="/results">
+                        <SearchResults />
+                    </Route>
+                    <Route path="/signup">
+                        <SignUpForm />
+                    </Route>
+                    <Route path="/explore/:id">
+                        <ExploreCurrencies />
+                    </Route>
+                    <Route exact path="/list/:listName">
+                        <MyList />
+                    </Route>
+                    <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                    <Route path="/404">
+                        <h1>No Results found, please try again</h1>
+                    </Route>
+                    <Route path="/">
+                        <h1>My Home Page</h1>
+                    </Route>
+                </Switch>
+            </BrowserRouter >)}
+        </>
     );
 }
 

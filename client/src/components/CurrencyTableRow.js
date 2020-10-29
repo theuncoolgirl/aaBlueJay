@@ -8,7 +8,7 @@ import { thunks } from '../store/list';
 import { Spark } from './SparkLine';
 import { Table } from '@material-ui/core';
 
-const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
+const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const coins = useSelector(state => state.search)
@@ -20,10 +20,10 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
         history.push(`/coins/${coinId[0].id}`)
     }
 
-    const handleDelete = (currencyListId) => {
-        // const currencyListId = e.target.symbol
-        console.log(currencyListId)
-        dispatch(thunks.deleteWatchlistItem(currencyListId))
+    const handleDelete = (symbolToDelete) => {
+        // const symbolToDelete = e.target.
+        // console.log(symbolToDelete)
+        dispatch(thunks.deleteWatchlistItem(listIdToDelete, symbolToDelete))
     }
 
     const plotSparkData = (stockData) => {
@@ -31,7 +31,7 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
     }
 
     return (
-        <TableRow key={row.name} id={row.symbolId}>
+        <TableRow key={row.name}>
             <TableCell component="th" scope="row" onClick={handleClick} > {row.name} </TableCell>
             {spark ? <TableCell>
                 <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} />
@@ -40,8 +40,18 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
+            {/* {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null} */}
             {deleteIcon ? <TableCell align="center" id={row.symbolId}> <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} /> </TableCell> : null}
         </TableRow>
+
+        // <TableRow key={row.name}>
+        //     <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
+        //     <TableCell align="right">{row.symbol}</TableCell>
+        //     <TableCell align="right">{row.current_price}</TableCell>
+        //     <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
+        //     <TableCell align="right">{row.market_cap}</TableCell>
+        //     {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
+        // </TableRow>
     )
 }
 

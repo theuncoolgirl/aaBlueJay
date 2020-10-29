@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -36,14 +37,17 @@ const useStyles = makeStyles({
 
 export default function BasicTable() {
   const classes = useStyles();
-
+  const { listName } = useParams()
   const userId = useSelector((state) => state.session.id)
-  const userWatchlist = useSelector((state) => state.list.watchlist)
+  const userCurrentList = useSelector((state) => state.list.currentList)
+  const lists = useSelector((state) => state.list.lists)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(thunks.getUserWatchlist(userId));
-  }, [userId]);
+    // dispatch(thunks.getAllUserLists(userId));
+    dispatch(thunks.getUserWatchlist(userId, listName));
+  }, [userId, listName]);
 
   // const myList = useSelector(state => state.list.watchlist)
   // const stocks = myList ? myList : []
@@ -62,8 +66,8 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {userWatchlist.map((row) => (
-            <CurrenceyTableRow row={row} deleteIcon={true} spark={true}>
+          {userCurrentList.map((row) => (
+            <CurrenceyTableRow row={row} deleteIcon={true} listIdToDelete={lists ? lists[0][1] : null} spark={true}>
             </ CurrenceyTableRow>
           ))}
         </TableBody>
