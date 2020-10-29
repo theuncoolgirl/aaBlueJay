@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesBars } from 'react-sparklines';
 
 export const Spark = ({ data }) => {
-  console.log(data.length)
   return (
     <>
       <Sparklines data={data}>

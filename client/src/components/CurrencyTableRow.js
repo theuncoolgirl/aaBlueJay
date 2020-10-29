@@ -20,8 +20,9 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
         history.push(`/coins/${coinId[0].id}`)
     }
 
-    const handleDelete = (e) => {
-        const currencyListId = e.target.id
+    const handleDelete = (currencyListId) => {
+        // const currencyListId = e.target.symbol
+        console.log(currencyListId)
         dispatch(thunks.deleteWatchlistItem(currencyListId))
     }
 
@@ -30,8 +31,8 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
     }
 
     return (
-        <TableRow key={row.name}>
-            <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
+        <TableRow key={row.name} id={row.symbolId}>
+            <TableCell component="th" scope="row" onClick={handleClick} > {row.name} </TableCell>
             {spark ? <TableCell>
                 <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} />
             </TableCell> : null}
@@ -39,7 +40,7 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
-            {deleteIcon ? <TableCell align="center"> <RemoveIcon onClick={handleDelete} id={row.symbolId} /> </TableCell> : null}
+            {deleteIcon ? <TableCell align="center" id={row.symbolId}> <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} /> </TableCell> : null}
         </TableRow>
     )
 }
