@@ -13,6 +13,7 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
+import { Spark } from './components/SparkLine';
 
 
 function App() {
@@ -29,17 +30,15 @@ function App() {
     }, [])
 
     return (
-        <>
-        {!id && <div>Loading...</div>}
-        {id && (<BrowserRouter>
+        <BrowserRouter>
             <LoginForm />
             <SearchBar />
             <NavLink to="/friends">Friends</NavLink>
-                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
             <nav>
                 <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="/logo.png" height={'50px'} /></NavLink></li>
+                    <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                     <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
                 </ul>
                 <LogoutButton />
@@ -61,18 +60,18 @@ function App() {
                     <ExploreCurrencies />
                 </Route>
                 <Route exact path="/list/watchlist">
+                    <Spark />
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
                 <Route path="/404">
                     <h1>No Results found, please try again</h1>
                 </Route>
-                <Route exact={true} path="/">
+                <Route path="/">
                     <h1>My Home Page</h1>
                 </Route>
             </Switch>
-        </BrowserRouter >)}
-    </>
+        </BrowserRouter >
     );
 }
 
