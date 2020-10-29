@@ -75,7 +75,9 @@ def list_route():
 
     currencylistIds = filterIds(currencylistSimple)
     coin_data = cg.get_coins_markets(
-        vs_currency="usd", ids=currencylistIds, sparkline=True
+        sparkline="true",
+        vs_currency="usd",
+        ids=currencylistIds,
     )
 
     print("CURRENCY LIST =======", currencylist)
@@ -89,6 +91,7 @@ def list_route():
     #         if item["symbol"] == tup[0]:
     #             res[item["symbol"]] = item
     #             res[item["symbol"]]["symbolId"] = tup[1]
+    print(coin_data[10])
     res = {"watchlist": coin_data}
 
     return res

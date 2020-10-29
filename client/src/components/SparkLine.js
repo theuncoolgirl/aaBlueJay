@@ -7,7 +7,7 @@ export const Spark = () => {
   const stocks = myList ? myList : []
   const sampleData = [5, 10, 5, 20, 8, 15]
   const plotData = (stockData) => {
-    return [stockData.low_24h, stockData.current_price, stockData.high_24h]
+    return [stockData.sparkline_in_7d.price]
   }
   // debugger
   return (
