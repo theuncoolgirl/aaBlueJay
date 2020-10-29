@@ -37,6 +37,8 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
       }
   }));
+import Navigation from './components/Navigation'
+import NotFound from './components/NotFound'
 
 function App() {
     const classes = useStyles()
@@ -52,11 +54,8 @@ function App() {
     }, [])
 
     return (
-        <BrowserRouter>
+        <>
             <PurchaseHistory/>
-            <LoginForm />
-            <SearchBar />
-            <NavLink to="/friends">Friends</NavLink>
             <div className={classes.root}>
                 <Paper elevation={2}>
                     <div className='buying-power'>
@@ -64,44 +63,50 @@ function App() {
                     </div>
                 </Paper>
             </div>
-            <nav>
-                <ul>
-                    <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'}/></NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
-                    <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
-                    <li><NavLink to="/coins/litecoin" activeclass="active">coins</NavLink></li>
-                </ul>
-                <LogoutButton />
-            </nav>
-            <Switch>
-                <Route path="/friends">
-                    <FriendList />
-                </Route>
-                <Route path="/users">
-                    <UserList />
-                </Route>
-                <Route path="/results">
-                    <SearchResults />
-                </Route>
-                <Route path="/signup">
-                    <SignUpForm />
-                </Route>
-                <Route path="/explore/:id">
-                    <ExploreCurrencies />
-                </Route>
-                <Route exact path="/list/watchlist">
-                    <MyList />
-                </Route>
-                <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                <Route path="/">
-                    <h1>My Home Page</h1>
-                </Route>
-                <Route path="/404">
-                    <h1>No Results found, please try again</h1>
-                </Route>
-            </Switch>
-        </BrowserRouter >
+            {!id && <BrowserRouter><LoginForm /></BrowserRouter>}
+            {id && (<BrowserRouter>
+                <Navigation />
+                <SearchBar />
+                {/* <LoginForm /> */}
+                <NavLink to="/friends">Friends</NavLink>
+                <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'50px'} /></NavLink></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        <li><NavLink to="/list/watchlist" activeclass="active">Watchlist</NavLink></li>
+                    </ul>
+                    <LogoutButton />
+                </nav>
+                <Switch>
+                    <Route path="/friends">
+                        <FriendList />
+                    </Route>
+                    <Route path="/users">
+                        <UserList />
+                    </Route>
+                    <Route path="/results">
+                        <SearchResults />
+                    </Route>
+                    <Route path="/signup">
+                        <SignUpForm />
+                    </Route>
+                    <Route path="/explore/:id">
+                        <ExploreCurrencies />
+                    </Route>
+                    <Route exact path="/list/watchlist">
+                        <MyList />
+                    </Route>
+                    <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                    <Route path="/404">
+                        <NotFound />
+                    </Route>
+                    <Route exact={true} path="/">
+                        <h1>My Home Page</h1>
+                    </Route>
+                </Switch>
+            </BrowserRouter >)}
+        </>
     );
 }
 

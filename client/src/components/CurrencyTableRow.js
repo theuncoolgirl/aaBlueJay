@@ -19,7 +19,7 @@ const CurrenceyTableRow = ({ row, deleteIcon }) => {
     }
 
     const handleDelete = (e) => {
-        const currencyListId = Number(e.target.id)
+        const currencyListId = e.target.id
         dispatch(thunks.deleteWatchlistItem(currencyListId))
     }
 

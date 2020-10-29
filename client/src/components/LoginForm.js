@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import * as AuthAction from '../store/session';
 
 
@@ -12,7 +12,7 @@ const LoginForm = () =>{
     const token = useSelector(state => state.session.id);
 
     if (token) {
-        return <Redirect to="/" />;
+        return null
     }
 
     const updateEmail = (e) => {

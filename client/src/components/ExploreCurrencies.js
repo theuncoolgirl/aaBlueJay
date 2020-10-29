@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -31,6 +31,7 @@ const ExploreCurrencies = () => {
   const classes = useStyles();
 
   useEffect(() => {
+    console.log('in explore')
     dispatch(explore_all_load(id))
     // eslint-disable-next-line
   }, [id])
@@ -41,7 +42,7 @@ const ExploreCurrencies = () => {
   }
 
   if (!token) {
-    return <Redirect to="/" />;
+    return null;
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -11,14 +11,14 @@ import Paper from '@material-ui/core/Paper';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
 
-import bitcoin from '../test data/bit'
-const bitcoinSimple = {
-  name: bitcoin.name,
-  symbol: bitcoin.symbol,
-  price: bitcoin.market_data.current_price.usd,
-  today: bitcoin.market_data.price_change_percentage_24h_in_currency.usd,
-  marketCap: bitcoin.market_data.market_cap.usd
-}
+// import bitcoin from '../test data/bit'
+// const bitcoinSimple = {
+//   name: bitcoin.name,
+//   symbol: bitcoin.symbol,
+//   price: bitcoin.market_data.current_price.usd,
+//   today: bitcoin.market_data.price_change_percentage_24h_in_currency.usd,
+//   marketCap: bitcoin.market_data.market_cap.usd
+// }
 // console.log(bitcoin.market_data.current_price.usd)
 // const rows = [
 //   bitcoinSimple,
@@ -42,6 +42,7 @@ export default function BasicTable() {
 
   useEffect(() => {
     dispatch(thunks.getUserWatchlist(userId));
+    // eslint-disable-next-line
   }, [userId]);
 
 
