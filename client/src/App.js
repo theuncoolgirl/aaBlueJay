@@ -60,7 +60,6 @@ function App() {
                     <ExploreCurrencies />
                 </Route>
                 <Route exact path="/list/watchlist">
-                    <Spark />
                     <MyList />
                 </Route>
                 <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />

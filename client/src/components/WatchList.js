@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
+import { Spark } from './SparkLine'
 
 import bitcoin from '../test data/bit'
 const bitcoinSimple = {
@@ -44,6 +45,8 @@ export default function BasicTable() {
     dispatch(thunks.getUserWatchlist(userId));
   }, [userId]);
 
+  // const myList = useSelector(state => state.list.watchlist)
+  // const stocks = myList ? myList : []
 
   return (
     <TableContainer component={Paper}>
@@ -59,7 +62,8 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {userWatchlist.map((row) => (
-            <CurrenceyTableRow row={row} deleteIcon={true} />
+            <CurrenceyTableRow row={row} deleteIcon={true} spark={true}>
+            </ CurrenceyTableRow>
           ))}
         </TableBody>
       </Table>

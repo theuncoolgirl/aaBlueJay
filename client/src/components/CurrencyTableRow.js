@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { thunks } from '../store/list'
+import { thunks } from '../store/list';
+import { Spark } from './SparkLine';
 
-const CurrenceyTableRow = ({ row, deleteIcon }) => {
+const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const coins = useSelector(state => state.search)
@@ -23,6 +24,10 @@ const CurrenceyTableRow = ({ row, deleteIcon }) => {
         dispatch(thunks.deleteWatchlistItem(currencyListId))
     }
 
+    const plotSparkData = (stockData) => {
+        return stockData.sparkline_in_7d.price
+    }
+
     return (
         <TableRow key={row.name}>
             <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
@@ -30,6 +35,7 @@ const CurrenceyTableRow = ({ row, deleteIcon }) => {
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
+            {spark ? <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} /> : null}
             {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
         </TableRow>
     )
