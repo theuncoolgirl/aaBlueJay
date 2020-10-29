@@ -6,6 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { thunks } from '../store/list';
 import { Spark } from './SparkLine';
+import { Table } from '@material-ui/core';
 
 const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
     const history = useHistory()
@@ -31,11 +32,13 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark }) => {
     return (
         <TableRow key={row.name}>
             <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
+            {spark ? <TableCell>
+                <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} />
+            </TableCell> : null}
             <TableCell align="right">{row.symbol}</TableCell>
             <TableCell align="right">{row.current_price}</TableCell>
             <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">{row.market_cap}</TableCell>
-            {spark ? <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} /> : null}
             {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
         </TableRow>
     )

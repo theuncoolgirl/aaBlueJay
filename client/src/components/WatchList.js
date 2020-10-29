@@ -54,6 +54,7 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
+            <TableCell align="right">7-Day Performance</TableCell>
             <TableCell align="right">Symbol</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="right">Today</TableCell>

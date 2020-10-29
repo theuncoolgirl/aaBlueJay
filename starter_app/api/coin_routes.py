@@ -80,18 +80,6 @@ def list_route():
         ids=currencylistIds,
     )
 
-    print("CURRENCY LIST =======", currencylist)
-    print("SIMPLE =========", currencylistSimple)
-    print("IDS =========", currencylistIds)
-    print("COIN DATA =========", coin_data)
-
-    # res = dict()
-    # for item in coin_data:
-    #     for tup in currencylist:
-    #         if item["symbol"] == tup[0]:
-    #             res[item["symbol"]] = item
-    #             res[item["symbol"]]["symbolId"] = tup[1]
-    print(coin_data[10])
     res = {"watchlist": coin_data}
 
     return res
