@@ -13,6 +13,7 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
+import Navigation from './components/Navigation'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <Navigation />
             <LoginForm />
             <SearchBar />
             <NavLink to="/friends">Friends</NavLink>

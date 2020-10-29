@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
-import { Button, Divider, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
 
 function CoinDetails(props) {
@@ -51,20 +51,14 @@ function CoinDetails(props) {
 
     return (
 
-        <div className={classes.grow} style={{
-            paddingLeft: 30,
-            paddingRight: 30,
-            maxWidth: '80%',
-            marginTop: 30,
-        }}>
-
-
+        <Container className={classes.container} justify="space-around">
             <Grid
                 container
                 direction="row"
                 justify="space-around"
                 alignItems="flex-start"
                 spacing={6}
+                style={{ maxWidth: "80%" }}
             >
                 <Grid item xs={8}>
                     {
@@ -108,7 +102,7 @@ function CoinDetails(props) {
                 </Grid>
             </Grid>
 
-        </div >
+        </Container >
     );
 }
 
