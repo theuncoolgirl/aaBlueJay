@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy import create_engine
 
 db = SQLAlchemy()
 
@@ -28,7 +26,8 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "firstname": self.firstname,
             "lastname": self.lastname,
-            "email": self.email
+            "email": self.email,
+            "cash": self.cash
         }
 
     @property
@@ -66,6 +65,16 @@ class Purchase(db.Model):
     tickerSymbol = db.Column(db.String(20), nullable=False)
 
     user = db.relationship("User", back_populates="purchases")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "purchaseDate": self.purchaseDate,
+            "purchasePrice": self.purchasePrice,
+            "purchaseQuantity": self.purchaseQuantity,
+            "tickerSymbol": self.tickerSymbol
+        }
 
 
 class Recommendation(db.Model):

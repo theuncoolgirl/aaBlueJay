@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, session
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
-
 from starter_app.models import db, User
 from starter_app.api.user_routes import user_routes
 from starter_app.api.coin_routes import coin_routes
