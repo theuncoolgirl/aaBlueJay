@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
 import { Divider, Grid, Paper, Typography } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 import CoinModal from './CoinModal';
 
 
@@ -38,11 +38,11 @@ function CoinDetails(props) {
         if (priceChange.usd) {
             if (priceChange.usd > 0) {
                 return <>
-                    <Typography variant="subtitle2">+${priceChange.usd.toFixed(2)} (+{percentChange.usd.toFixed(2)}%)  <span style={{ fontWeight: "lighter" }}>Today</span></Typography>
+                    <Typography variant="subtitle2">+${priceChange.usd.toFixed(2)} (+{percentChange.usd.toFixed(2)}%)  <span className={classes.lighter}>Today</span></Typography>
                 </>
             } else {
                 return <>
-                    <Typography variant="subtitle2">-${Math.abs(priceChange.usd).toFixed(2)} (-{Math.abs(percentChange.usd).toFixed(2)}%)  <span style={{ fontWeight: "lighter" }}>Today</span></Typography>
+                    <Typography variant="subtitle2">-${Math.abs(priceChange.usd).toFixed(2)} (-{Math.abs(percentChange.usd).toFixed(2)}%)  <span className={classes.lighter}>Today</span></Typography>
                 </>
             }
         } else return null

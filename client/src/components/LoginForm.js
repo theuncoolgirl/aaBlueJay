@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import * as AuthAction from '../store/session';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 
 const LoginForm = () => {
   const classes = useStyles();
@@ -44,7 +44,7 @@ const LoginForm = () => {
       direction="row"
       justify="space-around"
     >
-      <Grid item style={{ textAlign: 'center' }}>
+      <Grid item className={classes.center}>
         <Paper className={classes.formCard} elevation={3}>
           <Typography className={classes.title} variant='h5'>Log In</Typography>
           <form onSubmit={loginHandler}>
@@ -61,7 +61,7 @@ const LoginForm = () => {
               Demo User
             </Button>
             <div className="signup-form-login">
-              <Typography>Dont have an account?</Typography><NavLink to="/signup"><Typography>Sign Up</Typography></NavLink>
+              <Typography>Dont have an account?</Typography><NavLink className={classes.link} to="/signup"><Typography >Sign Up</Typography></NavLink>
             </div>
           </form>
         </Paper >

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import { Divider, Paper, Typography } from '@material-ui/core';
 import ListModal from './ListModal';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 
 const DisplayLists = () => {
   const classes = useStyles();
