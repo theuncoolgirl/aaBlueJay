@@ -52,6 +52,10 @@ def explore_load(id):
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id, list_name = request.json.values()
+    print("==========================")
+    print(list_name)
+    print(user_id)
+    print("==========================")
 
     query = (
         UserList.query.options(joinedload("currencylist"))
