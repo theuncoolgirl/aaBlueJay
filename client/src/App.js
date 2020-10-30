@@ -18,7 +18,6 @@ import { Container } from '@material-ui/core';
 import LoggedOutView from './components/LoggedOutView'
 
 function App() {
-    const classes = useStyles()
     const dispatch = useDispatch()
     const loaduser = () => dispatch(AuthAction.loadUser())
     const load_all_coins = () => dispatch(load_coin_names())
