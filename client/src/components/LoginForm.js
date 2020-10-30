@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import * as AuthAction from '../store/session';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
@@ -12,6 +12,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const token = useSelector(state => state.session.id);
+  const history = useHistory();
 
   if (token) {
     return null
@@ -28,11 +29,13 @@ const LoginForm = () => {
   const loginHandler = e => {
     e.preventDefault()
     login(email, password)
+    history.push('/')
   }
 
   const popDemoUser = e => {
     e.preventDefault()
     login("demo@example.com", "password")
+    history.push('/')
   }
 
   return (

@@ -52,6 +52,9 @@ function App() {
                 {/* <LoginForm /> */}
                 <Container maxWidth="md" style={{ marginTop: 40 }}>
                     <Switch>
+                        <Route exact={true} path="/">
+                            <DisplayLists />
+                        </Route>
                         <Route path="/friends">
                             <FriendList />
                         </Route>
@@ -73,9 +76,6 @@ function App() {
                         <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
                         <Route path="/404">
                             <NotFound />
-                        </Route>
-                        <Route exact={true} path="/">
-                            <DisplayLists />
                         </Route>
                     </Switch>
                 </Container>

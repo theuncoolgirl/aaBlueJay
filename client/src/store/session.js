@@ -25,44 +25,44 @@ export const load_user = (user) => {
 }
 
 export const login = (email, password) => {
-    return async dispatch => {
-      const XSRFTOKEN = await fetch('/api/users/get_csrf')
-      const token = (await XSRFTOKEN.json())
-
-      const response = await fetch(`/api/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken':token.csrfT
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const user  = await response.json();
-        dispatch(setUser(user));
-      }
-    };
-  };
-
-
-export const signup = (firstname, lastname, username, email, password, confirmpassword) => async dispatch => {
+  return async dispatch => {
     const XSRFTOKEN = await fetch('/api/users/get_csrf')
     const token = (await XSRFTOKEN.json())
 
-    const response = await fetch(`/api/users/signup`, {
+    const response = await fetch(`/api/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRFToken':token.csrfT
+        'X-CSRFToken': token.csrfT
       },
-      body: JSON.stringify({firstname, lastname, username, email, password, confirmpassword})
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
       const user = await response.json();
       dispatch(setUser(user));
     }
+  };
+};
+
+
+export const signup = (firstname, lastname, username, email, password, confirmpassword) => async dispatch => {
+  const XSRFTOKEN = await fetch('/api/users/get_csrf')
+  const token = (await XSRFTOKEN.json())
+
+  const response = await fetch(`/api/users/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': token.csrfT
+    },
+    body: JSON.stringify({ firstname, lastname, username, email, password, confirmpassword })
+  });
+
+  if (response.ok) {
+    const user = await response.json();
+    dispatch(setUser(user));
+  }
 }
 
 export const logout = () => async dispatch => {
@@ -73,7 +73,7 @@ export const logout = () => async dispatch => {
   const res = await fetch('/api/users/logout', {
     method: "POST",
     headers: {
-      'X-CSRFToken':token.csrfT
+      'X-CSRFToken': token.csrfT
     },
   });
   if (res.ok) {
@@ -89,7 +89,7 @@ export const loadUser = () => async dispatch => {
   }
 }
 
-export default function reducer(state={}, action) {
+export default function reducer(state = {}, action) {
   switch (action.type) {
     case LOAD_USER:
       // if (action.user == {}){
