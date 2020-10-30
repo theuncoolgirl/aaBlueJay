@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { thunks } from '../store/list';
+// import useStyles from '../styles.js';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;

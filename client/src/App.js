@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
 import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
-import LogoutButton from './components/LogoutButton';
 import SignUpForm from './components/SignUpForm';
 import CoinDetails from './components/CoinDetails';
 import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
-import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import { thunks } from './store/list';
-import DisplayLists from './components/DisplayLists'
-// import Navigation from './components/Navigation'
+import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
 
@@ -37,12 +34,16 @@ function App() {
     return (
         <>
             {!id && <BrowserRouter>
-                <LoginForm />
-                <Switch>
-                    <Route path="/signup">
-                        <SignUpForm />
-                    </Route>
-                </Switch>
+                <Container maxWidth="md" style={{ marginTop: 40 }}>
+                    <Switch>
+                        <Route path="/signup">
+                            <SignUpForm />
+                        </Route>
+                        <Route path="/login">
+                            <LoginForm />
+                        </Route>
+                    </Switch>
+                </Container>
             </BrowserRouter>}
             {id && (<BrowserRouter>
                 <Navigation />
