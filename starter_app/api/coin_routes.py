@@ -147,7 +147,7 @@ def get_user_lists():
     user_lists = UserList.query.filter(UserList.userId == current_user.id).all()
     # if user_lists:
     #     return {"lists": []}
-    listNames = [(name.listName, name.id) for name in user_lists]
+    listNames = sorted([(name.listName.title(), name.id) for name in user_lists])
     return {"lists": listNames}
 
 
