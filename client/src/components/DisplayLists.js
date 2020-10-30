@@ -1,22 +1,13 @@
 import React from 'react';
-// import { thunks } from '../store/list';
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-// import AddListItem from './AddListItem';
 import {  Divider, Paper, Typography } from '@material-ui/core';
 import ListModal from './ListModal';
 
 const DisplayLists = () => {
-  // const userId = useSelector((state) => state.session.id)
-  // const dispatch = useDispatch()
   const userLists = useSelector(state => state.list.lists)
   const history = useHistory()
-  // const { listName } = useParams()
 
-  // useEffect(() => {
-  //   // dispatch(thunks.getAllUserLists(userId));
-  //   dispatch(thunks.getUserWatchlist(userId, listName));
-  // }, [userId, listName]);
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -24,10 +15,6 @@ const DisplayLists = () => {
     history.push(`/list/${e.target.id}`)
   }
 
-  // const handleCreate = (e) => {
-  //   e.preventDefault()
-  //   // return <ListModal />
-  // }
 
   return (
     <>
@@ -39,9 +26,6 @@ const DisplayLists = () => {
             {userLists ? userLists.map(list => <div key={list[0]} id={list[0]} onClick={handleClick}>{list[0]}<Divider style={{ marginTop: 10, marginBottom: 10 }} /></div>) : null}
           </Typography>
         </div>
-        {/* <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleCreate} >
-          &#10003; Create List
-        </Button> */}
         <ListModal />
       </Paper>
     </>

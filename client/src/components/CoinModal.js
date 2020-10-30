@@ -1,9 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Button, Divider, Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { useSelector } from 'react-redux';
 import AddListItem from './AddListItem'
-// import DisplayLists from './DisplayLists'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -23,7 +23,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    width: 250,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -37,6 +37,7 @@ export default function SimpleModal() {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -46,20 +47,17 @@ export default function SimpleModal() {
   };
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-      {userLists.map(list => <div key={`${list[0]}-${list[1]}`}>{list[0]} <AddListItem listTitle={list[0]} listId={list[1]} /></div>)}
-    </div>
+      <div style={modalStyle} className={classes.paper}>
+        <h2 id="simple-modal-title">Lists</h2>
+        {userLists.map(list => <span key={`${list[0]}-${list[1]}`}>{list[0]}<AddListItem listTitle={list[0]} listId={list[1]} /> <Divider style={{ marginTop: 10, marginBottom: 10}} /></span>)}
+      </div>
   );
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Add to List
-      </button>
+      <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleOpen}>
+        &#10003; Add to list
+     </Button>
       <Modal
         open={open}
         onClose={handleClose}
