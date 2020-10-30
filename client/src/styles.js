@@ -3,11 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        maxWidth: '100%',
-        margin: 0,
-        padding: 0,
-        // flexGrow: 1,
+    coinGridItem: {
+        marginRight: 20,
     },
     link: {
         color: "black",
@@ -21,17 +18,9 @@ const useStyles = makeStyles((theme) => ({
         },
         '&:hover': {
             color: "gray",
-            cursor: "pointer"
+            cursor: "pointer",
         },
     },
-    MuiFormControl: {
-        root: {
-            margin: 0,
-            color: "red",
-            height: 40,
-            maxHeight: 40
-        },
-    }
 }));
 
 export default useStyles;

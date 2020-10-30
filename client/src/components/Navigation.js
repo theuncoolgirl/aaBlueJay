@@ -122,7 +122,7 @@ export default function Navigation() {
                             <Typography className={classes.link} underline="none" variant="caption">Explore</Typography>
                         </NavLink>
                         <NavLink to="/list/watchlist" activeclass="active" style={{ textDecoration: "none" }}>
-                            <Typography className={classes.link} underline="none" variant="caption">Watchlist</Typography>
+                            <Typography className={classes.link} underline="none" variant="caption">Lists</Typography>
                         </NavLink>
                         <NavLink to="/friends" activeclass="active" style={{ textDecoration: "none" }}>
                             <Typography className={classes.link} underline="none" variant="caption">Friends</Typography>

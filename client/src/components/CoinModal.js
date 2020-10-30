@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Divider, Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Modal } from '@material-ui/core';
+import DisplayLists from './DisplayLists'
 import AddListItem from './AddListItem'
 
 function rand() {

@@ -90,32 +90,31 @@ export default function ComboBox() {
     }
     history.push(`/coins/${coinId[0].id}`)
   }
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      const results = coins.filter(coin => {
+        return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
+          || (coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
+      })
+      const exactResults = results.filter(coin => {
+        return ((coin.name.toLowerCase() === (e.target.value.toLowerCase().trim()))
+          || (coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
+      })
 
-  const handleEnter = (e) =>{
-      if (e.key === 'Enter') {
-          const results = coins.filter(coin => {
-            return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
-                    ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
-          })
-          const exactResults = results.filter(coin => {
-            return ((coin.name.toLowerCase() === (e.target.value.toLowerCase().trim()))
-            ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
-          })
-
-        if (results.length === 0) {
-          history.push(`/404`)
-        } else if (exactResults.length === 1) {
-          history.push(`/coins/${exactResults[0].id}`)
-        } else {
-          history.push(`/results`, results)
-        }
+      if (results.length === 0) {
+        history.push(`/404`)
+      } else if (exactResults.length === 1) {
+        history.push(`/coins/${exactResults[0].id}`)
+      } else {
+        history.push(`/results`, results)
       }
+    }
   }
 
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ marginLeft: "15%", width: "40%" }}>
+      <div style={{ marginLeft: "8.5%", width: "40%" }}>
         <Autocomplete
           id="custom-input-demo"
           size="small"

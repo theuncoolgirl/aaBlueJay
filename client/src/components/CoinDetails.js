@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
-import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
-// import useStyles from '../styles.js';
+import { Divider, Grid, Paper, Typography } from '@material-ui/core';
+import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 
 function CoinDetails(props) {
@@ -19,7 +19,6 @@ function CoinDetails(props) {
         current_price_usd,
         percent_change_usd,
         price_change_usd,
-        // chart_data,
         match: {
             params: {
                 coinId
@@ -51,17 +50,13 @@ function CoinDetails(props) {
     }
 
     return (
-
-        <Container maxWidth="md">
+        <>
             <Grid
                 container
                 direction="row"
-                justify="center"
-                alignItems="flex-start"
-                spacing={6}
-                style={{ margin: 0 }}
+                justify="space-around"
             >
-                <Grid item xs={8}>
+                <Grid className={classes.coinGridItem} item xs={8}>
                     {
                         name ?
                             <div>
@@ -74,18 +69,18 @@ function CoinDetails(props) {
                                     </Typography>
                                     : null}
                                 {displayChangeData(price_change_usd, percent_change_usd)}
-                                <ChartComponent className='stockchart' />
+                                <ChartComponent />
                                 {description !== "" ?
                                     <div>
-                                        <Typography variant="h6">About</Typography>
-                                        <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                                        <Typography variant="h6" style={{ marginTop: 10, marginBottom: 10 }}>About</Typography>
+                                        <Divider style={{ marginBottom: 10 }} />
                                         <Typography variant="caption"><span dangerouslySetInnerHTML={{ __html: description }}></span></Typography>
                                     </div>
                                     : null}
                             </div>
                             : <h2>Loading...</h2>}
                 </Grid>
-                <Grid item xs={4} style={{ textAlign: 'center' }}>
+                <Grid item xs={3} style={{ textAlign: 'center' }}>
                     {name ?
                         <>
                             <Paper elevation={3} style={{ textAlign: 'center', padding: 10 }}>
@@ -95,15 +90,13 @@ function CoinDetails(props) {
                                     <Typography variant="subtitle2">Placeholder for Simulation Functionality</Typography>
                                 </div>
                             </Paper>
-                            <Button variant="outlined" color="primary" style={{ margin: 20 }}>
-                                &#10003; Add to List
-                        </Button>
+                            <CoinModal />
                         </>
                         : null}
                 </Grid>
             </Grid>
-            <CoinModal />
-        </Container >
+
+        </>
     );
 }
 
