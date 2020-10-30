@@ -46,15 +46,15 @@ export default function SimpleModal() {
   };
 
   const body = (
-      <div style={modalStyle} className={classes.paper}>
-        <h2 id="simple-modal-title">Lists</h2>
-        {userLists.map(list => <span key={`${list[0]}-${list[1]}`}>{list[0]}<AddListItem listTitle={list[0]} listId={list[1]} /> <Divider style={{ marginTop: 10, marginBottom: 10}} /></span>)}
-      </div>
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Lists</h2>
+      {userLists.map(list => <span key={`${list[0]}-${list[1]}`}>{list[0]}<AddListItem listTitle={list[0]} listId={list[1]} /> <Divider style={{ marginTop: 10, marginBottom: 10 }} /></span>)}
+    </div>
   );
 
   return (
     <div>
-      <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleOpen}>
+      <Button style={{ margin: 20 }} variant="outlined" color="primary" onClick={handleOpen}>
         &#10003; Add to list
      </Button>
       <Modal

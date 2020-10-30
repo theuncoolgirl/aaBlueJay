@@ -6,12 +6,11 @@ import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 
+
 function CoinDetails(props) {
     const classes = useStyles();
     const {
         updateCoinIdValue,
-        // eslint-disable-next-line
-        receiveCoinDetails,
         getCoinDetails,
         description,
         name,
@@ -72,22 +71,30 @@ function CoinDetails(props) {
                                 <ChartComponent />
                                 {description !== "" ?
                                     <div>
-                                        <Typography variant="h6" style={{ marginTop: 10, marginBottom: 10 }}>About</Typography>
-                                        <Divider style={{ marginBottom: 10 }} />
-                                        <Typography variant="caption"><span dangerouslySetInnerHTML={{ __html: description }}></span></Typography>
+                                        <Typography className={classes.about} variant="h6">
+                                            About
+                                        </Typography>
+                                        <Divider className={classes.divider} />
+                                        <Typography variant="caption">
+                                            <span dangerouslySetInnerHTML={{ __html: description }}></span>
+                                        </Typography>
                                     </div>
                                     : null}
                             </div>
                             : <h2>Loading...</h2>}
                 </Grid>
-                <Grid item xs={3} style={{ textAlign: 'center' }}>
+                <Grid className={classes.center} item xs={3}>
                     {name ?
                         <>
-                            <Paper elevation={3} style={{ textAlign: 'center', padding: 10 }}>
-                                <Typography variant="subtitle2">Buy {symbol.toUpperCase()}</Typography>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div style={{ height: 200 }}>
-                                    <Typography variant="subtitle2">Placeholder for Simulation Functionality</Typography>
+                            <Paper className={classes.sideCard} elevation={3}>
+                                <Typography variant="subtitle2">
+                                    Buy {symbol.toUpperCase()}
+                                </Typography>
+                                <Divider className={classes.divider} />
+                                <div className={classes.spacer}>
+                                    <Typography variant="subtitle2">
+                                        Placeholder for Simulation Functionality
+                                    </Typography>
                                 </div>
                             </Paper>
                             <CoinModal />
@@ -95,7 +102,6 @@ function CoinDetails(props) {
                         : null}
                 </Grid>
             </Grid>
-
         </>
     );
 }

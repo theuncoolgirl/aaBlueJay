@@ -14,12 +14,13 @@ import Pagination from '@material-ui/lab/Pagination';
 
 import CurrenceyTableRow from "./CurrencyTableRow";
 import { explore_all_load } from '../store/explore'
+import useStyles from '../styles.js';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 650,
+//   },
+// });
 
 
 const ExploreCurrencies = () => {
@@ -61,7 +62,7 @@ const ExploreCurrencies = () => {
           </TableHead>
           <TableBody>
             {rows.map((row, idx) => {
-              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`}deleteIcon={false} />
+              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false} />
             }
             )}
           </TableBody>
