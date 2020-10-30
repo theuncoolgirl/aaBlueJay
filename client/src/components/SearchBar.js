@@ -91,11 +91,14 @@ export default function ComboBox() {
     if (coinId.length === 0) {
       return
     }
+
     setReset(!reset)
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
+    // console.log(e)
     if (e.key === 'Enter') {
+      e.preventDefault()
       const results = coins.filter(coin => {
         return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
           || (coin.symbol.toLowerCase().includes(e.target.value.toLowerCase().trim())))
@@ -104,14 +107,16 @@ export default function ComboBox() {
         return ((coin.name.toLowerCase() === (e.target.value.toLowerCase().trim()))
           || (coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
       })
+
       setReset(!reset)
+
       if (results.length === 0) {
         history.push(`/404`)
       } else if (exactResults.length === 1) {
         history.push(`/coins/${exactResults[0].id}`)
       } else {
         dispatch(loadCurrentResults(results))
-        history.push(`/results`, results)
+        history.push(`/results`)
       }
     }
   }
@@ -123,11 +128,13 @@ export default function ComboBox() {
         <Autocomplete
           id="custom-input-demo"
           size="small"
-          value={reset}
+          key={`autocomplete-${reset}`}
+          freeSolo={true}
           onChange={handleSearch}
+          onKeyDown={(e) => handleEnter(e)}
           options={coins.map((option) => option.name || option.symbol)}
           renderInput={(params) => (
-            <TextField {...params} label="Search Coins" variant="filled" onKeyDown={(e) => handleEnter(e)} />
+            <TextField {...params} label="Search Coins" variant="filled" />
           )}
         />
       </div>
