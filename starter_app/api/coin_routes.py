@@ -3,6 +3,7 @@ from flask import request
 from pycoingecko import CoinGeckoAPI
 from ..models import UserList, CurrencyList, db
 from sqlalchemy.orm import joinedload
+from flask_login import current_user
 
 coin_routes = Blueprint("coins", __name__)
 cg = CoinGeckoAPI()
@@ -50,26 +51,39 @@ def explore_load(id):
 
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
-    vs_currency, user_id = request.json.values()
+    vs_currency, user_id, list_name = request.json.values()
 
     query = (
         UserList.query.options(joinedload("currencylist"))
-        .filter(UserList.userId == user_id)
+        .filter(UserList.userId == user_id, UserList.listName == list_name)
         .first()
     )
+    if query is None:
+        return {"currentList": []}
 
-    coin_data = cg.get_coins_markets(vs_currency="usd")
     currencylist = [
         (currencylist.tickerSymbol.lower(), currencylist.id)
         for currencylist in query.currencylist
     ]
+    currencylistSimple = [
+        currencylist.tickerSymbol.lower() for currencylist in query.currencylist
+    ]
 
-    res = dict()
-    for item in coin_data:
-        for tup in currencylist:
-            if item["symbol"] == tup[0]:
-                res[item["symbol"]] = item
-                res[item["symbol"]]["symbolId"] = tup[1]
+    def filterIds(currencylistSimple):
+        return [
+            stock["id"]
+            for stock in cg.get_coins_list()
+            if stock["symbol"] in currencylistSimple
+        ]
+
+    currencylistIds = filterIds(currencylistSimple)
+    coin_data = cg.get_coins_markets(
+        sparkline="true",
+        vs_currency="usd",
+        ids=currencylistIds,
+    )
+
+    res = {"currentList": coin_data}
 
     return res
 
@@ -82,9 +96,18 @@ def load_names():
 
 @coin_routes.route("/list/delete", methods=["DELETE"])
 def delete_list_item():
+#     listId = request.json["listId"]
+#     symbolToDelete = request.json["symbolToDelete"]
+#     print(listId, symbolToDelete)
+#     toDelete = CurrencyList.query.filter(
+#         CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbolToDelete
+#     ).first()
+#     print("list to delete ========", toDelete)
+
     listId = int(request.json["listId"])
     toDelete = CurrencyList.query.get(listId)
     print(toDelete.tickerSymbol)
+
     db.session.delete(toDelete)
     db.session.commit()
 
@@ -111,8 +134,26 @@ def add_list_item():
 
 @coin_routes.route("/list/all", methods=["PUT"])
 def get_user_lists():
-    user_id = int(request.json["user_id"])
-    user_lists = UserList.query.filter(UserList.userId == user_id).all()
-    print(user_lists[0].listName)
+    print("========", request.json)
+    user_lists = UserList.query.filter(UserList.userId == current_user.id).all()
+    # if user_lists:
+    #     return {"lists": []}
     listNames = [(name.listName, name.id) for name in user_lists]
     return {"lists": listNames}
+
+
+@coin_routes.route("/list/create", methods=["POST"])
+def create_list():
+    user_id = int(request.json["user_id"])
+    list_name = request.json["list_name"]
+    newList = UserList(userId=user_id, listName=list_name)
+
+    db.session.add(newList)
+    db.session.commit()
+
+    res = UserList.query.filter(
+        UserList.listName == list_name, UserList.userId == user_id
+    ).first()
+
+    # listNames = [(name.listName, name.id) for name in user_lists]
+    return {"newList": [res.listName, res.id]}

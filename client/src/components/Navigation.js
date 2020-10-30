@@ -1,7 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Button, InputBase, Link, Toolbar, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import LogoutButton from './LogoutButton';
+import SearchBar from './SearchBar';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -73,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         color: "black",
+        weight: "bold",
         marginTop: "auto",
         marginBottom: "auto",
         marginLeft: 15,
@@ -96,10 +101,9 @@ export default function Navigation() {
         <div>
             <AppBar className={classes.toolbar} position="static" color="inherit" elevation="0">
                 <Toolbar className={classes.toolbar}>
-                    <Typography className={classes.title} variant="h6" style={{ color: "black" }} noWrap>
-                        Logo
-                    </Typography>
-                    <div className={classes.search} style={{ marginLeft: "20%", width: "40%" }}>
+                    <NavLink style={{ paddingLeft: 20, paddingTop: 3 }} to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'34px'} /></NavLink>
+                    <SearchBar />
+                    {/* <div className={classes.search} style={{ marginLeft: "20%", width: "40%" }}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
@@ -111,18 +115,22 @@ export default function Navigation() {
                             }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
-                    </div>
+                    </div> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <Link className={classes.link} color="black" href="/" underline="none" variant="subtitle2">
-                            Link 1
-                        </Link>
-                        <Link className={classes.link} color="black" href="/" underline="none" variant="subtitle2">
-                            Link 2
-                        </Link>
-                        <Link className={classes.link} color="black" href="/" underline="none" variant="subtitle2">
-                            Link 3
-                        </Link>
+                        <NavLink to="/explore/1" activeclass="active" style={{ textDecoration: "none" }}>
+                            <Typography className={classes.link} underline="none" variant="caption">Explore</Typography>
+                        </NavLink>
+                        <NavLink to="/list/watchlist" activeclass="active" style={{ textDecoration: "none" }}>
+                            <Typography className={classes.link} underline="none" variant="caption">Watchlist</Typography>
+                        </NavLink>
+                        <NavLink to="/friends" activeclass="active" style={{ textDecoration: "none" }}>
+                            <Typography className={classes.link} underline="none" variant="caption">Friends</Typography>
+                        </NavLink>
+                        <NavLink to="/users" activeclass="active" style={{ textDecoration: "none" }}>
+                            <Typography className={classes.link} underline="none" variant="caption">Users</Typography>
+                        </NavLink>
+                        <LogoutButton />
                     </div>
                 </Toolbar>
             </AppBar>
