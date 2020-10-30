@@ -1,10 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { fade, makeStyles } from '@material-ui/core/styles';
-// import { AppBar, Button, InputBase, Link, Toolbar, Typography } from '@material-ui/core';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-// import SearchIcon from '@material-ui/icons/Search';
 import LogoutButton from './LogoutButton';
 import SearchBar from './SearchBar';
 
@@ -50,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -94,29 +90,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation() {
     const classes = useStyles();
-    // const [anchorEl, setAnchorEl] = React.useState(null);
-    // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-
     return (
         <div>
             <AppBar className={classes.toolbar} position="static" color="inherit" elevation="0">
                 <Toolbar className={classes.toolbar}>
                     <NavLink style={{ paddingLeft: 20, paddingTop: 3 }} to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'34px'} /></NavLink>
                     <SearchBar />
-                    {/* <div className={classes.search} style={{ marginLeft: "20%", width: "40%" }}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <NavLink to="/explore/1" activeclass="active" style={{ textDecoration: "none" }}>
