@@ -2,7 +2,7 @@ import { Container } from "@material-ui/core";
 import React from "react";
 import { useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
-import { Divider, Grid, Paper } from '@material-ui/core';
+import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 
 const SearchResults = () => {
     const rows = useLocation().state
@@ -15,14 +15,14 @@ const SearchResults = () => {
     debugger
     return (
         <Container>
-            <h1>Results</h1>
-            <Grid container space={2}>
+            <h1>So many options...</h1>
+            <Grid container space={2} style={{ overflow: 'hidden' }}>
                     {rows.map((row) => (
                         <Grid  item sm={3}>
-                            <a href={`/coins/${row.id}`}
-                            style={{margin:'5px', color:'black', textDecoration: 'none'}}
+                            <Typography><a href={`/coins/${row.id}`}
+                            // style={{margin:'5px', color:'black', textDecoration: 'none'}}
                             key={row.name}>
-                            {row.name}</a>
+                            {row.name}</a></Typography>
                         </ Grid>
                     ))}
             </Grid>
