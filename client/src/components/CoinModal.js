@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Divider, Modal } from '@material-ui/core';
+import { Button, Divider, Modal, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddListItem from './AddListItem'
 
@@ -22,7 +22,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 250,
+    width: 350,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -47,8 +47,14 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Lists</h2>
-      {userLists.map(list => <span key={`${list[0]}-${list[1]}`}>{list[0]}<AddListItem listTitle={list[0]} listId={list[1]} /> <Divider style={{ marginTop: 10, marginBottom: 10 }} /></span>)}
+      <Typography variant="h4" id="simple-modal-title">Lists</Typography>
+      {userLists.map(list => <Typography key={`${list[0]}-${list[1]}`}>
+                              <Toolbar>
+                                {list[0]}
+                                <AddListItem listTitle={list[0]} listId={list[1]} />
+                                </Toolbar>
+                              <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                            </Typography>)}
     </div>
   );
 

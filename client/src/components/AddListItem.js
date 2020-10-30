@@ -19,9 +19,14 @@ const AddListItem = ({ listTitle, listId }) => {
   }
 
   return (
+    <>
+    <div className={classes.grow} />
+    <div className={classes.navBarLinks}>
     <Button className={classes.listButton} variant="outlined" color="primary" size="small" onClick={handleAdd}>
-      {`Add to ${listTitle}`}
+      Add
     </Button>
+    </div>
+    </>
   );
 }
 
