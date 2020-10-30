@@ -48,7 +48,7 @@ class CandleStickStockScaleChart extends React.Component {
 			<ChartCanvas height={400}
 				ratio={ratio}
 				width={width}
-				margin={{ left: 50, right: 50, top: 20, bottom: 40 }}
+				margin={{ left: 80, right: 50, top: 20, bottom: 40 }}
 				type={type}
 				seriesName={`${coinId}`}
 				data={data}
@@ -57,10 +57,6 @@ class CandleStickStockScaleChart extends React.Component {
 				displayXAccessor={displayXAccessor}
 				xExtents={xExtents}
 			>
-				{/* title label */}
-				<Label x={width / 2.5} y={20}
-					fontSize={30} text={`${coinId}`} fontFamily='comic' />
-
 				{/* xaxis label */}
 				<Label x={width / 2.5} y={325}
 					// rotate={-90}

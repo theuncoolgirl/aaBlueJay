@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
 import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
+import BuyingPower from './BuyingPower'
+import { load_purchase_history} from '../store/purchase'
 
 function CoinDetails(props) {
+    const dispatch = useDispatch()
     const classes = useStyles();
     const {
         updateCoinIdValue,
@@ -26,6 +29,8 @@ function CoinDetails(props) {
             }
         }
     } = props;
+    
+    const currentUserId = useSelector(state => state.session.id)
 
     // updateCoinIdValue - coinId is pulled from props.match.params and is used
     // to update state; getCoinDetails - uses this coinId to fetch from backend
@@ -33,8 +38,10 @@ function CoinDetails(props) {
     useEffect(() => {
         updateCoinIdValue(coinId);
         getCoinDetails();
+        dispatch(load_purchase_history(currentUserId))
+
         // eslint-disable-next-line
-    }, [coinId]);
+    }, [coinId, currentUserId]);
 
     const displayChangeData = (priceChange, percentChange) => {
         if (priceChange.usd) {
@@ -74,7 +81,7 @@ function CoinDetails(props) {
                                     </Typography>
                                     : null}
                                 {displayChangeData(price_change_usd, percent_change_usd)}
-                                <ChartComponent className='stockchart' />
+                                <ChartComponent className='stockchart' coinId={coinId} />
                                 {description !== "" ?
                                     <div>
                                         <Typography variant="h6">About</Typography>
@@ -91,8 +98,9 @@ function CoinDetails(props) {
                             <Paper elevation={3} style={{ textAlign: 'center', padding: 10 }}>
                                 <Typography variant="subtitle2">Buy {symbol.toUpperCase()}</Typography>
                                 <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div style={{ height: 200 }}>
-                                    <Typography variant="subtitle2">Placeholder for Simulation Functionality</Typography>
+                                <div style={{ height: 200 }} className={classes.root}>
+                                    {/* <Typography variant="subtitle2">Placeholder for Simulation Functionality</Typography> */}
+                                    <BuyingPower symbol={symbol} currentPrice={current_price_usd.usd}/>
                                 </div>
                             </Paper>
                             <Button variant="outlined" color="primary" style={{ margin: 20 }}>

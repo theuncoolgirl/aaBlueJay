@@ -1,73 +1,66 @@
-import React, { useState } from 'react'
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button';
-import { useStyles } from '../App'
-import { addPurchase, deletePurchase } from '../store/purchase'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import BuyingPowerModal from './BuyingPowerModal'
 
-const BuyingPower = () => {
-    const dispatch = useDispatch()
-
-    const [currentStockId, setCurrentStockId] = useState('')
-    const [selectedTickerSymbol, setSelectedTickerSymbol] = useState('')
+const BuyingPower = (props) => {
+    const { symbol, currentPrice } = props
 
     const bank = useSelector(state => state.session.cash)
     const currentUserId = useSelector(state => state.session.id)
-    const purchaseTickerSymbols = useSelector(state => state.purchase)
+    const purchases = useSelector(state => state.purchase)
 
-    const classes = useStyles()
+    const [qtyOfPurchase, setQtyOfPurchase] = useState(null)
 
-    const handleChange = (e) => {
-        //ticker symbol and id in db is stored in the select menu item value as an array so you need to index
-        //it to get the specific value -- an example would be [28, "ewt"]
-        setCurrentStockId(e.target.value[0])
-        setSelectedTickerSymbol(e.target.value[1])
+    //modal logic
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
     };
 
-    const buyStock = (e) => {
-        //hard coded price qty and price for now
-        dispatch(addPurchase(currentUserId, selectedTickerSymbol, 200, 3))
-    }
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-    const deleteStock = (e) => {
-        dispatch(deletePurchase(currentUserId, currentStockId))
-    }
+    //using purchases populated in the store
+    //only update purchase qty if symbol changed
+    useEffect(() => {
+        const getPurchaseQty = () => {
+            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol == symbol)
+            console.log(foundPurchases)
+            if (foundPurchases.length > 0) {
+                const totalQtyOfPurchase = foundPurchases.reduce((acc, curr) => {
+                    return acc + curr.purchaseQuantity
+                }, 0)
+
+                //return qty with 1 decimal place
+                setQtyOfPurchase( Number((totalQtyOfPurchase).toFixed(1)))
+            } else {
+                setQtyOfPurchase(0)
+            }
+        }
+        return getPurchaseQty()
+    }, [symbol, purchases])
 
     return (
         <>
             <h2>Buying Power</h2>
             <h4>you have ${bank} in your bank</h4>
-            <h4>You are subscribed to:</h4>
-            <form className='buying-power-form'>
-                <FormControl variant="outlined" size='small' className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Currency</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        value={currentStockId}
-                        onChange={handleChange}
-                        label="currency"
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        {purchaseTickerSymbols.map((purchase, i) => {
-                            return <MenuItem key={i} value={[purchase.id, purchase.tickerSymbol]}>{purchase.tickerSymbol}</MenuItem>
-                        }
-                        )}
+            <h4>You have a purchase quantity of <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> in {symbol}</h4>
+            <Button variant="contained" color="primary" onClick={handleOpen}>
+                Buy/Sell
+            </Button>
+            <BuyingPowerModal
+                onClose={handleClose}
+                open={open} bank={bank}
+                qtyOfPurchase={qtyOfPurchase}
+                currentPrice={currentPrice}
+                currentUserId={currentUserId}
+                symbol={symbol}
+                purchases={purchases}
+            />
 
-                    </Select>
-                </FormControl>
-                <Button variant="contained" color="primary" onClick={buyStock}>
-                    Buy Stock
-                </Button>
-                <Button variant="contained" color="secondary" onClick={deleteStock}>
-                    Delete Stock
-                </Button>
-            </form>
         </>
     )
 }

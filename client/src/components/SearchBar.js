@@ -85,6 +85,9 @@ export default function ComboBox() {
     const coinId = coins.filter(coin => {
       return (coin.name === e.target.innerHTML.trim())
     })
+    if (coinId.length === 0) {
+      return
+    }
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) =>{

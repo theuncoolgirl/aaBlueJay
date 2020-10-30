@@ -15,30 +15,10 @@ import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import BuyingPower from './components/BuyingPower'
 import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
 import PurchaseHistory from './components/PurchaseHistory'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
-
-export const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      '& > *': {
-        margin: theme.spacing(1),
-        width: theme.spacing(40),
-        height: theme.spacing(50),
-      },
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 160,
-      },
-      selectEmpty: {
-        marginTop: theme.spacing(2),
-      }
-  }));
+import useStyles from './styles'
 
 function App() {
     const classes = useStyles()
@@ -55,13 +35,6 @@ function App() {
 
     return (
         <>
-            <div className={classes.root}>
-                <Paper elevation={2}>
-                    <div className='buying-power'>
-                        <BuyingPower />
-                    </div>
-                </Paper>
-            </div>
             {!id && <BrowserRouter>
             <LoginForm />
             <Switch>

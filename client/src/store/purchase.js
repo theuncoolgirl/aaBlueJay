@@ -1,6 +1,7 @@
+import { updateBank } from './session'
+
 const LOAD_ALL_PURCHASES = 'bluejay/purchase/LOAD_ALL_PURCHASES'
-const ADD_PURCHASE = 'bluejay/purchase/ADD_PURCHASE'
-const DELETE_PURCHASE = 'bluejay/purchase/DELETE_PURCHASE'
+const ADD_PURCHASE_HISTORY = 'bluejay/purchase/ADD_PURCHASE_HISTORY'
 
 //action creators
 const loadAll = (purchases) => {
@@ -10,16 +11,9 @@ const loadAll = (purchases) => {
   }
 }
 
-const buy = (purchase) => {
+const addHistory = (purchase) => {
   return {
-    type: ADD_PURCHASE,
-    purchase
-  }
-}
-
-const removePurchase = (purchase) => {
-  return {
-    type: DELETE_PURCHASE,
+    type: ADD_PURCHASE_HISTORY,
     purchase
   }
 }
@@ -34,14 +28,15 @@ export const load_purchase_history = (id) => async dispatch => {
   }
 }
 
-export const addPurchase = (userId, tickerSymbol, purchasePrice, purchaseQuantity) => async dispatch => {
+export const addPurchaseHistory = (userId, tickerSymbol, purchasePrice, purchaseQuantity) => async dispatch => {
   const body = {
     userId,
     purchasePrice,
     purchaseQuantity,
     tickerSymbol
   }
-  console.log('in add purchase')
+
+  console.log('in add purchase', purchaseQuantity, purchasePrice)
   try {
     const res = await fetch('/api/users/purchases/new', {
       method: 'POST',
@@ -55,50 +50,26 @@ export const addPurchase = (userId, tickerSymbol, purchasePrice, purchaseQuantit
       throw res
     }
 
-    const { purchase } = await res.json()
-    dispatch(buy(purchase))
+    const { purchase, cash } = await res.json()
+    console.log('cash',cash)
+    console.log('update', updateBank)
+    //update bank in store after buy/sell
+    dispatch(updateBank(cash))
+    //update purchase history in store
+    dispatch(addHistory(purchase))
+
   } catch (e) {
     console.log(e)
   }
 }
-
-export const deletePurchase = (userId, purchaseId) => async dispatch => {
-  const body = {
-    userId,
-  }
-
-  try {
-    const res = await fetch(`/api/users/purchases/${purchaseId}/delete`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    })
-
-    if (!res.ok) {
-      throw res
-    }
-
-    const { purchase } = await res.json()
-    console.log('in thunk', purchase)
-    dispatch(removePurchase(purchase))
-  } catch (e) {
-    console.log(e)
-  }
-}
-
 
 //reducer
 export default function reducer(state = [], action) {
   switch (action.type) {
     case LOAD_ALL_PURCHASES:
       return action.purchases;
-    case ADD_PURCHASE:
+    case ADD_PURCHASE_HISTORY:
       return [...state, action.purchase]
-    case DELETE_PURCHASE:
-      const newState = state.filter( purchase => purchase.id != action.purchase.id)
-      return newState
     default:
       return state;
   }
