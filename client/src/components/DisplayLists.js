@@ -45,9 +45,6 @@ const DisplayLists = () => {
         <ListModal />
       </Paper>
     </>
-    // <>
-    //   {/* {userLists.map(list => <div>{list[0]}</div>)} */}
-    // </>
   )
 }
 

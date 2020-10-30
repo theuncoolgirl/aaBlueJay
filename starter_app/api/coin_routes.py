@@ -58,6 +58,7 @@ def list_route():
         .filter(UserList.userId == user_id, UserList.listName == list_name)
         .first()
     )
+
     if query is None:
         return {"currentList": []}
 
@@ -65,6 +66,10 @@ def list_route():
         (currencylist.tickerSymbol.lower(), currencylist.id)
         for currencylist in query.currencylist
     ]
+
+    if len(currencylist) == 0:
+        return {"currentList": []}
+
     currencylistSimple = [
         currencylist.tickerSymbol.lower() for currencylist in query.currencylist
     ]
