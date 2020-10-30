@@ -2,8 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Button, InputBase, Link, Toolbar, Typography } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+// import { AppBar, Button, InputBase, Link, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+// import SearchIcon from '@material-ui/icons/Search';
 import LogoutButton from './LogoutButton';
 import SearchBar from './SearchBar';
 
@@ -93,8 +94,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation() {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+    // const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
 
     return (

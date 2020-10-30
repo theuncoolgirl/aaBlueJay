@@ -7,7 +7,7 @@ import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 
 function CoinDetails(props) {
-    // const classes = useStyles();
+    const classes = useStyles();
     const {
         updateCoinIdValue,
         // eslint-disable-next-line
