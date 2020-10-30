@@ -10,7 +10,7 @@ import { Spark } from './SparkLine';
 const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const coins = useSelector(state => state.search)
+    const coins = useSelector(state => state.search.allCoins)
 
     const handleClick = (e) => {
         const coinId = coins.filter(coin => {

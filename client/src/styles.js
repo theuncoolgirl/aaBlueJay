@@ -1,4 +1,4 @@
-// import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import background from './commuters.png';
 
@@ -128,6 +128,37 @@ export const useStyles = makeStyles((theme) => ({
         marginLeft: "8.5%",
         width: "40%"
     },
+    MuiFormControl: {
+        root: {
+            margin: 0,
+            color: "red",
+            height: 40,
+            maxHeight: 40
+        },
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 100,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        // boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        width: 400
+    }, 
+    slider: {
+        width: 300,
+        display: 'block'
+      },
     sideCard: {
         textAlign: 'center',
         padding: 10,
