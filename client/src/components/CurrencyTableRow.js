@@ -42,9 +42,11 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
             <TableCell align="right" style={{ color: todayColor }}>% {row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">${row.market_cap.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
             {/* {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null} */}
-            {deleteIcon ? <TableCell align="center" id={row.symbolId}> <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} /> </TableCell> : null}
+            {deleteIcon ? <TableCell align="center" id={row.symbolId}>
+                            <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} />
+                          </TableCell>
+                        : null}
         </TableRow>
-
     )
 }
 

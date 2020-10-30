@@ -5,9 +5,9 @@ const NotFound = () => {
 
     return (
         <>
-            <img src="/doge.png" alt="404img" />
-            <span><Typography>404, Nothing to see here</Typography></span>
+            <img src="/doge.png" alt="404img" style={{height:500}}/>
             <img src="/leftdoge.png" alt="404img" />
+            <span><Typography variant="h2">404, We ate your results</Typography></span>
         </>
     )
 }

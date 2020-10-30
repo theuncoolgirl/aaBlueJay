@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
 import DisplayLists from './DisplayLists';
-import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
 import { useStyles } from '../styles.js';
-
+import NotFound from './NotFound'
 
 export default function BasicTable() {
   const classes = useStyles();
@@ -22,6 +22,29 @@ export default function BasicTable() {
     dispatch(thunks.getUserWatchlist(userId, convertedListName));
     // eslint-disable-next-line
   }, [userId, listName]);
+
+  if(lists.length === 0) {
+    return(
+      <>
+      <Grid
+        container
+        direction="row"
+        justify="space-around"
+        display="flex"
+        overflow="show%"
+      >
+    <Grid>
+      <Grid className={classes.coinGridItem} item xs={8}></Grid>
+      <NotFound/>
+      {/* <Typography >You do not have any current lists. </Typography> */}
+      </Grid>
+      <Grid className={classes.center} item xs={3}>
+        <DisplayLists />
+      </Grid>
+    </Grid>
+      </>
+    )
+  }
 
   return (
     <Grid

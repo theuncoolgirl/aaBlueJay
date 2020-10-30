@@ -18,8 +18,8 @@ export default function Navigation() {
                         <NavLink to="/explore/1" activeclass="active" className={classes.navBarLink}>
                             <Typography underline="none" variant="caption">Explore</Typography>
                         </NavLink>
-                        <NavLink to="/list/Watch List" activeclass="active" className={classes.navBarLink}>
-                            <Typography underline="none" variant="caption">Lists</Typography>
+                        <NavLink to="/" activeclass="active" className={classes.navBarLink}>
+                            <Typography underline="none" variant="caption">Home</Typography>
                         </NavLink>
                         <LogoutButton />
                     </div>
