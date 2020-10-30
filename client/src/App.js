@@ -36,10 +36,10 @@ function App() {
             {!id && <LoggedOutView />}
             {id && (<BrowserRouter>
                 <Navigation />
-                <PurchaseHistory />
                 <Container maxWidth="md" style={{ marginTop: 40 }}>
                     <Switch>
                         <Route exact={true} path="/">
+                            <PurchaseHistory />
                             <DisplayLists />
                         </Route>
                         <Route path="/friends">

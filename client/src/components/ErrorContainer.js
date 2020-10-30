@@ -34,7 +34,7 @@ const ErrorContainer = () => {
 
     return(
     <Container>
-    {formattedErrors.map(err => <div>{err}</div>)}
+        {formattedErrors.map(err => <div>{err}</div>)}
     </ Container>
     )
 }

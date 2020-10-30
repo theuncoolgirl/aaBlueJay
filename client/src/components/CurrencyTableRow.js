@@ -43,14 +43,6 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
             {deleteIcon ? <TableCell align="center" id={row.symbolId}> <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} /> </TableCell> : null}
         </TableRow>
 
-        // <TableRow key={row.name}>
-        //     <TableCell component="th" scope="row" onClick={handleClick}> {row.name} </TableCell>
-        //     <TableCell align="right">{row.symbol}</TableCell>
-        //     <TableCell align="right">{row.current_price}</TableCell>
-        //     <TableCell align="right">{row.market_cap_change_percentage_24h}</TableCell>
-        //     <TableCell align="right">{row.market_cap}</TableCell>
-        //     {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null}
-        // </TableRow>
     )
 }
 
