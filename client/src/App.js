@@ -15,7 +15,7 @@ import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import { thunks } from './store/list';
 import DisplayLists from './components/DisplayLists'
-import Navigation from './components/Navigation'
+// import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 
 
@@ -50,7 +50,7 @@ function App() {
                 <NavLink to="/friends">Friends</NavLink>
                 <nav>
                     <ul>
-                        <li><NavLink to="/" activeclass="active"><img src="logo.png" height={'50px'} /></NavLink></li>
+                        <li><NavLink to="/" activeclass="active"><img src="/logo.png" height={'50px'} alt="logo" /></NavLink></li>
                         <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                         <li><NavLink to="/explore/1" activeclass="active">Explore</NavLink></li>
                         <li><NavLink to="/list/Watch List" activeclass="active">Watchlist</NavLink></li>
@@ -74,7 +74,6 @@ function App() {
                         <ExploreCurrencies />
                     </Route>
                     <Route exact path="/list/:listName">
-
                         <MyList />
                     </Route>
                     <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />

@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { thunks } from '../store/list';
 import { Spark } from './SparkLine';
-import { Table } from '@material-ui/core';
+// import { Table } from '@material-ui/core';
 
 const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
     const history = useHistory()

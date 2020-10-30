@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { thunks } from '../store/list';
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom';
-import AddListItem from './AddListItem';
-import { Button, Divider, Grid, Paper, Typography } from '@material-ui/core';
+import React from 'react';
+// import { thunks } from '../store/list';
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+// import AddListItem from './AddListItem';
+import {  Divider, Paper, Typography } from '@material-ui/core';
 import ListModal from './ListModal';
 
 const DisplayLists = () => {
-  const userId = useSelector((state) => state.session.id)
-  const dispatch = useDispatch()
+  // const userId = useSelector((state) => state.session.id)
+  // const dispatch = useDispatch()
   const userLists = useSelector(state => state.list.lists)
   const history = useHistory()
-  const { listName } = useParams()
+  // const { listName } = useParams()
 
   // useEffect(() => {
   //   // dispatch(thunks.getAllUserLists(userId));
@@ -24,10 +24,10 @@ const DisplayLists = () => {
     history.push(`/list/${e.target.id}`)
   }
 
-  const handleCreate = (e) => {
-    e.preventDefault()
-    // return <ListModal />
-  }
+  // const handleCreate = (e) => {
+  //   e.preventDefault()
+  //   // return <ListModal />
+  // }
 
   return (
     <>

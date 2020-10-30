@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesBars } from 'react-sparklines';
+// import { useSelector } from 'react-redux';
+import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 
 export const Spark = ({ data }) => {
   return (
