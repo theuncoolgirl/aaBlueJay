@@ -3,9 +3,9 @@ import { Redirect, useHistory } from 'react-router-dom'
 import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useDispatch, useSelector } from 'react-redux'
-// import useStyles from '../styles.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { loadCurrentResults } from '../store/search_coins'
+import { theme, useStyles } from '../styles.js';
 
 const theme = createMuiTheme({
   overrides: {
@@ -77,7 +77,7 @@ const theme = createMuiTheme({
 });
 
 export default function ComboBox() {
-  // const classes = useStyles();
+  const classes = useStyles();
   const history = useHistory()
   const dispatch = useDispatch()
   const coins = useSelector(state => state.search.allCoins)
@@ -91,7 +91,6 @@ export default function ComboBox() {
     if (coinId.length === 0) {
       return
     }
-
     setReset(!reset)
     history.push(`/coins/${coinId[0].id}`)
   }
@@ -121,10 +120,9 @@ export default function ComboBox() {
     }
   }
 
-
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ marginLeft: "8.5%", width: "40%" }}>
+      <div className={classes.searchDiv}>
         <Autocomplete
           id="custom-input-demo"
           size="small"

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link, Typography } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 import * as AuthAction from '../store/session';
 
 const LogoutButton = () => {
@@ -25,8 +25,8 @@ const LogoutButton = () => {
 
   return (
     <div>
-      <Link onClick={logoutHandler} style={{ textDecoration: "none" }}>
-        <Typography className={classes.link} underline="none" variant="caption">Logout</Typography>
+      <Link onClick={logoutHandler} className={classes.navBarLink}>
+        <Typography underline="none" variant="caption">Logout</Typography>
       </Link>
     </div>
   );

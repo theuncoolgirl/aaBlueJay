@@ -1,14 +1,14 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
+import { useStyles } from '../styles.js';
 
 export const Spark = ({ data }) => {
+  const classes = useStyles();
   return (
     <>
       <Sparklines data={data}>
-        <SparklinesLine style={{ strokeWidth: 2, stroke: "#336aff", fill: "green" }} />
-        <SparklinesSpots size={3}
-          style={{ stroke: "#336aff", strokeWidth: 2, fill: "white" }} />
+        <SparklinesLine className={classes.sparklinesLine} />
+        <SparklinesSpots className={classes.sparklinesSpots} size={3} />
       </Sparklines>
     </>
   )

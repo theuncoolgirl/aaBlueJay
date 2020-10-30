@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { Divider, Paper, Typography } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ListModal from './ListModal';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 import { thunks } from '../store/list'
+
 const DisplayLists = () => {
   const classes = useStyles();
   const userLists = useSelector(state => state.list.lists);
