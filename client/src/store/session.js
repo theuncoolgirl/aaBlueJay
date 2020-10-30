@@ -77,6 +77,11 @@ export const signup = (firstname, lastname, username, email, password, confirmpa
     body: JSON.stringify({ firstname, lastname, username, email, password, confirmpassword })
   });
 
+  if (response.status === 401) {
+    let errors = await response.json()
+    dispatch(setErrors(errors))
+  }
+
   if (response.ok) {
     const user = await response.json();
     dispatch(setUser(user));

@@ -18,7 +18,17 @@ const ErrorContainer = () => {
 
     for (let err of errArr) {
         for(let e of err[1]) {
-            formattedErrors.push(capitalize(err[0]) + e.slice(4))
+            if (err[0] === "confirmpassword" && e === 'Passwords must match') {
+               formattedErrors.push(e)
+            } else if (err[0] === "confirmpassword") {
+                formattedErrors.push(capitalize(err[0]) + e.slice(4))
+            } else if (err[0] === "firstname"){
+                formattedErrors.push("First name field is required")
+            } else if (err[0] === "lastname"){
+                formattedErrors.push("Last name field is required")
+            } else {
+                formattedErrors.push(capitalize(err[0]) + e.slice(4))
+            }
         }
     }
 

@@ -35,7 +35,8 @@ def login():
             return {"error": "No match found for username and password."}
         login_user(user)
         return user.to_dict()
-    return form.errors
+    print(form.errors)
+    return form.errors, 401
 
 
 @user_routes.route("/signup", methods=["POST"])
@@ -64,7 +65,7 @@ def sign_up():
         db.session.add(watchlist)
         db.session.commit()
         return user.to_dict()
-    return form.errors
+    return form.errors, 401
 
 
 @user_routes.route("/logout", methods=["POST"])

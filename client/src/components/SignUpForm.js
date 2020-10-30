@@ -4,6 +4,7 @@ import * as AuthAction from '../store/session';
 import { Redirect, NavLink } from 'react-router-dom';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
+import ErrorContainer from './ErrorContainer'
 
 const SignUpForm = () => {
         const classes = useStyles();
@@ -33,6 +34,7 @@ const SignUpForm = () => {
                         direction="row"
                         justify="space-around"
                 >
+                        <ErrorContainer />
                         <Grid item style={{ textAlign: 'center' }}>
                                 <Paper className={classes.formCard} elevation={3}>
                                         <Typography className={classes.title} variant='h5'>Sign Up</Typography>
