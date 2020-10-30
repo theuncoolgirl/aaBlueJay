@@ -56,6 +56,7 @@ const ExploreCurrencies = () => {
               <TableCell align="right">Price</TableCell>
               <TableCell align="right">Today</TableCell>
               <TableCell align="right">Market Cap</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

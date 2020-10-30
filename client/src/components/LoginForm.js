@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import * as AuthAction from '../store/session';
 
 
@@ -26,6 +26,7 @@ const LoginForm = () =>{
    const loginHandler = e => {
      e.preventDefault()
      login(email, password)
+     return <Redirect to="/" />
    }
 
     return (

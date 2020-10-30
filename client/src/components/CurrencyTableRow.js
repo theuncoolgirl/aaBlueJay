@@ -37,9 +37,9 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
                 <Spark data={plotSparkData(row)} id={row.symbolId + "-spark"} />
             </TableCell> : null}
             <TableCell align="right">{row.symbol}</TableCell>
-            <TableCell align="right">${row.current_price}</TableCell>
+            <TableCell align="right">${row.current_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
             <TableCell align="right">% {row.market_cap_change_percentage_24h}</TableCell>
-            <TableCell align="right">${row.market_cap}</TableCell>
+            <TableCell align="right">${row.market_cap.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
             {/* {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null} */}
             {deleteIcon ? <TableCell align="center" id={row.symbolId}> <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} /> </TableCell> : null}
         </TableRow>
