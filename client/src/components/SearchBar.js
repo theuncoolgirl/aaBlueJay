@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { Button, TextField } from '@material-ui/core/';
+import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useSelector } from 'react-redux'
-import useStyles from '../styles.js';
+// import useStyles from '../styles.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -76,7 +76,7 @@ const theme = createMuiTheme({
 });
 
 export default function ComboBox() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const history = useHistory()
   const coins = useSelector(state => state.search)
 
@@ -85,6 +85,9 @@ export default function ComboBox() {
     const coinId = coins.filter(coin => {
       return (coin.name === e.target.innerHTML.trim())
     })
+    if (coinId.length === 0) {
+      return
+    }
     history.push(`/coins/${coinId[0].id}`)
   }
 
@@ -99,15 +102,16 @@ export default function ComboBox() {
             ||(coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
           })
 
-
-      if (results.length === 0) {
-        history.push(`/404`)
-      } else if (exactResults.length === 1) {
-        history.push(`/coins/${exactResults[0].id}`)
-      } else {
-        history.push(`/results`, results)
+        if (results.length === 0) {
+          history.push(`/404`)
+        } else if (exactResults.length === 1) {
+          history.push(`/coins/${exactResults[0].id}`)
+        } else {
+          history.push(`/results`, results)
+        }
       }
   }
+
 
   return (
     <ThemeProvider theme={theme}>

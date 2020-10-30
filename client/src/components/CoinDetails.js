@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
 import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
-import useStyles from '../styles.js';
+// import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 
 function CoinDetails(props) {
-    const classes = useStyles();
+    // const classes = useStyles();
     const {
         updateCoinIdValue,
         // eslint-disable-next-line

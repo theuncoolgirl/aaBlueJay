@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import AddListItem from './AddListItem';
+// import AddListItem from './AddListItem';
 import { useSelector, useDispatch } from 'react-redux';
-import DisplayLists from './DisplayLists'
-import { Button, Divider, Grid, Paper, Typography } from '@material-ui/core';
+// import DisplayLists from './DisplayLists'
+import { Button } from '@material-ui/core';
 import { thunks } from '../store/list';
 
 function rand() {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleModal() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const userLists = useSelector(state => state.list.lists)
+  // const userLists = useSelector(state => state.list.lists)
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);

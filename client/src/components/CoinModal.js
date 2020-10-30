@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import DisplayLists from './DisplayLists'
+import { useSelector } from 'react-redux';
+import AddListItem from './AddListItem'
+// import DisplayLists from './DisplayLists'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;

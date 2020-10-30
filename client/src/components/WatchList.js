@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
-import { Spark } from './SparkLine'
+// import { Spark } from './SparkLine'
 
 const useStyles = makeStyles({
   table: {
@@ -31,6 +31,7 @@ export default function BasicTable() {
 
   useEffect(() => {
     dispatch(thunks.getUserWatchlist(userId, listName));
+    // eslint-disable-next-line
   }, [userId, listName]);
 
 
