@@ -4,6 +4,7 @@ import * as AuthAction from '../store/session';
 import { Redirect, NavLink } from 'react-router-dom';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
+import ErrorContainer from './ErrorContainer'
 
 const SignUpForm = () => {
         const classes = useStyles();
@@ -58,6 +59,7 @@ const SignUpForm = () => {
                                                 <Button type="submit" className={classes.formButton} variant="outlined" color="primary">
                                                         Sign Up
                                                 </Button>
+                                                <ErrorContainer />
                                                 <div className="signup-form-login">
                                                         <Typography>Already have an account?</Typography><NavLink to="/login"><Typography>Log In</Typography></NavLink>
                                                 </div>

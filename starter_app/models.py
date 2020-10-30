@@ -98,7 +98,7 @@ class UserList(db.Model):
 
     user = db.relationship("User", back_populates="userlists")
     currencylist = db.relationship(
-        "CurrencyList", back_populates="userlist")
+        "CurrencyList", back_populates="userlist", cascade="all, delete-orphan")
 
 
 class CurrencyList(db.Model):

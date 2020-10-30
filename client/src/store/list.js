@@ -3,25 +3,28 @@ const DELETE_LIST_ITEM = 'bluejay/list/DELETE_LIST_ITEM'
 const ADD_LIST_ITEM = 'bluejay/list/ADD_LIST_ITEM'
 const GET_ALL_LISTS = 'bluejay/list/GET_ALL_LISTS'
 const CREATE_NEW_LIST = 'bluejay/list/CREATE_ALL_LIST'
+const DELETE_LIST = 'bluejay/list/DELETE_LIST'
 
 const updateUserWatchlist = value => ({ type: GET_USER_WATCHLIST, value })
 const deleteListItem = value => ({ type: DELETE_LIST_ITEM, value })
 const addListItem = value => ({ type: ADD_LIST_ITEM, value })
 const getAllLists = value => ({ type: GET_ALL_LISTS, value })
 const createList = value => ({ type: CREATE_NEW_LIST, value })
+const deleteList = value => ({type: DELETE_LIST, value})
 
 export const actions = {
   updateUserWatchlist,
   deleteListItem,
   addListItem,
   getAllLists,
-  createList
+  createList,
+  deleteList
 };
 
 // const userId = getState().auth.user._id;
 
 const getUserWatchlist = (userId, listName) => async (dispatch, getState) => {
-
+  console.log(listName)
   let res = await fetch("/api/coins/list", {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -116,17 +119,36 @@ const createNewList = (userId, listName) => async dispatch => {
   }
 }
 
+const deleteListThunk = (userId, listName) => async dispatch => {
+  let res = await fetch("/api/coins/list/delete/userlist", {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "user_id": userId,
+      "list_name": listName
+    })
+  })
+  if (res.status >= 200 && res.status < 400) {
+    const data = await res.json();
+    dispatch(deleteList(data.deletedList))
+    return data
+  } else {
+    console.error('Bad response');
+  }
+}
 
 export const thunks = {
   getUserWatchlist,
   deleteWatchlistItem,
   addWatchlistItem,
   getAllUserLists,
-  createNewList
+  createNewList,
+  deleteListThunk
 }
 
 function reducer(state = { currentList: [], lists: [] }, action) {
   let newState;
+  let filteredList;
   switch (action.type) {
     case GET_USER_WATCHLIST:
       newState = Object.values(action.value)
@@ -134,9 +156,14 @@ function reducer(state = { currentList: [], lists: [] }, action) {
         ...state,
         currentList: [...newState]
       };
+    case DELETE_LIST:
+      newState = { ...state }
+      filteredList = newState.lists.filter(list=> list[0] !== action.value[0])
+      newState.lists = [...filteredList]
+      return newState
     case DELETE_LIST_ITEM:
       newState = { ...state }
-      const filteredList = newState.currentList.filter(listItem => {
+      filteredList = newState.currentList.filter(listItem => {
         return listItem.symbol !== action.value.symbol.toLowerCase()
       })
       newState.currentList = filteredList
