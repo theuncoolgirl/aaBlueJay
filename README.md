@@ -99,3 +99,92 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
    ```
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
 11. profit
+
+
+## Features 
+***
+- Features Overview
+- Explore currencies 
+- Interactive candlestick stockchart
+- Dynamically genereated simulation 
+- Search currencies
+- Coingecko stocks API integration
+- User authentication and authorization
+- User currency watchlists 
+- Robinhood sparkline integration
+
+## Technologies 
+***
+- Flask
+- SqlAlchemy
+- Postgresql
+- React/Redux
+- Coingecko API
+
+## Installation
+***
+1. Clone this repository (only this branch)
+
+   ```bash
+   git clone https://github.com/theuncoolgirl/aaBlueJay.git
+   ```
+2. Install dependencies
+   ```bash
+   pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
+   pipenv install alembic Flask-Migrate
+   ```
+
+3. Open psql and make the below
+
+   - Create user "bluejay" with a password
+   - Create database bluejay_dev_db with owner bluejay
+
+
+4. Create .flaskenv with:
+    ```bash
+   FLASK_APP=starter_app
+   ```
+
+5. create a .env and add configuration modeled below: 
+
+   ```
+   DATABASE_URL=postgresql://username:password@localhost/database_name
+   SECRET_KEY=<<super_secret_key>>
+   ```
+
+
+6. migrate to database
+
+   ``` pipenv shell
+    flask db init
+    flask db migrate 
+    flask db upgrade
+   ```
+
+5. Activate python shell and seed database
+
+   ```bash
+   pipenv shell
+   ```
+
+   ```bash
+   python -m database && flask run
+   ```
+
+***
+*IMPORTANT!*
+   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
+   You can do this by running:
+   ```bash
+   pipenv lock -r > requirements.txt
+   ```
+
+*ALSO IMPORTANT!*
+   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
+   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
+
+
+
+### Features Overview
+***
+BlueJay is a robinhood clone meant to explore, retrieve, and graphically model crypto currency data from the Coingecko API that gives access to current and historical stock information. 

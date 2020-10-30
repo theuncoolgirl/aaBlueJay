@@ -28,12 +28,14 @@ const BuyingPowerModal = (props) => {
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
         onClose()
+        setBuySliderValue(0)
     }
 
     const sell = () => {
         //multiplying  by -1 so that the purchase history will reflect as sold or selling
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice*sellSliderValue*-1, sellSliderValue*-1))
         onClose()
+        setSellSliderValue(0)
     }
 
     //set marks/labels for modal slider 
@@ -82,7 +84,7 @@ const BuyingPowerModal = (props) => {
                             step={0.1}
                             marks={marks}
                             min={0}
-                            valueLabelDisplay="on"
+                            valueLabelDisplay="auto"
                             max={maxQtyToPurchase}
                             value={buySliderValue}
                             onChange={(e, buyValue) => { setBuySliderValue(buyValue) }}
@@ -98,7 +100,7 @@ const BuyingPowerModal = (props) => {
                             step={0.1}
                             marks={marks}
                             min={0}
-                            valueLabelDisplay="on"
+                            valueLabelDisplay="auto"
                             max={qtyOfPurchase}
                             value={sellSliderValue}
                             onChange={(e, value) => { setSellSliderValue(value) }}
