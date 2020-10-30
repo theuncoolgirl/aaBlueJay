@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { Divider, Paper, Typography } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import ListModal from './ListModal';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 import { thunks } from '../store/list'
+
 const DisplayLists = () => {
   const classes = useStyles();
   const userLists = useSelector(state => state.list.lists);
@@ -30,7 +31,7 @@ const DisplayLists = () => {
 
   return (
     <>
-      <Paper className={classes.sideCard} elevation={3}>
+      <Paper className={classes.sideCard} style={{ overflow: 'scroll' }} elevation={3}>
         <Typography variant="h5">Lists</Typography>
         <Divider className={classes.divider} />
         <div className={classes.spacer}>
@@ -42,8 +43,8 @@ const DisplayLists = () => {
                                                 </div>))
                         : null}
           </Typography>
+          <ListModal style={{ position: 'absolute', marginTop: "30" }} />
         </div>
-        <ListModal />
       </Paper>
     </>
   )

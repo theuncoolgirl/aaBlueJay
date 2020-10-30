@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
 import { thunks } from '../store/list'
 
 const AddListItem = ({ listTitle, listId }) => {

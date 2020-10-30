@@ -1,83 +1,14 @@
 import React, { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useDispatch, useSelector } from 'react-redux'
-// import useStyles from '../styles.js';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { loadCurrentResults } from '../store/search_coins'
-
-const theme = createMuiTheme({
-  overrides: {
-    // Style sheet name ⚛️
-    MuiButton: {
-      // Name of the rule
-      text: {
-        // Some CSS
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-        borderRadius: 3,
-        border: 0,
-        color: 'white',
-        height: 48,
-        padding: '0 30px',
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      },
-    },
-    MuiInput: {
-      formControl: {
-        "label + &": {
-          marginTop: "auto",
-          marginBottom: "auto"
-        }
-      }
-    },
-    MuiInputLabel: {
-      formControl: {
-        top: -8,
-      }
-    },
-    MuiAutocomplete: {
-      root: {
-        height: 30,
-        maxHeight: 30,
-      },
-      input: {
-        paddingLeft: 0,
-        '&:first-child': {
-          paddingLeft: 1,
-        },
-      },
-      inputRoot: {
-        '&&[class*="MuiFilledInput-root"]': {
-          padding: 1
-        }
-      }
-    },
-    MuiFilledInput: {
-      root: {
-        backgroundColor: "white",
-        border: "1px solid lightgray",
-        borderRadius: 4
-      },
-      underline: {
-        '&:hover': {
-          '&:before': {
-            borderBottom: "none"
-          }
-        },
-        '&:before': {
-          borderBottom: "none"
-        },
-        '&:after': {
-          borderBottom: "none"
-        }
-      }
-    }
-  },
-});
+import { theme, useStyles } from '../styles.js';
 
 export default function ComboBox() {
-  // const classes = useStyles();
+  const classes = useStyles();
   const history = useHistory()
   const dispatch = useDispatch()
   const coins = useSelector(state => state.search.allCoins)
@@ -91,7 +22,6 @@ export default function ComboBox() {
     if (coinId.length === 0) {
       return
     }
-
     setReset(!reset)
     history.push(`/coins/${coinId[0].id}`)
   }
@@ -121,10 +51,9 @@ export default function ComboBox() {
     }
   }
 
-
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ marginLeft: "8.5%", width: "40%" }}>
+      <div className={classes.searchDiv}>
         <Autocomplete
           id="custom-input-demo"
           size="small"

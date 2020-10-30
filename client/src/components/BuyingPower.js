@@ -34,7 +34,7 @@ const BuyingPower = (props) => {
                 }, 0)
 
                 //return qty with 1 decimal place
-                setQtyOfPurchase( Number((totalQtyOfPurchase).toFixed(1)))
+                setQtyOfPurchase(Number((totalQtyOfPurchase).toFixed(1)))
             } else {
                 setQtyOfPurchase(0)
             }

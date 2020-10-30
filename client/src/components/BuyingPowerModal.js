@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useStyles from '../styles'
+import { useStyles } from '../styles'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import * as RIIcons from 'react-icons/ri'
@@ -21,11 +21,12 @@ const BuyingPowerModal = (props) => {
     const [buySliderValue, setBuySliderValue] = useState(0)
     const [sellSliderValue, setSellSliderValue] = useState(0)
 
-    useEffect(()=> {
+    useEffect(() => {
+        console.log('rendering')
     }, [purchases])
     //functions for buying power modal to buy or sell
     const buy = () => {
-        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice*buySliderValue, buySliderValue))
+        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
         onClose()
     }
 
@@ -38,24 +39,24 @@ const BuyingPowerModal = (props) => {
     //set marks/labels for modal slider 
     const marks = [
         {
-          value: 0,
-          label: '0'
+            value: 0,
+            label: '0'
         },
         {
             value: qtyOfPurchase,
             label: `${qtyOfPurchase}`
         }
-      ];
+    ];
 
-      //function to make sure user can't purchase anything if unsufficient funds
-      const maxQtyToPurchase = (() => {
-        if (bank > currentPrice){
+    //function to make sure user can't purchase anything if unsufficient funds
+    const maxQtyToPurchase = (() => {
+        if (bank > currentPrice) {
             //return qty with 2 decimal places
             return Number((bank / currentPrice).toFixed(2))
-        } else {    
+        } else {
             return 0
         }
-      })()
+    })()
 
 
     return (
@@ -83,9 +84,8 @@ const BuyingPowerModal = (props) => {
                             min={0}
                             valueLabelDisplay="on"
                             max={maxQtyToPurchase}
-                            valueLabelDisplay="auto"
                             value={buySliderValue}
-                            onChange={(e, buyValue)=>{setBuySliderValue(buyValue)}}
+                            onChange={(e, buyValue) => { setBuySliderValue(buyValue) }}
                         />
                     </div>
                     <div className={classes.slider}>
@@ -100,27 +100,26 @@ const BuyingPowerModal = (props) => {
                             min={0}
                             valueLabelDisplay="on"
                             max={qtyOfPurchase}
-                            valueLabelDisplay="auto"
                             value={sellSliderValue}
-                            onChange={(e, value)=>{setSellSliderValue(value)}}
+                            onChange={(e, value) => { setSellSliderValue(value) }}
                         />
                     </div>
                 </DialogContent>
                 <DialogActions>
-                        {/* disable buy button if there is no money in the bank */}
-                        {bank > 0 ? <Button onClick={buy} color="primary">
-                            Buy
+                    {/* disable buy button if there is no money in the bank */}
+                    {bank > 0 ? <Button onClick={buy} color="primary">
+                        Buy
                         </Button> :
                         <Button onClick={buy} disabled={true} color="primary">
-                        Buy
+                            Buy
                         </Button>}
 
-                        {/*disable sell button if purchase qty is 0 */}
-                        {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>
-                            Sell
+                    {/*disable sell button if purchase qty is 0 */}
+                    {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>
+                        Sell
                        </Button> :
-                       <Button onClick={sell} disabled={true} color="primary" autoFocus>
-                       Sell
+                        <Button onClick={sell} disabled={true} color="primary" autoFocus>
+                            Sell
                        </Button>}
                 </DialogActions>
             </Dialog>
