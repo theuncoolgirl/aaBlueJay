@@ -7,6 +7,7 @@ import { load_purchase_history } from '../store/purchase'
 const PurchaseHistory = () => {
     const dispatch = useDispatch()
     const id = useSelector(state => state.session.id);
+    const purchases = useSelector(state => state.purchase)
 
     useEffect(()=>{
         dispatch(load_purchase_history(id))
@@ -18,7 +19,9 @@ const PurchaseHistory = () => {
     }
 
     return (
-        <h1>test</h1>
+        <>
+        {purchases.map(purchase => <div key={`purchase-${purchase.tickerSymbol}`}>{purchase.tickerSymbol}</div>)}
+        </>
     )
 }
 

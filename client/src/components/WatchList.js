@@ -1,17 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
 import DisplayLists from './DisplayLists';
-import { Grid, Paper } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { useStyles } from '../styles.js';
+
 
 export default function BasicTable() {
   const classes = useStyles();
@@ -19,11 +14,12 @@ export default function BasicTable() {
   const userId = useSelector((state) => state.session.id)
   const userCurrentList = useSelector((state) => state.list.currentList)
   const lists = useSelector((state) => state.list.lists)
+  const convertedListName = decodeURIComponent(listName)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(thunks.getUserWatchlist(userId, listName));
+    dispatch(thunks.getUserWatchlist(userId, convertedListName));
     // eslint-disable-next-line
   }, [userId, listName]);
 

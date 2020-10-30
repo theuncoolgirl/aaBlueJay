@@ -22,10 +22,7 @@ const getCoinDetails = () => {
         try {
             if (response.status >= 200 && response.status < 400) {
                 const data = await response.json();
-                // console.log("data: ", data)
                 data.chart_data = DataToCsv(data.chart_data)
-                // data.chart_data = csvParse(csv2, parseData2(parseDate))
-                // console.log('updated data', data);
                 dispatch(receiveCoinDetails(data))
             } else {
                 console.error('Bad response');

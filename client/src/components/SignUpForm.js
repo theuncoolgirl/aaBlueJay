@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as AuthAction from '../store/session';
 import { Redirect, NavLink } from 'react-router-dom';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import useStyles from '../styles.js';
+import { useStyles } from '../styles.js';
+import ErrorContainer from './ErrorContainer'
 
 const SignUpForm = () => {
         const classes = useStyles();
@@ -33,7 +34,7 @@ const SignUpForm = () => {
                         direction="row"
                         justify="space-around"
                 >
-                        <Grid item style={{ textAlign: 'center' }}>
+                        <Grid item className={classes.center}>
                                 <Paper className={classes.formCard} elevation={3}>
                                         <Typography className={classes.title} variant='h5'>Sign Up</Typography>
                                         <form onSubmit={SignupHandler}>
@@ -58,8 +59,9 @@ const SignUpForm = () => {
                                                 <Button type="submit" className={classes.formButton} variant="outlined" color="primary">
                                                         Sign Up
                                                 </Button>
+                                                <ErrorContainer />
                                                 <div className="signup-form-login">
-                                                        <Typography>Already have an account?</Typography><NavLink to="/login"><Typography>Log In</Typography></NavLink>
+                                                        <Typography>Already have an account?</Typography><NavLink className={classes.link} to="/login"><Typography>Log In</Typography></NavLink>
                                                 </div>
                                         </form>
                                 </Paper >

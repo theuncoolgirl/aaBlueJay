@@ -44,7 +44,6 @@ def coin():
 
 @coin_routes.route("/explore/<int:id>")
 def explore_load(id):
-    print(int(id))
     coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
     return {"coins": coins}
 
@@ -52,10 +51,7 @@ def explore_load(id):
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id, list_name = request.json.values()
-    print("==========================")
-    print(list_name)
-    print(user_id)
-    print("==========================")
+
 
     query = (
         UserList.query.options(joinedload("currencylist"))
@@ -102,6 +98,17 @@ def load_names():
     coin_names = cg.get_coins_list()
     return {"coin_names": coin_names}
 
+@coin_routes.route("/list/delete/userlist", methods=["DELETE"])
+def delete_user_list():
+    user_id = int(request.json["user_id"])
+    list_name = request.json["list_name"]
+
+    toDelete = UserList.query.filter(UserList.userId == user_id, UserList.listName == list_name).first()
+
+    db.session.delete(toDelete)
+    db.session.commit()
+    return {"deletedList": [toDelete.listName, toDelete.id]}
+
 
 @coin_routes.route("/list/delete", methods=["DELETE"])
 def delete_list_item():
@@ -143,7 +150,6 @@ def add_list_item():
 
 @coin_routes.route("/list/all", methods=["PUT"])
 def get_user_lists():
-    print("========", request.json)
     user_lists = UserList.query.filter(UserList.userId == current_user.id).all()
     # if user_lists:
     #     return {"lists": []}
