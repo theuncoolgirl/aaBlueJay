@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { Button, Grid } from '@material-ui/core';
 import { thunks } from '../store/list'
 
 const AddListItem = ({ listTitle, listId }) => {
@@ -16,9 +17,9 @@ const AddListItem = ({ listTitle, listId }) => {
   }
 
   return (
-    <span>
-      <button onClick={handleAdd}>{`Add to ${listTitle}`}</button>
-    </span>
+      <Button variant="outlined" color="primary" size ="small" style={{ marginLeft: 10}} onClick={handleAdd}>
+      {`Add to ${listTitle}`}
+     </Button>
   );
 }
 

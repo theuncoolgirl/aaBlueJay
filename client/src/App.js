@@ -13,9 +13,12 @@ import { load_coin_names } from './store/search_coins'
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
-import Navigation from './components/Navigation'
+import { thunks } from './store/list';
+import DisplayLists from './components/DisplayLists'
+// import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
+
 
 function App() {
 
@@ -27,6 +30,7 @@ function App() {
     useEffect(() => {
         loaduser()
         load_all_coins()
+        dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
     }, [])
 

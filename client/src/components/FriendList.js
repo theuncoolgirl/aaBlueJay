@@ -19,7 +19,7 @@ const FriendList = () => {
     }
 
     return (
-    friends.map(friend => <div>{friend.firstname}</div>)
+    friends.map(friend => <div key={friend.username}>{friend.firstname}</div>)
     )
 }
 

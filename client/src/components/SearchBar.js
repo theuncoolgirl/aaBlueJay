@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { Button, TextField } from '@material-ui/core/';
+import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useSelector } from 'react-redux'
-import useStyles from '../styles.js';
+// import useStyles from '../styles.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -76,7 +76,7 @@ const theme = createMuiTheme({
 });
 
 export default function ComboBox() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const history = useHistory()
   const coins = useSelector(state => state.search)
 
@@ -85,6 +85,9 @@ export default function ComboBox() {
     const coinId = coins.filter(coin => {
       return (coin.name === e.target.innerHTML.trim())
     })
+    if (coinId.length === 0) {
+      return
+    }
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
@@ -107,6 +110,7 @@ export default function ComboBox() {
       }
     }
   }
+
 
   return (
     <ThemeProvider theme={theme}>
