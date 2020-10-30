@@ -12,7 +12,7 @@ const ChartComponent = (props) => {
 		return <div>Loading...</div>
 	} else {
 		return (
-			<ChartWrapper type={"svg"} data={chartData} />
+			<ChartWrapper coinId={props.coinId} type={"svg"} data={chartData} />
 		)
 	}
 }

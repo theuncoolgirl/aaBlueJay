@@ -1,8 +1,12 @@
 // import Cookies from "js-cookie";
 
+import { object } from "prop-types";
+
 const SET_USER = "bluejay/authentication/SET_USER";
 const REMOVE_USER = "bluejay/authentication/REMOVE_USER";
 const LOAD_USER = "bluejay/authentication/LOAD_USER"
+const UPDATE_BANK = "bluejay/authentication/UPDATE_BANK"
+
 
 export const setUser = (user) => {
   return {
@@ -21,6 +25,13 @@ export const load_user = (user) => {
   return {
     type: LOAD_USER,
     user
+  }
+}
+
+export const updateBank = (cash) => {
+  return {
+    type: UPDATE_BANK,
+    cash
   }
 }
 
@@ -100,6 +111,8 @@ export default function reducer(state = {}, action) {
       return action.user;
     case REMOVE_USER:
       return {};
+    case UPDATE_BANK:
+      return Object.assign({}, state, {cash: action.cash})
     default:
       return state;
   }

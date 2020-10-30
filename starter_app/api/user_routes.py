@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from starter_app.models import User, Friend, Purchase, UserList
 from flask_login import current_user, login_user, logout_user
 from flask import request
-from ..models import User, db
+from ..models import User, db, Purchase
 from ..forms import LoginForm, SignUpForm
 
 user_routes = Blueprint("users", __name__)
@@ -56,7 +56,8 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
 
-        newUser = User.query.filter(User.email == user.to_dict()["email"]).first()
+        newUser = User.query.filter(
+            User.email == user.to_dict()["email"]).first()
         login_user(newUser)
 
         watchlist = UserList(userId=newUser.id, listName="Watch List")
@@ -82,7 +83,33 @@ def get_csrf_token():
 def purchase_history(id):
     purchases = Purchase.query.filter(Purchase.userId == id).all()
     print(purchases)
-    return {"test": 1}
+    res = [purchase.to_dict() for purchase in purchases]
+    return {"purchases": res}
+
+
+@user_routes.route("/purchases/new", methods=["POST"])
+def add_purchase():
+    data = request.json
+    purchase = Purchase(
+        userId=data["userId"],
+        purchasePrice=data["purchasePrice"],
+        purchaseQuantity=data["purchaseQuantity"],
+        tickerSymbol=data["tickerSymbol"],
+    )
+    # increase amount of cash in bank by the
+    # amount of the share/currency purchases
+    user = User.query.filter(User.id == data["userId"]).first()
+    # ensures no negative values for cash
+    user.cash = (
+        user.cash - int(data["purchasePrice"])
+        if (user.cash - int(data["purchasePrice"]) >= 0)
+        else 0
+    )
+    db.session.add(purchase)
+    db.session.commit()
+    # purchase = Purchase.query.order_by(Purchase.purchaseDate.desc()).first()
+    print("user cash ---------------", user.cash)
+    return {"purchase": purchase.to_dict(), "cash": user.cash}
 
 
 @user_routes.route("/friends/<int:id>")
