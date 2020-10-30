@@ -50,7 +50,7 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {userCurrentList.map((row) => (
-            <CurrenceyTableRow row={row} deleteIcon={true} listIdToDelete={lists ? lists[0][1] : null} spark={true}>
+            <CurrenceyTableRow row={row} deleteIcon={true} key={`list-${row.id}`} listIdToDelete={lists ? lists[0][1] : null} spark={true}>
             </ CurrenceyTableRow>
           ))}
         </TableBody>

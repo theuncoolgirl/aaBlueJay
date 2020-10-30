@@ -59,8 +59,8 @@ const ExploreCurrencies = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
-              return < CurrenceyTableRow row={row} deleteIcon={false} />
+            {rows.map((row, idx) => {
+              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`}deleteIcon={false} />
             }
             )}
           </TableBody>

@@ -51,7 +51,7 @@ export default function SimpleModal() {
       <p id="simple-modal-description">
         Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
       </p>
-      {userLists.map(list => <div>{list[0]} <AddListItem listTitle={list[0]} listId={list[1]} /></div>)}
+      {userLists.map(list => <div key={`${list[0]}-${list[1]}`}>{list[0]} <AddListItem listTitle={list[0]} listId={list[1]} /></div>)}
     </div>
   );
 
