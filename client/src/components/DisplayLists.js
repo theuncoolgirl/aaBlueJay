@@ -17,8 +17,7 @@ const DisplayLists = () => {
   const handleClick = (e) => {
     e.preventDefault();
     const test = escape(e.target.id)
-    console.log(test)
-    // console.log(e.target.id)
+    console.log(test)    // console.log(e.target.id)
     history.push(`/list/${test}`);
   }
 
@@ -38,7 +37,7 @@ const DisplayLists = () => {
           <Typography variant="subtitle2">
             {userLists ? userLists.map(list => (<div key={list[0]} id={list[0]} onClick={handleClick}>
                                                 {list[0]}
-                                                <RemoveIcon onClick={handleDelete} id={`list-${list[0]}`} />
+                                                <RemoveIcon onClick={handleDelete} style={{float:"right"}} id={`list-${list[0]}`} />
                                                 <Divider className={classes.divider} />
                                                 </div>))
                         : null}

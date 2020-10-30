@@ -39,6 +39,7 @@ function App() {
                     <Container maxWidth="lg" style={{ marginTop: 40 }}>
                         <Switch>
                             <Route exact={true} path="/">
+                                <PurchaseHistory />
                                 <DisplayLists />
                             </Route>
                             <Route path="/friends">

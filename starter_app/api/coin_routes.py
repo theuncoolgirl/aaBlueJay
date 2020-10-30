@@ -103,6 +103,12 @@ def delete_user_list():
     user_id = int(request.json["user_id"])
     list_name = request.json["list_name"]
 
+    print("======================")
+    print("======================")
+    # print(toDelete)
+    print("======================")
+    print("======================")
+
     toDelete = UserList.query.filter(UserList.userId == user_id, UserList.listName == list_name).first()
 
     db.session.delete(toDelete)
@@ -118,11 +124,6 @@ def delete_list_item():
     toDelete = CurrencyList.query.filter(
         CurrencyList.listId == listId, CurrencyList.tickerSymbol == symbolToDelete
     ).first()
-    print("list to delete ========", toDelete)
-
-    # listId = int(request.json["listId"])
-    # toDelete = CurrencyList.query.get(listId)
-    # print(toDelete.tickerSymbol)
 
     db.session.delete(toDelete)
     db.session.commit()
@@ -160,7 +161,7 @@ def get_user_lists():
 @coin_routes.route("/list/create", methods=["POST"])
 def create_list():
     user_id = int(request.json["user_id"])
-    list_name = request.json["list_name"]
+    list_name = request.json["list_name"].title()
     newList = UserList(userId=user_id, listName=list_name)
 
     db.session.add(newList)
