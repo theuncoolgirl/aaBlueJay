@@ -26,11 +26,12 @@ export default function BasicTable() {
   const userId = useSelector((state) => state.session.id)
   const userCurrentList = useSelector((state) => state.list.currentList)
   const lists = useSelector((state) => state.list.lists)
+  const convertedListName = decodeURIComponent(listName)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(thunks.getUserWatchlist(userId, listName));
+    dispatch(thunks.getUserWatchlist(userId, convertedListName));
     // eslint-disable-next-line
   }, [userId, listName]);
 
