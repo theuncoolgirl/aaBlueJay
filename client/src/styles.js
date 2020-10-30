@@ -132,6 +132,17 @@ export const useStyles = makeStyles((theme) => ({
         marginLeft: "8.5%",
         width: "40%"
     },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        // boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        width: 400,
+    }, 
+    slider: {
+        width: 300,
+        display: 'block'
+      },
     sideCard: {
         textAlign: 'center',
         padding: 10,

@@ -28,13 +28,11 @@ const BuyingPowerModal = (props) => {
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
         onClose()
-        console.log('buy')
     }
 
     const sell = () => {
         //multiplying  by -1 so that the purchase history will reflect as sold or selling
-        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * sellSliderValue * -1, sellSliderValue * -1))
-        console.log('sell')
+        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice*sellSliderValue*-1, sellSliderValue*-1))
         onClose()
     }
 

@@ -36,7 +36,6 @@ export const addPurchaseHistory = (userId, tickerSymbol, purchasePrice, purchase
     tickerSymbol
   }
 
-  console.log('in add purchase', purchaseQuantity, purchasePrice)
   try {
     const res = await fetch('/api/users/purchases/new', {
       method: 'POST',
@@ -51,8 +50,6 @@ export const addPurchaseHistory = (userId, tickerSymbol, purchasePrice, purchase
     }
 
     const { purchase, cash } = await res.json()
-    console.log('cash',cash)
-    console.log('update', updateBank)
     //update bank in store after buy/sell
     dispatch(updateBank(cash))
     //update purchase history in store

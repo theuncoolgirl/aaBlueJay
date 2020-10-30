@@ -27,8 +27,7 @@ const BuyingPower = (props) => {
     //only update purchase qty if symbol changed
     useEffect(() => {
         const getPurchaseQty = () => {
-            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol === symbol)
-            console.log(foundPurchases)
+            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol == symbol)
             if (foundPurchases.length > 0) {
                 const totalQtyOfPurchase = foundPurchases.reduce((acc, curr) => {
                     return acc + curr.purchaseQuantity
@@ -46,8 +45,8 @@ const BuyingPower = (props) => {
     return (
         <>
             <h2>Buying Power</h2>
-            <h4>you have ${bank} in your bank</h4>
-            <h4>You have a purchase quantity of <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> in {symbol}</h4>
+            <h4>you have $<span style={{ color: "rgba(255,0,0,0.9)" }}>{bank}</span> in your bank</h4>
+            <h4>You have a purchase quantity of <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> in {symbol.toUpperCase()}</h4>
             <Button variant="contained" color="primary" onClick={handleOpen}>
                 Buy/Sell
             </Button>
