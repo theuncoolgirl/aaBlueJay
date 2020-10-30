@@ -44,7 +44,6 @@ def coin():
 
 @coin_routes.route("/explore/<int:id>")
 def explore_load(id):
-    print(int(id))
     coins = cg.get_coins_markets(vs_currency="usd", per_page=50, page=id)
     return {"coins": coins}
 
@@ -52,10 +51,6 @@ def explore_load(id):
 @coin_routes.route("/list", methods=["PUT"])
 def list_route():
     vs_currency, user_id, list_name = request.json.values()
-    print("==========================")
-    print(list_name)
-    print(user_id)
-    print("==========================")
 
     query = (
         UserList.query.options(joinedload("currencylist"))

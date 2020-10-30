@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom'
 import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // import useStyles from '../styles.js';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { loadCurrentResults } from '../store/search_coins'
 
 const theme = createMuiTheme({
   overrides: {
@@ -78,21 +79,26 @@ const theme = createMuiTheme({
 export default function ComboBox() {
   // const classes = useStyles();
   const history = useHistory()
-  const coins = useSelector(state => state.search)
+  const dispatch = useDispatch()
+  const coins = useSelector(state => state.search.allCoins)
+  const [reset, setReset] = useState(false)
 
   const handleSearch = (e) => {
-    e.preventDefault()
     const coinId = coins.filter(coin => {
       return (coin.name === e.target.innerHTML.trim())
     })
+
     if (coinId.length === 0) {
       return
     }
-    // return <Redirect to={`/coins/${coinId[0].id}`}/>
+
+    setReset(!reset)
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
+    // console.log(e)
     if (e.key === 'Enter') {
+      e.preventDefault()
       const results = coins.filter(coin => {
         return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
           || (coin.symbol.toLowerCase().includes(e.target.value.toLowerCase().trim())))
@@ -102,14 +108,15 @@ export default function ComboBox() {
           || (coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
       })
 
+      setReset(!reset)
+
       if (results.length === 0) {
         history.push(`/404`)
       } else if (exactResults.length === 1) {
-        // return <Redirect to={`/coins/${exactResults[0].id}`}/>
         history.push(`/coins/${exactResults[0].id}`)
       } else {
-        // return <Redirect to={`/coins/${exactResults[0].id}`}/>
-        history.push(`/results`, results)
+        dispatch(loadCurrentResults(results))
+        history.push(`/results`)
       }
     }
   }
@@ -121,10 +128,13 @@ export default function ComboBox() {
         <Autocomplete
           id="custom-input-demo"
           size="small"
+          key={`autocomplete-${reset}`}
+          freeSolo={true}
           onChange={handleSearch}
+          onKeyDown={(e) => handleEnter(e)}
           options={coins.map((option) => option.name || option.symbol)}
           renderInput={(params) => (
-            <TextField {...params} label="Search Coins" variant="filled" onKeyDown={(e) => handleEnter(e)} />
+            <TextField {...params} label="Search Coins" variant="filled" />
           )}
         />
       </div>
