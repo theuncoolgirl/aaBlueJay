@@ -31,7 +31,7 @@ const DisplayLists = () => {
 
   return (
     <>
-      <Paper className={classes.sideCard} elevation={3}>
+      <Paper className={classes.sideCard} style={{ overflow: 'scroll' }} elevation={3}>
         <Typography variant="h5">Lists</Typography>
         <Divider className={classes.divider} />
         <div className={classes.spacer}>
@@ -43,8 +43,8 @@ const DisplayLists = () => {
                                                 </div>))
                         : null}
           </Typography>
+          <ListModal style={{ position: 'absolute', marginTop: "30" }} />
         </div>
-        <ListModal />
       </Paper>
     </>
   )
