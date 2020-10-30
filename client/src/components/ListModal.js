@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-// import AddListItem from './AddListItem';
 import { useSelector, useDispatch } from 'react-redux';
-// import DisplayLists from './DisplayLists'
 import { Button } from '@material-ui/core';
 import { thunks } from '../store/list';
 
@@ -36,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleModal() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const userLists = useSelector(state => state.list.lists)
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [inputVal, setInputVal] = React.useState("")
   const userId = useSelector((state) => state.session.id)
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,7 +49,6 @@ export default function SimpleModal() {
   };
 
   const handleCreate = (e) => {
-    // console.log(inputVal)
     dispatch(thunks.createNewList(userId, inputVal))
     handleClose()
   }
