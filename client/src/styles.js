@@ -138,7 +138,7 @@ export const useStyles = makeStyles((theme) => ({
         // boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
         width: 400,
-    }, 
+    },
     slider: {
         width: 300,
         display: 'block'
@@ -146,7 +146,8 @@ export const useStyles = makeStyles((theme) => ({
     sideCard: {
         textAlign: 'center',
         padding: 10,
-        maxWidth: 250
+        maxWidth: 250,
+        height: '80vh'
     },
     siteInfoCard: {
         textAlign: 'center',

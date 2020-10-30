@@ -2,15 +2,9 @@ import React, { useEffect } from 'react'
 import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { load_purchase_history } from '../store/purchase'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import DisplayLists from './DisplayLists';
 
 const useStyles = makeStyles({
     table: {
@@ -37,6 +31,9 @@ const PurchaseHistory = () => {
         const coinId = allCoins.filter(coin => {
             return (coin.name === e.target.innerHTML.trim())
         })
+        if (coinId.length === 0) {
+          return
+        }
         history.push(`/coins/${coinId[0].id}`)
     }
 
@@ -45,6 +42,14 @@ const PurchaseHistory = () => {
     }
 
     return (
+      <Grid
+      container
+      direction="row"
+      justify="space-around"
+      display="flex"
+      overflow="show%"
+    >
+    <Grid className={classes.coinGridItem} item xs={8}>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -70,6 +75,11 @@ const PurchaseHistory = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Grid>
+    <Grid className={classes.center} item xs={3}>
+      <DisplayLists />
+    </Grid>
+  </Grid>
     )
 }
 

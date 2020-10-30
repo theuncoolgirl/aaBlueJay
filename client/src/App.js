@@ -40,7 +40,6 @@ function App() {
                         <Switch>
                             <Route exact={true} path="/">
                                 <PurchaseHistory />
-                                <DisplayLists />
                             </Route>
                             <Route path="/friends">
                                 <FriendList />
