@@ -19,15 +19,15 @@ const DisplayLists = () => {
 
   return (
     <>
-      <Paper className={classes.sideCard} elevation={3}>
+      <Paper className={classes.sideCard} style={{ overflow: 'scroll' }} elevation={3}>
         <Typography variant="h5">Lists</Typography>
         <Divider className={classes.divider} />
         <div className={classes.spacer}>
           <Typography variant="subtitle2">
             {userLists ? userLists.map(list => <div key={list[0]} id={list[0]} onClick={handleClick}>{list[0]}<Divider className={classes.divider} /></div>) : null}
           </Typography>
+          <ListModal style={{ position: 'absolute', marginTop: "30" }} />
         </div>
-        <ListModal />
       </Paper>
     </>
   )
