@@ -32,10 +32,10 @@ const ErrorContainer = () => {
         }
     }
 
-    return (
-        <Container>
-            {formattedErrors.map(err => <div>{err}</div>)}
-        </ Container>
+    return(
+    <Container>
+        {formattedErrors.map(err => <div>{err}</div>)}
+    </ Container>
     )
 }
 

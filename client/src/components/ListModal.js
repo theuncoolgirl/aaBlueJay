@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from '@material-ui/core';
+import { Button, Typography, TextField } from '@material-ui/core';
 import { thunks } from '../store/list';
 // import useStyles from '../styles.js';
 
@@ -29,7 +29,12 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    textAlign: 'center'
   },
+  inputField: {
+    marginTop: 20,
+    width: 200
+}
 }));
 
 export default function SimpleModal() {
@@ -56,9 +61,12 @@ export default function SimpleModal() {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h4 id="simple-modal-title">What do you want to name your list?</h4>
-      <input type="text" placeholder="List Name" value={inputVal} onChange={e => setInputVal(e.target.value)} />
-      <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleCreate}>
+      <Typography variant="h5" id="simple-modal-title">What do you want to name your list?</Typography>
+
+      {/* <input  className={classes.inputField} type="text" placeholder="List Name" value={inputVal} onChange={e => setInputVal(e.target.value)} /> */}
+      <TextField className={classes.inputField} label="List Name" variant="outlined" size="small" value={inputVal} onChange={e => setInputVal(e.target.value)} />
+
+      <Button variant="outlined" color="primary" style={{ margin: 20, height: 40 }} onClick={handleCreate}>
         &#10003; Create List
      </Button>
     </div>
