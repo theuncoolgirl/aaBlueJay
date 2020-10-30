@@ -15,6 +15,7 @@ import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
+import { Container } from '@material-ui/core';
 
 function App() {
 
@@ -32,44 +33,48 @@ function App() {
     return (
         <>
             {!id && <BrowserRouter>
-            <LoginForm />
-            <Switch>
-            <Route path="/signup">
-                        <SignUpForm />
-            </Route>
-            </Switch>
-            </BrowserRouter>}
-            {id && (<BrowserRouter>
-                <Navigation />
-                {/* <LoginForm /> */}
+                <LoginForm />
                 <Switch>
-                    <Route path="/friends">
-                        <FriendList />
-                    </Route>
-                    <Route path="/users">
-                        <UserList />
-                    </Route>
-                    <Route path="/results">
-                        <SearchResults />
-                    </Route>
                     <Route path="/signup">
                         <SignUpForm />
                     </Route>
-                    <Route path="/explore/:id">
-                        <ExploreCurrencies />
-                    </Route>
-                    <Route exact path="/list/watchlist">
-                        <MyList />
-                    </Route>
-                    <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                    <Route path="/404">
-                        <NotFound />
-                    </Route>
-                    <Route exact={true} path="/">
-                        <h1>My Home Page</h1>
-                    </Route>
                 </Switch>
-            </BrowserRouter >)}
+            </BrowserRouter>}
+            {id && (<BrowserRouter>
+                <Navigation />
+
+                {/* <LoginForm /> */}
+                <Container maxWidth="md" style={{ marginTop: 40 }}>
+                    <Switch>
+                        <Route path="/friends">
+                            <FriendList />
+                        </Route>
+                        <Route path="/users">
+                            <UserList />
+                        </Route>
+                        <Route path="/results">
+                            <SearchResults />
+                        </Route>
+                        <Route path="/signup">
+                            <SignUpForm />
+                        </Route>
+                        <Route path="/explore/:id">
+                            <ExploreCurrencies />
+                        </Route>
+                        <Route exact path="/list/watchlist">
+                            <MyList />
+                        </Route>
+                        <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                        <Route path="/404">
+                            <NotFound />
+                        </Route>
+                        <Route exact={true} path="/">
+                            <h1>My Home Page</h1>
+                        </Route>
+                    </Switch>
+                </Container>
+            </BrowserRouter >)
+            }
         </>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import { Button, Modal } from '@material-ui/core';
 import DisplayLists from './DisplayLists'
 
 function rand() {
@@ -54,9 +54,9 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        Add to List
-      </button>
+      <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleOpen}>
+        &#10003; Add to List
+                        </Button>
       <Modal
         open={open}
         onClose={handleClose}
