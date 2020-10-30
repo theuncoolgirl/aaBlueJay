@@ -4,6 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import * as AuthAction from '../store/session';
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
+import ErrorContainer from './ErrorContainer'
 
 const LoginForm = () => {
   const classes = useStyles();
@@ -40,10 +41,11 @@ const LoginForm = () => {
 
   return (
     <Grid
-      container
-      direction="row"
-      justify="space-around"
+    container
+    direction="row"
+    justify="space-around"
     >
+      <ErrorContainer />
       <Grid item style={{ textAlign: 'center' }}>
         <Paper className={classes.formCard} elevation={3}>
           <Typography className={classes.title} variant='h5'>Log In</Typography>
