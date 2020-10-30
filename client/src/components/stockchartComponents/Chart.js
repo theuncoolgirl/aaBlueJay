@@ -62,7 +62,7 @@ class CandleStickStockScaleChart extends React.Component {
 					// rotate={-90}
 					fontSize={20} text="date" fontFamily='comic' />
 
-				<Chart id={1} yExtents={d => [d.high + 50, d.low - 50]}>
+				<Chart id={1} yExtents={d => [d.high, d.low]}>
 					<XAxis axisAt="bottom" orient="bottom" ticks={6} />
 					<YAxis axisAt="left" orient="left" ticks={5} />
 					{/* comp that displays all candle stick data */}

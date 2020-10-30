@@ -92,7 +92,7 @@ export default function Navigation() {
     const classes = useStyles();
     return (
         <div>
-            <AppBar className={classes.toolbar} position="static" color="inherit" elevation="0">
+            <AppBar className={classes.toolbar} position="static" color="inherit" elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <NavLink style={{ paddingLeft: 20, paddingTop: 3 }} to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'34px'} /></NavLink>
                     <SearchBar />
