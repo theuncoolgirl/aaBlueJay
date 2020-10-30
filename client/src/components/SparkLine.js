@@ -1,14 +1,18 @@
 import React from 'react';
 // import { useSelector } from 'react-redux';
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
+import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines';
 
 export const Spark = ({ data }) => {
+  const open7d = data[0];
+  const close7d = data[data.length - 1];
+  const sevenDColor = close7d > open7d ? "green" : "red";
   return (
     <>
       <Sparklines data={data}>
-        <SparklinesLine style={{ strokeWidth: 2, stroke: "#336aff", fill: "green" }} />
+        <SparklinesLine style={{ strokeWidth: 2, stroke: sevenDColor, fill: "white" }} />
         <SparklinesSpots size={3}
-          style={{ stroke: "#336aff", strokeWidth: 2, fill: "white" }} />
+          style={{ stroke: sevenDColor, strokeWidth: 2, fill: "white" }} />
+        <SparklinesReferenceLine type="mean" />
       </Sparklines>
     </>
   )
