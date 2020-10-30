@@ -25,8 +25,8 @@ const LogoutButton = () => {
 
   return (
     <div>
-      <Link onClick={logoutHandler} className={classes.navBarLink}>
-        <Typography underline="none" variant="caption">Logout</Typography>
+      <Link onClick={logoutHandler} style={{ textDecoration: "none" }}>
+        <Typography className={classes.navBarLink} underline="none" variant="caption">Logout</Typography>
       </Link>
     </div>
   );
