@@ -31,7 +31,7 @@ const DisplayLists = () => {
 
   return (
     <>
-      <Paper className={classes.sideCard} style={{ overflow: 'scroll' }} elevation={3}>
+      <Paper className={classes.sideCard} style={{ overflowY: 'scroll' }} elevation={3}>
         <Typography variant="h5">Lists</Typography>
         <Divider className={classes.divider} />
         <div className={classes.spacer}>
