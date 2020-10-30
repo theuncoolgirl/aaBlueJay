@@ -29,9 +29,7 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
         return stockData.sparkline_in_7d.price
     }
 
-    console.log(row.market_cap_change_percentage_24h)
     const todayColor = String(row.market_cap_change_percentage_24h)[0] === "-" ? 'red' : 'green';
-    console.log(row.market_cap_change_percentage_24h, todayColor)
 
     return (
         <TableRow key={row.name}>
