@@ -45,7 +45,7 @@ const getUserWatchlist = (userId, listName) => async (dispatch, getState) => {
 };
 
 const deleteWatchlistItem = (listId, symbolToDelete) => async dispatch => {
-  // console.log(symbolToDelete)
+  console.log("DELETE STORE:", listId, symbolToDelete)
   let res = await fetch("/api/coins/list/delete", {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
@@ -140,7 +140,7 @@ function reducer(state = { currentList: [], lists: [] }, action) {
         return listItem.symbol !== action.value.symbol.toLowerCase()
       })
       newState.currentList = filteredList
-      return { currentList: filteredList }
+      return newState
     case CREATE_NEW_LIST:
       newState = { ...state }
       newState.lists = [...newState.lists, action.value]
