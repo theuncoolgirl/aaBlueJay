@@ -16,6 +16,7 @@ import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
 import LoggedOutView from './components/LoggedOutView'
+import PurchaseHistory from './components/PurchaseHistory'
 
 function App() {
     const dispatch = useDispatch()
@@ -35,6 +36,7 @@ function App() {
             {!id && <LoggedOutView />}
             {id && (<BrowserRouter>
                 <Navigation />
+                <PurchaseHistory />
                 <Container maxWidth="md" style={{ marginTop: 40 }}>
                     <Switch>
                         <Route exact={true} path="/">

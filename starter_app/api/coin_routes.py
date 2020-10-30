@@ -52,18 +52,12 @@ def explore_load(id):
 def list_route():
     vs_currency, user_id, list_name = request.json.values()
 
-    print("==================")
-    print(user_id, list_name)
-    print("==================")
 
     query = (
         UserList.query.options(joinedload("currencylist"))
         .filter(UserList.userId == user_id, UserList.listName == list_name)
         .first()
     )
-    print("==================")
-    print(query)
-    print("==================")
 
     if query is None:
         return {"currentList": []}

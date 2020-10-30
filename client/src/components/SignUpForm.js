@@ -34,7 +34,6 @@ const SignUpForm = () => {
                         direction="row"
                         justify="space-around"
                 >
-                        <ErrorContainer />
                         <Grid item style={{ textAlign: 'center' }}>
                                 <Paper className={classes.formCard} elevation={3}>
                                         <Typography className={classes.title} variant='h5'>Sign Up</Typography>
@@ -60,6 +59,7 @@ const SignUpForm = () => {
                                                 <Button type="submit" className={classes.formButton} variant="outlined" color="primary">
                                                         Sign Up
                                                 </Button>
+                                                <ErrorContainer />
                                                 <div className="signup-form-login">
                                                         <Typography>Already have an account?</Typography><NavLink to="/login"><Typography>Log In</Typography></NavLink>
                                                 </div>
