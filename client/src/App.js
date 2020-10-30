@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
-import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
 import SignUpForm from './components/SignUpForm';
 import CoinDetails from './components/CoinDetails';
@@ -16,7 +15,7 @@ import DisplayLists from './components/DisplayLists'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
-// import {LoggedOutView} from './components/LoggedOutView'
+import LoggedOutView from './components/LoggedOutView'
 
 function App() {
 
@@ -34,22 +33,9 @@ function App() {
 
     return (
         <>
-            {!id && <BrowserRouter>
-                <Container maxWidth="md" style={{ marginTop: 40 }}>
-                    <Switch>
-                        <Route path="/signup">
-                            <SignUpForm />
-                        </Route>
-                        <Route path="/login">
-                            <LoginForm />
-                        </Route>
-                    </Switch>
-                </Container>
-            </BrowserRouter>}
+            {!id && <LoggedOutView />}
             {id && (<BrowserRouter>
                 <Navigation />
-
-                {/* <LoginForm /> */}
                 <Container maxWidth="md" style={{ marginTop: 40 }}>
                     <Switch>
                         <Route exact={true} path="/">

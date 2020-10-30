@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { TextField } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useSelector } from 'react-redux'
@@ -88,13 +88,14 @@ export default function ComboBox() {
     if (coinId.length === 0) {
       return
     }
+    // return <Redirect to={`/coins/${coinId[0].id}`}/>
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
     if (e.key === 'Enter') {
       const results = coins.filter(coin => {
         return ((coin.name.toLowerCase().includes(e.target.value.toLowerCase().trim()))
-          || (coin.symbol.toLowerCase() === e.target.value.toLowerCase().trim()))
+          || (coin.symbol.toLowerCase().includes(e.target.value.toLowerCase().trim())))
       })
       const exactResults = results.filter(coin => {
         return ((coin.name.toLowerCase() === (e.target.value.toLowerCase().trim()))
@@ -104,8 +105,10 @@ export default function ComboBox() {
       if (results.length === 0) {
         history.push(`/404`)
       } else if (exactResults.length === 1) {
+        // return <Redirect to={`/coins/${exactResults[0].id}`}/>
         history.push(`/coins/${exactResults[0].id}`)
       } else {
+        // return <Redirect to={`/coins/${exactResults[0].id}`}/>
         history.push(`/results`, results)
       }
     }
