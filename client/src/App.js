@@ -36,36 +36,36 @@ function App() {
             {!id && <LoggedOutView />}
             {id && (<BrowserRouter>
                 <Navigation />
-                <Container maxWidth="md" style={{ marginTop: 40 }}>
-                    <Switch>
-                        <Route exact={true} path="/">
-                            <PurchaseHistory />
-                            <DisplayLists />
-                        </Route>
-                        <Route path="/friends">
-                            <FriendList />
-                        </Route>
-                        <Route path="/users">
-                            <UserList />
-                        </Route>
-                        <Route path="/results">
-                            <SearchResults />
-                        </Route>
-                        <Route path="/signup">
-                            <SignUpForm />
-                        </Route>
-                        <Route path="/explore/:id">
-                            <ExploreCurrencies />
-                        </Route>
-                        <Route exact path="/list/:listName">
-                            <MyList />
-                        </Route>
-                        <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                        <Route path="/404">
-                            <NotFound />
-                        </Route>
-                    </Switch>
-                </Container>
+                    <Container maxWidth="lg" style={{ marginTop: 40 }}>
+                        <Switch>
+                            <Route exact={true} path="/">
+                                <PurchaseHistory />
+                                <DisplayLists />
+                            </Route>
+                            <Route path="/friends">
+                                <FriendList />
+                            </Route>
+                            <Route path="/users">
+                                <UserList />
+                            </Route>
+                            <Route path="/results">
+                                <SearchResults />
+                            </Route>
+                            <Route path="/signup">
+                                <SignUpForm />
+                            </Route>
+                            <Route path="/explore/:id">
+                                <ExploreCurrencies />
+                            </Route>
+                            <Route exact path="/list/:listName">
+                                <MyList />
+                            </Route>
+                            <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                            <Route path="/404">
+                                <NotFound />
+                            </Route>
+                        </Switch>
+                    </Container>
             </BrowserRouter >)
             }
         </>

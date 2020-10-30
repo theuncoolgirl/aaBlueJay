@@ -27,7 +27,7 @@ const BuyingPower = (props) => {
     //only update purchase qty if symbol changed
     useEffect(() => {
         const getPurchaseQty = () => {
-            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol == symbol)
+            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol === symbol)
             console.log(foundPurchases)
             if (foundPurchases.length > 0) {
                 const totalQtyOfPurchase = foundPurchases.reduce((acc, curr) => {
@@ -35,7 +35,7 @@ const BuyingPower = (props) => {
                 }, 0)
 
                 //return qty with 1 decimal place
-                setQtyOfPurchase( Number((totalQtyOfPurchase).toFixed(1)))
+                setQtyOfPurchase(Number((totalQtyOfPurchase).toFixed(1)))
             } else {
                 setQtyOfPurchase(0)
             }

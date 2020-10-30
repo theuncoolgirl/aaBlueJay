@@ -56,7 +56,6 @@ export const login = (email, password) => {
       dispatch(setErrors(errors))
     }
     if (response.ok) {
-      debugger
       const user = await response.json();
       dispatch(setUser(user));
     }
@@ -115,7 +114,7 @@ export const loadUser = () => async dispatch => {
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case SET_ERRORS:
-      return {'errors': action.errors}
+      return { 'errors': action.errors }
     case LOAD_USER:
       return action.user
     case SET_USER:
@@ -123,7 +122,7 @@ export default function reducer(state = {}, action) {
     case REMOVE_USER:
       return {};
     case UPDATE_BANK:
-      return Object.assign({}, state, {cash: action.cash})
+      return Object.assign({}, state, { cash: action.cash })
     default:
       return state;
   }
