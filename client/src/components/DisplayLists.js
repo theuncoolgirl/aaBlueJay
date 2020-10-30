@@ -1,21 +1,34 @@
-import React, { useEffect } from 'react';
-import { thunks } from '../store/list';
-import { useDispatch, useSelector } from 'react-redux'
-import AddListItem from './AddListItem'
+import React from 'react';
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import { Divider, Paper, Typography } from '@material-ui/core';
+import ListModal from './ListModal';
+import useStyles from '../styles.js';
 
 const DisplayLists = () => {
-  const userId = useSelector((state) => state.session.id)
-  const dispatch = useDispatch()
-  const userLists = useSelector(state => state.list.lists)
+  const classes = useStyles();
+  const userLists = useSelector(state => state.list.lists);
+  const history = useHistory();
 
-  useEffect(() => {
-    dispatch(thunks.getAllUserLists(userId));
-    // eslint-disable-next-line
-  }, [userId]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push(`/list/${e.target.id}`);
+  }
+
 
   return (
     <>
-      {userLists.map(list => <div>{list[0]} <AddListItem listTitle={list[0]} listId={list[1]} /></div>)}
+      <Paper className={classes.sideCard} elevation={3}>
+        <Typography variant="h5">Lists</Typography>
+        <Divider className={classes.divider} />
+        <div className={classes.spacer}>
+          <Typography variant="subtitle2">
+            {userLists ? userLists.map(list => <div key={list[0]} id={list[0]} onClick={handleClick}>{list[0]}<Divider className={classes.divider} /></div>) : null}
+          </Typography>
+        </div>
+        <ListModal />
+      </Paper>
     </>
   )
 }

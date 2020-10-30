@@ -2,19 +2,18 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { actions, thunks } from '../store/coin';
 import ChartComponent from './stockchartComponents/ChartComponent'
-import { Button, Container, Divider, Grid, Paper, Typography } from '@material-ui/core';
+import { Divider, Grid, Paper, Typography } from '@material-ui/core';
 import useStyles from '../styles.js';
 import CoinModal from './CoinModal';
 import BuyingPower from './BuyingPower'
 import { load_purchase_history} from '../store/purchase'
+
 
 function CoinDetails(props) {
     const dispatch = useDispatch()
     const classes = useStyles();
     const {
         updateCoinIdValue,
-        // eslint-disable-next-line
-        receiveCoinDetails,
         getCoinDetails,
         description,
         name,
@@ -22,7 +21,6 @@ function CoinDetails(props) {
         current_price_usd,
         percent_change_usd,
         price_change_usd,
-        // chart_data,
         match: {
             params: {
                 coinId
@@ -58,17 +56,13 @@ function CoinDetails(props) {
     }
 
     return (
-
-        <Container maxWidth="md">
+        <>
             <Grid
                 container
                 direction="row"
-                justify="center"
-                alignItems="flex-start"
-                spacing={6}
-                style={{ margin: 0 }}
+                justify="space-around"
             >
-                <Grid item xs={8}>
+                <Grid className={classes.coinGridItem} item xs={8}>
                     {
                         name ?
                             <div>
@@ -84,34 +78,36 @@ function CoinDetails(props) {
                                 <ChartComponent className='stockchart' coinId={coinId} />
                                 {description !== "" ?
                                     <div>
-                                        <Typography variant="h6">About</Typography>
-                                        <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                        <Typography variant="caption"><span dangerouslySetInnerHTML={{ __html: description }}></span></Typography>
+                                        <Typography className={classes.about} variant="h6">
+                                            About
+                                        </Typography>
+                                        <Divider className={classes.divider} />
+                                        <Typography variant="caption">
+                                            <span dangerouslySetInnerHTML={{ __html: description }}></span>
+                                        </Typography>
                                     </div>
                                     : null}
                             </div>
                             : <h2>Loading...</h2>}
                 </Grid>
-                <Grid item xs={4} style={{ textAlign: 'center' }}>
+                <Grid className={classes.center} item xs={3}>
                     {name ?
                         <>
-                            <Paper elevation={3} style={{ textAlign: 'center', padding: 10 }}>
-                                <Typography variant="subtitle2">Buy {symbol.toUpperCase()}</Typography>
-                                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                                <div style={{ height: 200 }} className={classes.root}>
-                                    {/* <Typography variant="subtitle2">Placeholder for Simulation Functionality</Typography> */}
-                                    <BuyingPower symbol={symbol} currentPrice={current_price_usd.usd}/>
+                            <Paper className={classes.sideCard} elevation={3}>
+                                <Typography variant="subtitle2">
+                                    Buy {symbol.toUpperCase()}
+                                </Typography>
+                                <Divider className={classes.divider} />
+                                <div className={classes.spacer}>
+                                <BuyingPower symbol={symbol} currentPrice={current_price_usd.usd}/>
                                 </div>
                             </Paper>
-                            <Button variant="outlined" color="primary" style={{ margin: 20 }}>
-                                &#10003; Add to List
-                        </Button>
+                            <CoinModal />
                         </>
                         : null}
                 </Grid>
             </Grid>
-            <CoinModal />
-        </Container >
+        </>
     );
 }
 

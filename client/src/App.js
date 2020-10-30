@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
-import LoginForm from './components/LoginForm'
 import MyList from './components/WatchList'
-import LogoutButton from './components/LogoutButton';
 import SignUpForm from './components/SignUpForm';
 import CoinDetails from './components/CoinDetails';
 import ExploreCurrencies from './components/ExploreCurrencies'
 import * as AuthAction from './store/session';
 import { load_coin_names } from './store/search_coins'
-import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
-import BuyingPower from './components/BuyingPower'
-import Paper from '@material-ui/core/Paper';
-import PurchaseHistory from './components/PurchaseHistory'
+import { thunks } from './store/list';
+import DisplayLists from './components/DisplayLists'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
-import useStyles from './styles'
+import { Container } from '@material-ui/core';
+import LoggedOutView from './components/LoggedOutView'
 
 function App() {
     const classes = useStyles()
@@ -30,50 +27,46 @@ function App() {
     useEffect(() => {
         loaduser()
         load_all_coins()
+        dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
     }, [])
 
     return (
         <>
-            {!id && <BrowserRouter>
-            <LoginForm />
-            <Switch>
-            <Route path="/signup">
-                        <SignUpForm />
-            </Route>
-            </Switch>
-            </BrowserRouter>}
+            {!id && <LoggedOutView />}
             {id && (<BrowserRouter>
                 <Navigation />
-                {/* <LoginForm /> */}
-                <Switch>
-                    <Route path="/friends">
-                        <FriendList />
-                    </Route>
-                    <Route path="/users">
-                        <UserList />
-                    </Route>
-                    <Route path="/results">
-                        <SearchResults />
-                    </Route>
-                    <Route path="/signup">
-                        <SignUpForm />
-                    </Route>
-                    <Route path="/explore/:id">
-                        <ExploreCurrencies />
-                    </Route>
-                    <Route exact path="/list/watchlist">
-                        <MyList />
-                    </Route>
-                    <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
-                    <Route path="/404">
-                        <NotFound />
-                    </Route>
-                    <Route exact={true} path="/">
-                        <h1>My Home Page</h1>
-                    </Route>
-                </Switch>
-            </BrowserRouter >)}
+                <Container maxWidth="md" style={{ marginTop: 40 }}>
+                    <Switch>
+                        <Route exact={true} path="/">
+                            <DisplayLists />
+                        </Route>
+                        <Route path="/friends">
+                            <FriendList />
+                        </Route>
+                        <Route path="/users">
+                            <UserList />
+                        </Route>
+                        <Route path="/results">
+                            <SearchResults />
+                        </Route>
+                        <Route path="/signup">
+                            <SignUpForm />
+                        </Route>
+                        <Route path="/explore/:id">
+                            <ExploreCurrencies />
+                        </Route>
+                        <Route exact path="/list/:listName">
+                            <MyList />
+                        </Route>
+                        <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
+                        <Route path="/404">
+                            <NotFound />
+                        </Route>
+                    </Switch>
+                </Container>
+            </BrowserRouter >)
+            }
         </>
     );
 }
