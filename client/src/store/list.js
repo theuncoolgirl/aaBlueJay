@@ -158,7 +158,7 @@ function reducer(state = { currentList: [], lists: [] }, action) {
       };
     case DELETE_LIST:
       newState = { ...state }
-      filteredList = newState.lists.filter(list=> list.listName !== action.value.listName[0])
+      filteredList = newState.lists.filter(list=> list[0] !== action.value[0])
       newState.lists = [...filteredList]
       return newState
     case DELETE_LIST_ITEM:

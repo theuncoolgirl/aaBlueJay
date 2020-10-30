@@ -110,12 +110,6 @@ def delete_user_list():
     list_name = request.json["list_name"]
 
     toDelete = UserList.query.filter(UserList.userId == user_id, UserList.listName == list_name).first()
-    print("===========================")
-    print("===========================")
-    # print(toDelete.currencylist)
-    print("===========================")
-    print("===========================")
-
 
     db.session.delete(toDelete)
     db.session.commit()
