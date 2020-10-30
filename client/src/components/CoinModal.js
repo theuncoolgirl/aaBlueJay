@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Divider, Modal } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import useStyles from '../styles.js';
 import AddListItem from './AddListItem'
 
 function rand() {

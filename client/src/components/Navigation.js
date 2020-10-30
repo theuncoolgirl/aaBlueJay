@@ -90,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation() {
     const classes = useStyles();
-
     return (
         <div>
             <AppBar className={classes.toolbar} position="static" color="inherit" elevation="0">
@@ -102,7 +101,7 @@ export default function Navigation() {
                         <NavLink to="/explore/1" activeclass="active" style={{ textDecoration: "none" }}>
                             <Typography className={classes.link} underline="none" variant="caption">Explore</Typography>
                         </NavLink>
-                        <NavLink to="/list/watchlist" activeclass="active" style={{ textDecoration: "none" }}>
+                        <NavLink to="/list/Watch List" activeclass="active" style={{ textDecoration: "none" }}>
                             <Typography className={classes.link} underline="none" variant="caption">Lists</Typography>
                         </NavLink>
                         <NavLink to="/friends" activeclass="active" style={{ textDecoration: "none" }}>

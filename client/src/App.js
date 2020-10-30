@@ -12,10 +12,11 @@ import { load_coin_names } from './store/search_coins'
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import { thunks } from './store/list';
+import DisplayLists from './components/DisplayLists'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
-
+// import {LoggedOutView} from './components/LoggedOutView'
 
 function App() {
 
@@ -66,7 +67,7 @@ function App() {
                         <Route path="/explore/:id">
                             <ExploreCurrencies />
                         </Route>
-                        <Route exact path="/list/watchlist">
+                        <Route exact path="/list/:listName">
                             <MyList />
                         </Route>
                         <Route exact path="/coins/:coinId" render={props => <CoinDetails {...props} />} />
@@ -74,7 +75,7 @@ function App() {
                             <NotFound />
                         </Route>
                         <Route exact={true} path="/">
-                            <h1>My Home Page</h1>
+                            <DisplayLists />
                         </Route>
                     </Switch>
                 </Container>
