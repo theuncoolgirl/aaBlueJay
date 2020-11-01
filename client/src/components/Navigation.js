@@ -11,7 +11,7 @@ export default function Navigation() {
         <div>
             <AppBar className={classes.toolbar} position="static" color="inherit" elevation={0}>
                 <Toolbar className={classes.toolbar}>
-                    <NavLink className={classes.navImg} to="/" activeclass="active"><Container className={classes.logo} alt="logo" height={'34px'} /></NavLink>
+                    <NavLink className={classes.navImg} to="/" activeclass="active"><Container className={classes.logo} /></NavLink>
                     <SearchBar />
                     <div className={classes.grow} />
                     <div className={classes.navBarLinks}>

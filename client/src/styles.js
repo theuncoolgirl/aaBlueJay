@@ -1,4 +1,3 @@
-// import { fade, makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { tsvFormat } from 'd3-dsv';
 import background from './commuters.png';
@@ -6,9 +5,6 @@ import doge from './doge.png';
 import dogeleft from './leftdoge.png';
 import logo from './logo.png'
 
-
-// import { useStyles } from '../styles.js';
-// const classes = useStyles();
 
 export const useStyles = makeStyles((theme) => ({
     about: {
@@ -40,18 +36,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     doge: {
         backgroundImage: `url(${doge})`,
-        // backgroundRepeat: false,
         backgroundSize: "cover",
         margin: 0,
-        // backgroundSize: 100
-        // height: 500,
-        // width: 600
     },
     dogeleft: {
         backgroundImage: `url(${dogeleft})`,
         backgroundSize: "cover",
         margin: 0
-        // backgroundSize: "cover",
     },
     formButton: {
         marginTop: 15,
@@ -124,20 +115,15 @@ export const useStyles = makeStyles((theme) => ({
         alt: "logo",
         height: '34px',
         padding: 20
-        // margin: 5
     },
     logoForLoggedOutView: {
         backgroundImage: `url(${logo})`,
         backgroundSize: "cover",
         alt: "logo",
-        // display: 'inline-block',
-        // marginTop: 3,
-        // marginBottom: 3,
         height: '34px',
         width: '34px',
         marginLeft: 'auto',
         marginRight: 'auto',
-        // padding: 5,
         margin: 5
     },
     navBarLink: {
