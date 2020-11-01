@@ -124,7 +124,9 @@ export const useStyles = makeStyles((theme) => ({
         width: '34px',
         marginLeft: 'auto',
         marginRight: 'auto',
-        margin: 5
+        marginBottom: 3,
+        marginTop: 6,
+        padding: 1
     },
     navBarLink: {
         marginLeft: 15,
