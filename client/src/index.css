@@ -27,3 +27,7 @@ h4{
     height: 50px;
     width: 50px
 }
+
+.list-div:hover{
+background-color: gray;
+}

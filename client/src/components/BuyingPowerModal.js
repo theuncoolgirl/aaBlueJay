@@ -38,18 +38,7 @@ const BuyingPowerModal = (props) => {
         setSellSliderValue(0)
     }
 
-    //set marks/labels for modal slider 
-    const marks = [
-        {
-            value: 0,
-            label: '0'
-        },
-        {
-            value: qtyOfPurchase,
-            label: `${qtyOfPurchase}`
-        }
-    ];
-
+    
     //function to make sure user can't purchase anything if unsufficient funds
     const maxQtyToPurchase = (() => {
         if (bank > currentPrice) {
@@ -59,7 +48,37 @@ const BuyingPowerModal = (props) => {
             return 0
         }
     })()
+    
+    //set marks/labels for modal slider 
+    const marksBuy = [
+        {
+            value: 0,
+            label: '0'
+        },{
+            value: maxQtyToPurchase/2,
+            label: `${maxQtyToPurchase/2}`
+        },
+        {
+            value: maxQtyToPurchase,
+            label: `${maxQtyToPurchase}`
+        }
+    ];
 
+    const marksSell = [
+        {
+            value: 0,
+            label: '0'
+        },
+        {
+            value: qtyOfPurchase/2,
+            label: `${qtyOfPurchase/2}`
+        },
+        {
+            value: qtyOfPurchase,
+            label: `${qtyOfPurchase}`
+        }
+    ]
+    
 
     return (
         <div>
@@ -82,7 +101,7 @@ const BuyingPowerModal = (props) => {
                             defaultValue={0}
                             aria-labelledby="discrete-slider-small-steps"
                             step={0.1}
-                            marks={marks}
+                            marks={marksBuy}
                             min={0}
                             valueLabelDisplay="auto"
                             max={maxQtyToPurchase}
@@ -98,7 +117,7 @@ const BuyingPowerModal = (props) => {
                             defaultValue={0}
                             aria-labelledby="discrete-slider-small-steps"
                             step={0.1}
-                            marks={marks}
+                            marks={marksSell}
                             min={0}
                             valueLabelDisplay="auto"
                             max={qtyOfPurchase}

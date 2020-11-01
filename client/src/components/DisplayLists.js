@@ -35,7 +35,7 @@ const DisplayLists = () => {
         <Divider className={classes.divider} />
         <div className={classes.spacer}>
           <Typography variant="subtitle2">
-            {userLists ? userLists.map(list => (<div key={list[0]} id={list[0]} onClick={handleClick}>
+            {userLists ? userLists.map(list => (<div className='list-div' key={list[0]} id={list[0]} onClick={handleClick}>
                                                 {list[0]}
                                                 <RemoveIcon onClick={handleDelete} style={{float:"right"}} id={`list-${list[0]}`} />
                                                 <Divider className={classes.divider} />

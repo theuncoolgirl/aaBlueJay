@@ -7,15 +7,14 @@ This is the backend for the Flask React project.
 1. Clone this repository (only this branch)
 
 ```bash
-git clone https://github.com/appacademy-starters/react-project-starter.git --branch flask-project-starter --single-branch
+$ git clone https://github.com/appacademy-starters/react-project-starter.git --branch flask-project-starter --single-branch
 ```
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format
 2. Install dependencies
    ```bash
-   pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
+   $ pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
    pipenv install alembic Flask-Migrate
    ```
-
    Open psql and make the below
    ---
    Create user "bluejay" with password 'password'
@@ -35,20 +34,22 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
 
    run the commands
    pipenv shell
-   flask db init
-   flask db migrate
-   flask db upgrade
+
+   $ flask db init
+   $ flask db migrate
+   $ flask db upgrade
+   
 
    check to see if your data is made
 
 5. Get into your pipenv, seed your database, and run your flask app
 
    ```bash
-   pipenv shell
+   $ pipenv shell
    ```
 
    ```bash
-   python -m database && flask run
+   $ python -m database && flask run
    ```
 6. To run the React App in development, checkout the [README](./client/README.md) inside the client directory.
 
@@ -103,7 +104,7 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
 
 ## Features 
 ***
-- Features Overview
+- [Features Overview](#Features-Overview)
 - Explore currencies 
 - Interactive candlestick stockchart
 - Dynamically genereated simulation 
@@ -120,23 +121,24 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
 - Postgresql
 - React/Redux
 - Coingecko API
+- Docker/Heroku deploy
 
 ## Installation
 ***
-1. Clone this repository (only this branch)
+1. Clone the repository
 
    ```bash
-   git clone https://github.com/theuncoolgirl/aaBlueJay.git
+   $ git clone https://github.com/theuncoolgirl/aaBlueJay.git
    ```
 2. Install dependencies
    ```bash
-   pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
-   pipenv install alembic Flask-Migrate
+   $ pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
+   $ pipenv install alembic Flask-Migrate
    ```
 
-3. Open psql and make the below
+3. Open psql and create user and database
 
-   - Create user "bluejay" with a password
+   - Create user "bluejay" with password "<<super_strong_secret_password>>"
    - Create database bluejay_dev_db with owner bluejay
 
 
@@ -156,19 +158,19 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
 6. migrate to database
 
    ``` pipenv shell
-    flask db init
-    flask db migrate 
-    flask db upgrade
+    $ flask db init
+    $ flask db migrate 
+    $ flask db upgrade
    ```
 
 5. Activate python shell and seed database
 
    ```bash
-   pipenv shell
+   $ pipenv shell
    ```
 
-   ```bash
-   python -m database && flask run
+   ```
+   $ python -m database && flask run
    ```
 
 ***
@@ -176,15 +178,20 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-forma
    If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
    You can do this by running:
    ```bash
-   pipenv lock -r > requirements.txt
+    $ pipenv lock -r > requirements.txt
    ```
 
 *ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
+   $ psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
    There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
 
 
 
 ### Features Overview
 ***
-BlueJay is a robinhood clone meant to explore, retrieve, and graphically model crypto currency data from the Coingecko API that gives access to current and historical stock information. 
+BlueJay is a robinhood clone meant to explore, retrieve, and graphically model crypto currency data from the Coingecko API of which gives access to current and historical currency/stock information. Major features are highlighted below, but the app has much potenitial in implementing additional goals of social iteraction (friends list), recommendations (made by friends), account profile settings, networth calculation, and dark mode to name a few.
+
+> Current Status: ongoing development
+
+
+
