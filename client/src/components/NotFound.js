@@ -1,13 +1,16 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Container, Typography } from '@material-ui/core';
+import { useStyles } from '../styles';
 
 const NotFound = () => {
-
+    const classes = useStyles();
     return (
         <>
-            <img src="/doge.png" alt="404img" style={{height:500}}/>
-            <img src="/leftdoge.png" alt="404img" />
-            <span><Typography variant="h2">404, We ate your results</Typography></span>
+            <div style={{ display: 'flex', alignItems: 'flex-end', marginBottom: 50 }}>
+                <Container className={classes.doge} alt="404img" style={{ height: 500, width: 500 }} />
+                <Container className={classes.dogeleft} alt="404img" style={{ height: 300, width: 300 }} />
+            </div>
+            <span ><Typography variant="h2">404, We ate your results</Typography></span>
         </>
     )
 }

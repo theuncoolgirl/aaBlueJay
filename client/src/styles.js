@@ -1,6 +1,11 @@
 // import { fade, makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { tsvFormat } from 'd3-dsv';
 import background from './commuters.png';
+import doge from './doge.png';
+import dogeleft from './leftdoge.png';
+import logo from './logo.png'
+
 
 // import { useStyles } from '../styles.js';
 // const classes = useStyles();
@@ -32,6 +37,21 @@ export const useStyles = makeStyles((theme) => ({
     divider: {
         marginTop: 10,
         marginBottom: 10,
+    },
+    doge: {
+        backgroundImage: `url(${doge})`,
+        // backgroundRepeat: false,
+        backgroundSize: "cover",
+        margin: 0,
+        // backgroundSize: 100
+        // height: 500,
+        // width: 600
+    },
+    dogeleft: {
+        backgroundImage: `url(${dogeleft})`,
+        backgroundSize: "cover",
+        margin: 0
+        // backgroundSize: "cover",
     },
     formButton: {
         marginTop: 15,
@@ -98,6 +118,28 @@ export const useStyles = makeStyles((theme) => ({
         height: 40,
         textAlign: 'center',
     },
+    logo: {
+        backgroundImage: `url(${logo})`,
+        backgroundSize: "cover",
+        alt: "logo",
+        height: '34px',
+        padding: 20
+        // margin: 5
+    },
+    logoForLoggedOutView: {
+        backgroundImage: `url(${logo})`,
+        backgroundSize: "cover",
+        alt: "logo",
+        // display: 'inline-block',
+        // marginTop: 3,
+        // marginBottom: 3,
+        height: '34px',
+        width: '34px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        // padding: 5,
+        margin: 5
+    },
     navBarLink: {
         marginLeft: 15,
         marginRight: 15,
@@ -142,7 +184,7 @@ export const useStyles = makeStyles((theme) => ({
     slider: {
         width: 300,
         display: 'block'
-      },
+    },
     sideCard: {
         textAlign: 'center',
         padding: 10,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Container } from '@material-ui/core';
 import LogoutButton from './LogoutButton';
 import SearchBar from './SearchBar';
 import { useStyles } from '../styles.js';
@@ -11,7 +11,7 @@ export default function Navigation() {
         <div>
             <AppBar className={classes.toolbar} position="static" color="inherit" elevation={0}>
                 <Toolbar className={classes.toolbar}>
-                    <NavLink className={classes.navImg} to="/" activeclass="active"><img src="/logo.png" alt="logo" height={'34px'} /></NavLink>
+                    <NavLink className={classes.navImg} to="/" activeclass="active"><Container className={classes.logo} alt="logo" height={'34px'} /></NavLink>
                     <SearchBar />
                     <div className={classes.grow} />
                     <div className={classes.navBarLinks}>
