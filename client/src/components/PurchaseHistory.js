@@ -42,14 +42,16 @@ const PurchaseHistory = () => {
     }
 
     return (
+      <>
       <Grid
       container
       direction="row"
       justify="space-around"
       display="flex"
       overflow="show%"
-    >
+      >
     <Grid className={classes.coinGridItem} item xs={8}>
+      <h1>Purchase History</h1>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -80,6 +82,7 @@ const PurchaseHistory = () => {
       <DisplayLists />
     </Grid>
   </Grid>
+    </>
     )
 }
 
