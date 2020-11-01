@@ -1,5 +1,4 @@
 ## Features 
-***
 - [Features Overview](#Features-Overview)
 - [Purchase histroy](#Purchase-histroy)
 - [Dynamically updated crypto currency search bar](#Dynamically-updated-crypto-currency-search-bar)
@@ -13,7 +12,6 @@
 
 
 ## Technologies 
-***
 - Flask
 - SqlAlchemy
 - Postgresql
@@ -22,7 +20,6 @@
 - Docker/Heroku deploy
 
 ## Notable packages
-***
 - Materiaui
 - React-Stockchartjs
 - React-SparkLines
@@ -32,7 +29,6 @@
 - pycoingecko (API wrapper)
 
 ## Installation
-***
 1. Clone the repository
 
    ```bash
@@ -95,19 +91,21 @@
 
 
 
-### Features Overview
-***
+## Features Overview
+
 BlueJay is a robinhood clone meant to explore, retrieve, and graphically model crypto currency data from the Coingecko API of which gives access to current and historical currency/stock information. Major features are highlighted below, but the app has much potenitial in implementing additional goals of social iteraction (friends list), recommendations (made by friends), account profile settings, networth calculations, and dark mode to name a few.
 
 > Current Status: ongoing development
 
 ### Purchase histroy
+***
 Firstly, upon login, you are greeted with a purchase histories page that showscases all the users recent crypto currency transactions apart of the buying power trade simulation on the coin details [page](#Dynamically-generated-stockcharts-candlestick-graph). Sold items (red) and purchased items (green) are displayed with each transaction.
 
  ![purchases](readmeImages/purchases.png)
 
 
 ### Dynamically updated crypto currency search bar
+***
 ![](readmeImages/searchbar.gif)
 
 Through a series of essential functions called upon keypress (illustrated below), the current search term is lower-cased and cross referenced by the store that houses over 6000 relevant crypto-currencies. The `allCoins` slice of state holds keys referencing their name and ticker symbol. Once enter is pressed `handleSearch` function adds the term onto the history to direct the user to the selected coin details page and cleared using a `reset` boolean state. 
@@ -157,6 +155,7 @@ const handleSearch = (e) => {
 ```
 
 ### Dynamically generated stockcharts candlestick graph
+***
 
 The stockcharts graph dynamically generates candlestick data modeling `high`, `low`, `open`, and `close` values for the selected crypto currency. [Here](https://www.ig.com/us/trading-strategies/candlestick-trading-explained-181218?&CHID=1&QPID=2934542669&QPPID=1&gclid=Cj0KCQjwufn8BRCwARIsAKzP697iO3QSChfXja0ugFUKuKw0-LtsMDb1NIQzsG2G4HpiSqGta0ASgdwaAm60EALw_wcB&gclsrc=aw.ds) is a link to learn more on how to read candlestick data. Red indicates the close value is higher than the open, while green represents the open value is higher than the close value.
 
@@ -253,6 +252,7 @@ export function DataToCsv(data){
 ```
 
 ### Crypto currency buying power simulator
+***
 The buying power simulator allows the user to purchase and sell cryto currencies. We had in mind additional simulation features to scale it up including networth calculations, list displaying all purchased currencies, and the ability to add more money into the bank. The simulation dynamically updates the cash in the user slice of state as well as updating the user's cash and purchase history in the database. 
 
 ![](readmeImages/buyingPower.gif)
@@ -302,11 +302,13 @@ The buying power modal will disable the buy button if the user is out of money o
 ```
 
 ### Sparkline integration
+***
 Sparkline integration showing 7 day snapshot of crypto currency. The spakline line is green if the overall trend is positive and red if the overall trend is negative. The coingecko api is utilized to retrieve the data to plot on the line graph. 
 
 ![sparkline](readmeImages/sparkLine.png)
 
 ### List 
+***
 The `DisplayLists` compoenent dynamically displays all the current lists that the user can create and add any crypto currency to subscribe to so the user doesn't have to search for it each time. The lists are stored in the redux store under the `list` slice of state. 
 
 ```js
@@ -360,6 +362,7 @@ const handleClick = (e) => {
 
 
 ### CSRF protection on login and sign up forms
+***
 The csrf token is fetched from the backend api and appended to each request for login and signup
 
 ```js
