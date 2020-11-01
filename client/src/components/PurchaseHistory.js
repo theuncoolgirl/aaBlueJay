@@ -64,7 +64,7 @@ const PurchaseHistory = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-            {purchases.map(purchase => <TableRow key={`purchase-${purchase.tickerSymbol}`}>
+            {purchases.map(purchase => <TableRow key={`purchase-${purchase.tickerSymbol}-${purchase.id}`}>
                 <TableCell component="th" scope="row" onClick={handleClick} > {purchase.tickerSymbol} </TableCell>
                 {/* <TableCell align="right">{row.symbol}</TableCell> */}
                 {(purchase.purchasePrice > 0) ? <TableCell style={{color:'green'}} align="right">Bid: ${purchase.purchasePrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell> :

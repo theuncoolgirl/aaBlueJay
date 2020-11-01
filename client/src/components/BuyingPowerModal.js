@@ -127,13 +127,14 @@ const BuyingPowerModal = (props) => {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    {/* disable buy button if there is no money in the bank */}
-                    {bank > 0 ? <Button onClick={buy} color="primary">
-                        Buy
-                        </Button> :
-                        <Button onClick={buy} disabled={true} color="primary">
-                            Buy
-                        </Button>}
+                    {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
+                    {bank == 0 || maxQtyToPurchase === 0 ? 
+                    <Button onClick={buy} disabled={true} color="primary">
+                    Buy
+                    </Button>:
+                    <Button onClick={buy} color="primary">
+                    Buy
+                    </Button>}
 
                     {/*disable sell button if purchase qty is 0 */}
                     {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>

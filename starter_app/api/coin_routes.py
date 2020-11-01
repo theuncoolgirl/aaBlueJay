@@ -98,6 +98,7 @@ def load_names():
     coin_names = cg.get_coins_list()
     return {"coin_names": coin_names}
 
+
 @coin_routes.route("/list/delete/userlist", methods=["DELETE"])
 def delete_user_list():
     user_id = int(request.json["user_id"])

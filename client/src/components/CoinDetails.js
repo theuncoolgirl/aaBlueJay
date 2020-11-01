@@ -83,7 +83,7 @@ function CoinDetails(props) {
                                         </Typography>
                                         <Divider className={classes.divider} />
                                         <Typography variant="caption">
-                                            <span dangerouslySetInnerHTML={{ __html: description }}></span>
+                                            <span style={{fontSize: '16px'}} dangerouslySetInnerHTML={{ __html: description }}></span>
                                         </Typography>
                                     </div>
                                     : null}
