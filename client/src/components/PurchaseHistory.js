@@ -5,6 +5,8 @@ import { load_purchase_history } from '../store/purchase'
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import DisplayLists from './DisplayLists';
+import Typography from '@material-ui/core/Typography';
+
 
 const useStyles = makeStyles({
     table: {
@@ -51,7 +53,7 @@ const PurchaseHistory = () => {
       overflow="show%"
       >
     <Grid className={classes.coinGridItem} item xs={8}>
-      <h1>Purchase History</h1>
+      <Typography variant='h4'>Purchase History</Typography>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

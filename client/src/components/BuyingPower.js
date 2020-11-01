@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import BuyingPowerModal from './BuyingPowerModal'
+import Typography from '@material-ui/core/Typography';
+
 
 const BuyingPower = (props) => {
     const { symbol, currentPrice } = props
@@ -44,9 +46,9 @@ const BuyingPower = (props) => {
 
     return (
         <>
-            <h2>Buying Power</h2>
-            <h4>you have $<span style={{ color: "rgba(255,0,0,0.9)" }}>{bank}</span> in your bank</h4>
-            <h4>You have a purchase quantity of <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> in {symbol.toUpperCase()}</h4>
+            <Typography variant='h6'>Buying Power</Typography>
+            <Typography variant='h6'>You have $<span style={{ color: "rgba(255,0,0,0.9)" }}>{bank}</span> in your bank</Typography>
+            <Typography variant='h6'>You have <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> {symbol.toUpperCase()}</Typography>
             <Button variant="contained" color="primary" onClick={handleOpen}>
                 Buy/Sell
             </Button>
