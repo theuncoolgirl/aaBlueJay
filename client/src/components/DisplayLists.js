@@ -32,14 +32,18 @@ const DisplayLists = () => {
     <>
       <Paper className={classes.sideCard} style={{ overflowY: 'scroll' }} elevation={3}>
         <Typography variant="h5">Lists</Typography>
-        <Divider className={classes.divider} />
+        <Divider style={{marginBottom: 0}} className={classes.divider} />
         <div className={classes.spacer}>
           <Typography variant="subtitle2">
-            {userLists ? userLists.map(list => (<div key={list[0]} id={list[0]} onClick={handleClick}>
-                                                {list[0]}
-                                                <RemoveIcon onClick={handleDelete} style={{float:"right"}} id={`list-${list[0]}`} />
-                                                <Divider className={classes.divider} />
-                                                </div>))
+            {userLists ? userLists.map(list => (
+                                                <div key={list[0]}>
+                                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} className='list-div'  id={list[0]} onClick={handleClick}>
+                                                  <span style={{marginLeft: '35%'}} id={list[0]}>{list[0]}</span>
+                                                  <RemoveIcon onClick={handleDelete} style={{float:"right"}} id={`list-${list[0]}`} />
+                                                  </div>
+                                                    <Divider style={{margin: 0}} className={classes.divider} />
+                                                </div>
+                                               ))
                         : null}
           </Typography>
           <ListModal style={{ position: 'absolute', marginTop: "30" }} />

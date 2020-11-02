@@ -28,26 +28,17 @@ const BuyingPowerModal = (props) => {
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
         onClose()
+        setBuySliderValue(0)
     }
 
     const sell = () => {
         //multiplying  by -1 so that the purchase history will reflect as sold or selling
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice*sellSliderValue*-1, sellSliderValue*-1))
         onClose()
+        setSellSliderValue(0)
     }
 
-    //set marks/labels for modal slider 
-    const marks = [
-        {
-            value: 0,
-            label: '0'
-        },
-        {
-            value: qtyOfPurchase,
-            label: `${qtyOfPurchase}`
-        }
-    ];
-
+    
     //function to make sure user can't purchase anything if unsufficient funds
     const maxQtyToPurchase = (() => {
         if (bank > currentPrice) {
@@ -57,7 +48,37 @@ const BuyingPowerModal = (props) => {
             return 0
         }
     })()
+    
+    //set marks/labels for modal slider 
+    const marksBuy = [
+        {
+            value: 0,
+            label: '0'
+        },{
+            value: maxQtyToPurchase/2,
+            label: `${maxQtyToPurchase/2}`
+        },
+        {
+            value: maxQtyToPurchase,
+            label: `${maxQtyToPurchase}`
+        }
+    ];
 
+    const marksSell = [
+        {
+            value: 0,
+            label: '0'
+        },
+        {
+            value: qtyOfPurchase/2,
+            label: `${qtyOfPurchase/2}`
+        },
+        {
+            value: qtyOfPurchase,
+            label: `${qtyOfPurchase}`
+        }
+    ]
+    
 
     return (
         <div>
@@ -80,9 +101,9 @@ const BuyingPowerModal = (props) => {
                             defaultValue={0}
                             aria-labelledby="discrete-slider-small-steps"
                             step={0.1}
-                            marks={marks}
+                            marks={marksBuy}
                             min={0}
-                            valueLabelDisplay="on"
+                            valueLabelDisplay="auto"
                             max={maxQtyToPurchase}
                             value={buySliderValue}
                             onChange={(e, buyValue) => { setBuySliderValue(buyValue) }}
@@ -96,9 +117,9 @@ const BuyingPowerModal = (props) => {
                             defaultValue={0}
                             aria-labelledby="discrete-slider-small-steps"
                             step={0.1}
-                            marks={marks}
+                            marks={marksSell}
                             min={0}
-                            valueLabelDisplay="on"
+                            valueLabelDisplay="auto"
                             max={qtyOfPurchase}
                             value={sellSliderValue}
                             onChange={(e, value) => { setSellSliderValue(value) }}
@@ -106,13 +127,14 @@ const BuyingPowerModal = (props) => {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    {/* disable buy button if there is no money in the bank */}
-                    {bank > 0 ? <Button onClick={buy} color="primary">
-                        Buy
-                        </Button> :
-                        <Button onClick={buy} disabled={true} color="primary">
-                            Buy
-                        </Button>}
+                    {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
+                    {bank == 0 || maxQtyToPurchase === 0 ? 
+                    <Button onClick={buy} disabled={true} color="primary">
+                    Buy
+                    </Button>:
+                    <Button onClick={buy} color="primary">
+                    Buy
+                    </Button>}
 
                     {/*disable sell button if purchase qty is 0 */}
                     {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>

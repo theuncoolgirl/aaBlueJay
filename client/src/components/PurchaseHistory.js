@@ -42,14 +42,16 @@ const PurchaseHistory = () => {
     }
 
     return (
+      <>
       <Grid
       container
       direction="row"
       justify="space-around"
       display="flex"
       overflow="show%"
-    >
+      >
     <Grid className={classes.coinGridItem} item xs={8}>
+      <h1>Purchase History</h1>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -64,7 +66,7 @@ const PurchaseHistory = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-            {purchases.map(purchase => <TableRow key={`purchase-${purchase.tickerSymbol}`}>
+            {purchases.map(purchase => <TableRow key={`purchase-${purchase.tickerSymbol}-${purchase.id}`}>
                 <TableCell component="th" scope="row" onClick={handleClick} > {purchase.tickerSymbol} </TableCell>
                 {/* <TableCell align="right">{row.symbol}</TableCell> */}
                 {(purchase.purchasePrice > 0) ? <TableCell style={{color:'green'}} align="right">Bid: ${purchase.purchasePrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell> :
@@ -80,6 +82,7 @@ const PurchaseHistory = () => {
       <DisplayLists />
     </Grid>
   </Grid>
+    </>
     )
 }
 

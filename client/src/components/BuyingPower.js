@@ -27,7 +27,7 @@ const BuyingPower = (props) => {
     //only update purchase qty if symbol changed
     useEffect(() => {
         const getPurchaseQty = () => {
-            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol == symbol)
+            const foundPurchases = purchases.filter(purchase => purchase.tickerSymbol === symbol)
             if (foundPurchases.length > 0) {
                 const totalQtyOfPurchase = foundPurchases.reduce((acc, curr) => {
                     return acc + curr.purchaseQuantity

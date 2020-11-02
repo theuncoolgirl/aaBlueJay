@@ -68,7 +68,7 @@ export default function BasicTable() {
                 <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className='table--hover'>
               {userCurrentList.map((row) => (
                 <CurrenceyTableRow row={row} deleteIcon={true} key={`list-${row.id}`} listIdToDelete={lists ? lists[0][1] : null} spark={true}>
                 </ CurrenceyTableRow>

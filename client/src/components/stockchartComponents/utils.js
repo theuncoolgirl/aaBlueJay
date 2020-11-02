@@ -2,7 +2,7 @@ import { csvParse } from  "d3-dsv";
 import { timeParse } from "d3-time-format";
 import { Parser } from 'json2csv'
 
-function parseData2(parse) {
+function parseData2() {
 	return function(d) {
         d.date = new Date(d.date)
         d.open = +d.open *100;
@@ -13,10 +13,9 @@ function parseData2(parse) {
 	};
 }
 
-export const parseDate = timeParse("%Y-%m-%d");
-
 //parsing the date to the correct format for the candlestickchart
 export function DataToCsv(data){
+	//extracting the correct data from the chart data json object fetched from the api
 	const alteredFetchedData = data.map(marketData => {
 		return {
 		  date: new Date(marketData[0]) + ''.split('T')[0],
@@ -33,6 +32,6 @@ export function DataToCsv(data){
 	const json2csvParser2 = new Parser({fields2})
 	const csv2 = json2csvParser2.parse(alteredFetchedData)
 	//returning the csv data into formatted objects the chart can use for data inputs
-	return csvParse(csv2, parseData2(parseDate))
+	return csvParse(csv2, parseData2())
 
 }

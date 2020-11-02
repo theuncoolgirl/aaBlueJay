@@ -27,3 +27,17 @@ h4{
     height: 50px;
     width: 50px
 }
+
+.list-div{
+    height: 50px;
+
+}
+.list-div:hover{
+background-color: lightgray;
+cursor: pointer;
+transition: ease-in 0.3s;
+}
+
+.table--hover:hover{
+cursor: pointer;
+}
