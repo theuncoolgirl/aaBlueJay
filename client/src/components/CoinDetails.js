@@ -94,7 +94,7 @@ function CoinDetails(props) {
                     {name ?
                         <>
                             <Paper className={classes.sideCard} elevation={3}>
-                                <Typography variant="subtitle2">
+                                <Typography variant="h6">
                                     Buy {symbol.toUpperCase()}
                                 </Typography>
                                 <Divider className={classes.divider} />
