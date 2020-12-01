@@ -24,6 +24,8 @@ const BuyingPowerModal = (props) => {
     useEffect(() => {
         console.log('rendering')
     }, [purchases])
+
+    
     //functions for buying power modal to buy or sell
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
