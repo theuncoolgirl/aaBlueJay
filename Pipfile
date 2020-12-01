@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 psycopg2-binary = "==2.8.6"
 pycodestyle = "*"
-
 pylint = "*"
 autopep8 = "*"
 
@@ -33,6 +32,7 @@ pycoingecko = "*"
 Flask-Migrate = "*"
 Flask-Login = "*"
 wtforms-validators = "*"
+email-validator = "*"
 
 [requires]
 python_version = "3.8"
