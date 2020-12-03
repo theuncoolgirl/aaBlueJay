@@ -5,6 +5,7 @@ import githubFilled from '@iconify-icons/ant-design/github-filled';
 import websiteIcon from '@iconify-icons/gg/website';
 import angellistIcon from '@iconify-icons/cib/angellist';
 import danielphoto from '../danielphoto.jpg'
+import quynnphoto from '../quynnphoto.jpg'
 const About = () => {
 
 
@@ -16,6 +17,14 @@ const About = () => {
             <a href="https://www.linkedin.com/in/daniel-ford-29970a5a/"><Icon icon={linkedinIcon} /></a>
             <a href="https://github.com/theuncoolgirl/aaBlueJay"><Icon icon={githubFilled} /></a>
             <a href="https://angel.co/u/daniel-ford-14"><Icon icon={angellistIcon} /></a>
+        </div>
+        <div>
+        <img src={quynnphoto} alt="Daniel" />
+            <p>Hi my name is Quynn Smith. I am a Full Stack Software Engineer residing in Tampa, Florida striving to learn and experience everything tech. I have exposure in developing web applications harnessing React, Redux, Express, Python, Flask, and Postgresql. I also have a background in chemistry and Pharmacy. Happy Hacking!</p>
+            <a href="http://www.quynnsmith.com"><Icon icon={websiteIcon} /></a>
+            <a href="https://www.linkedin.com/in/quynn-smith-a442671bb/"><Icon icon={linkedinIcon} /></a>
+            <a href="https://github.com/qsmity"><Icon icon={githubFilled} /></a>
+            <a href="https://angel.co/u/quynn-smith"><Icon icon={angellistIcon} /></a>
         </div>
     )
 }
