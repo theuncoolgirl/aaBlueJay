@@ -15,14 +15,14 @@
 
 ## Technologies 
 - Flask
-- SqlAlchemy
-- Postgresql
+- SQLAlchemy
+- PostgreSQL
 - React/Redux
 - Coingecko API
 - Docker/Heroku deploy
 
 ## Notable packages
-- Materiaui
+- Materialui
 - React-Stockchartjs
 - React-SparkLines
 - React Icons
