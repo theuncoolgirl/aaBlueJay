@@ -63,7 +63,7 @@ export default function ComboBox() {
           onKeyDown={(e) => handleEnter(e)}
           options={coins.map((option) => option.name || option.symbol)}
           renderInput={(params) => (
-            <TextField {...params} label="Search Coins" variant="filled" />
+            <TextField {...params} placeholder="Search Coins" variant="filled" />
           )}
         />
       </div>
