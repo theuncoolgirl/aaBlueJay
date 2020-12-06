@@ -5,7 +5,7 @@ import githubFilled from '@iconify-icons/ant-design/github-filled';
 import websiteIcon from '@iconify-icons/gg/website';
 import angellistIcon from '@iconify-icons/cib/angellist';
 import danielphoto from '../danielphoto.jpg'
-import quynnphoto from '../danielphoto.jpg'
+import quynnphoto from '../quynnphoto.jpg'
 import johnphoto from '../johnphoto.png'
 const About = () => {
 
