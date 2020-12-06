@@ -20,8 +20,6 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
     }
 
     const handleDelete = (symbolToDelete) => {
-        // const symbolToDelete = e.target.
-        // console.log(symbolToDelete)
         dispatch(thunks.deleteWatchlistItem(listIdToDelete, symbolToDelete))
     }
 
@@ -41,11 +39,10 @@ const CurrenceyTableRow = ({ row, deleteIcon, spark, listIdToDelete }) => {
             <TableCell align="right">${row.current_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
             <TableCell align="right" style={{ color: todayColor }}>% {row.market_cap_change_percentage_24h}</TableCell>
             <TableCell align="right">${row.market_cap.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
-            {/* {deleteIcon ? <RemoveIcon onClick={handleDelete} id={row.symbolId} /> : null} */}
             {deleteIcon ? <TableCell align="center" id={row.symbolId}>
-                            <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} />
-                          </TableCell>
-                        : null}
+                <RemoveIcon onClick={() => handleDelete(row.symbol)} id={row.symbolId} />
+            </TableCell>
+                : null}
         </TableRow>
     )
 }

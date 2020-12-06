@@ -47,7 +47,7 @@ const ExploreCurrencies = () => {
           </TableHead>
           <TableBody className='table--hover'>
             {rows.map((row, idx) => {
-              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false}/>
+              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false} />
             }
             )}
           </TableBody>
