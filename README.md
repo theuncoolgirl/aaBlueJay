@@ -2,7 +2,7 @@
 
 ## Features 
 - [Features Overview](#Features-Overview)
-- [Purchase histroy](#Purchase-histroy)
+- [Purchase history](#Purchase-history)
 - [Dynamically updated crypto currency search bar](#Dynamically-updated-crypto-currency-search-bar)
 - [Dynamically generated stockcharts candlestick graph](#Dynamically-generated-stockcharts-candlestick-graph)
    - Coingecko stocks API integration
@@ -99,9 +99,9 @@ BlueJay is a robinhood clone meant to explore, retrieve, and graphically model c
 
 > Current Status: ongoing development
 
-### Purchase histroy
+### Purchase history
 ***
-Firstly, upon login, you are greeted with a purchase histories page that showscases all the users recent crypto currency transactions apart of the buying power trade simulation on the coin details [page](#Dynamically-generated-stockcharts-candlestick-graph). Sold items (red) and purchased items (green) are displayed with each transaction.
+Firstly, upon login, you are greeted with a purchase histories page that showscases all the user's recent crypto currency transactions, a part of the buying power trade simulation on the coin details [page](#Dynamically-generated-stockcharts-candlestick-graph). Sold items (red) and purchased items (green) are displayed with each transaction.
 
  ![purchases](readmeImages/purchases.png)
 
@@ -110,7 +110,7 @@ Firstly, upon login, you are greeted with a purchase histories page that showsca
 ***
 ![](readmeImages/searchbar.gif)
 
-Through a series of essential functions called upon keypress (illustrated below), the current search term is lower-cased and cross referenced by the store that houses over 6000 relevant crypto-currencies. The `allCoins` slice of state holds keys referencing their name and ticker symbol. Once enter is pressed `handleSearch` function adds the term onto the history to direct the user to the selected coin details page and cleared using a `reset` boolean state. 
+Through a series of essential functions called upon keypress (illustrated below), the current search term is lower-cased and cross referenced by the store that houses over 6000 relevant crypto-currencies. The `allCoins` slice of state holds keys referencing names and ticker symbols. Once enter is pressed, the `handleSearch` function adds the term onto the history to direct the user to the selected coin details page and then clears using a `reset` boolean state. 
 
 ```js
 //ComboBox component
@@ -305,7 +305,7 @@ The buying power modal will disable the buy button if the user is out of money o
 
 ### Sparkline integration
 ***
-Sparkline integration showing 7 day snapshot of crypto currency. The spakline line is green if the overall trend is positive and red if the overall trend is negative. The coingecko api is utilized to retrieve the data to plot on the line graph. 
+Sparkline integration showing 7 day snapshot of crypto currency. The sparkline line is green if the overall trend is positive and red if the overall trend is negative. The coingecko api is utilized to retrieve the live data for plotting on this graph. 
 
 ![sparkline](readmeImages/sparkLine.png)
 
