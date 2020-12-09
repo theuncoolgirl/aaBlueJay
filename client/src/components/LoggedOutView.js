@@ -13,7 +13,9 @@ const LoggedOutView = () => {
         <BrowserRouter>
             <Paper className={classes.logoBar} elevation={0} style={{ justifyItems: 'center' }}>
                 {/* <Container className={classes.logoForLoggedOutView} /> */}
-                <img src='/favicon.ico' className={classes.img} />
+
+                <img src='/favicon.ico' className={classes.img} alt="favicon" />
+
             </Paper>
             <Container maxWidth="none" className={classes.background}>
                 <Switch>
@@ -24,7 +26,7 @@ const LoggedOutView = () => {
                         <LoginForm />
                         <Paper className={classes.siteInfoCard} elevation={3}>
                             <Typography className={classes.title} variant='h5'>Explore the world of crypto currencies.</Typography>
-                            <Typography variant='subtitle1'>Everyone has heard of bitcoin, but did you know there are so many more? Sign up to explore all of the crypto currencies out there! You might even find some suprising ones like <a className={classes.link} href="https://dogecoin.com/">Dogecoin</a>.</Typography>
+                            <Typography variant='subtitle1'>Everyone has heard of bitcoin, but did you know there are so many more? Sign up to explore all of the crypto currencies out there! You might even find some suprising ones like <a className={classes.link} href="https://dogecoin.com/" target='_blank' rel="noopener noreferrer">Dogecoin</a>.</Typography>
                         </Paper>
                     </Route>
                 </Switch>

@@ -26,7 +26,6 @@ export default function ComboBox() {
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
-    // console.log(e)
     if (e.key === 'Enter') {
       e.preventDefault()
       const results = coins.filter(coin => {
@@ -63,7 +62,7 @@ export default function ComboBox() {
           onKeyDown={(e) => handleEnter(e)}
           options={coins.map((option) => option.name || option.symbol)}
           renderInput={(params) => (
-            <TextField {...params} label="Search Coins" variant="filled" />
+            <TextField {...params} placeholder="Search Coins" variant="filled" />
           )}
         />
       </div>
