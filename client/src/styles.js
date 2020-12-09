@@ -1,5 +1,4 @@
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
-// import { tsvFormat } from 'd3-dsv';
 import background from './commuters.png';
 import doge from './doge.png';
 import dogeleft from './leftdoge.png';
@@ -174,11 +173,6 @@ export const useStyles = makeStyles((theme) => ({
         margin: '0 auto'
         // display: 'block'
     },
-    dialogPaper: {
-        height: 500,
-        width: '1000px !important'
-        // overflow: 'hidden'
-    },
     sideCard: {
         textAlign: 'center',
         padding: 10,
@@ -208,6 +202,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     table: {
         minWidth: 650
+    },
+    ownedCoinsTable:{
+        minWidth: 300,
+        maxWidth: 300
     },
     title: {
         marginBottom: 10
