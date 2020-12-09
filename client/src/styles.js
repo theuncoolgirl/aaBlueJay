@@ -170,8 +170,14 @@ export const useStyles = makeStyles((theme) => ({
         width: 400,
     },
     slider: {
-        width: 300,
-        display: 'block'
+        width: 450,
+        margin: '0 auto'
+        // display: 'block'
+    },
+    dialogPaper: {
+        height: 500,
+        width: '1000px !important'
+        // overflow: 'hidden'
     },
     sideCard: {
         textAlign: 'center',
@@ -211,7 +217,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: 0,
         height: 40,
         minHeight: 40
-    },
+    }
 }));
 
 export const theme = createMuiTheme({
@@ -279,6 +285,19 @@ export const theme = createMuiTheme({
                     borderBottom: "none"
                 }
             }
-        }
+        },
     },
 });
+
+export const dialogTheme = createMuiTheme({
+    overrides: {
+        MuiDialog: {
+            paper: {
+                minWidth: 550,
+                maxWidth: 550,
+                minHeight: 500,
+                maxHeight: 500
+            },
+        }
+    }
+})
