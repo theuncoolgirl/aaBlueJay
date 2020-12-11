@@ -39,6 +39,7 @@ const ExploreCurrencies = () => {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
+              <TableCell align="left">7-Day Performance</TableCell>
               <TableCell align="right">Symbol</TableCell>
               <TableCell align="right">Price</TableCell>
               <TableCell align="right">Today</TableCell>
@@ -48,7 +49,7 @@ const ExploreCurrencies = () => {
           </TableHead>
           <TableBody className='table--hover'>
             {rows.map((row, idx) => {
-              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false} />
+              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false} spark={true} />
             }
             )}
           </TableBody>
