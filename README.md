@@ -1,6 +1,6 @@
 [Live Link](https://aabluejay.herokuapp.com/)
 
-## Features 
+## Features
 - [Features Overview](#Features-Overview)
 - [Purchase history](#Purchase-history)
 - [Dynamically updated crypto currency search bar](#Dynamically-updated-crypto-currency-search-bar)
@@ -13,7 +13,7 @@
    - User authentication and authorization
 
 
-## Technologies 
+## Technologies
 - Flask
 - SQLAlchemy
 - PostgreSQL
@@ -53,7 +53,7 @@
    FLASK_APP=starter_app
    ```
 
-5. create a .env and add configuration modeled below: 
+5. create a .env and add configuration modeled below:
 
    ```
    DATABASE_URL=postgresql://username:password@localhost/database_name
@@ -65,7 +65,7 @@
 
    ``` pipenv shell
     $ flask db init
-    $ flask db migrate 
+    $ flask db migrate
     $ flask db upgrade
    ```
 
@@ -88,7 +88,7 @@
    ```
 
 *ALSO IMPORTANT!*
-   $ psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
+   $ psycopg2-binary MUST remain a dev dependency because you can't install it on alpine-linux.
    There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
 
 
@@ -110,7 +110,7 @@ Firstly, upon login, you are greeted with a purchase histories page that showsca
 ***
 ![](readmeImages/searchbar.gif)
 
-Through a series of essential functions called upon keypress (illustrated below), the current search term is lower-cased and cross referenced by the store that houses over 6000 relevant crypto-currencies. The `allCoins` slice of state holds keys referencing names and ticker symbols. Once enter is pressed, the `handleSearch` function adds the term onto the history to direct the user to the selected coin details page and then clears using a `reset` boolean state. 
+Through a series of essential functions called upon keypress (illustrated below), the current search term is lower-cased and cross referenced by the store that houses over 6000 relevant crypto-currencies. The `allCoins` slice of state holds keys referencing names and ticker symbols. Once enter is pressed, the `handleSearch` function adds the term onto the history to direct the user to the selected coin details page and then clears using a `reset` boolean state.
 
 ```js
 //ComboBox component
@@ -163,7 +163,7 @@ The stockcharts graph dynamically generates candlestick data modeling `high`, `l
 
 ![](readmeImages/stockchart.gif)
 
-The data from the graph is fetched in the backend using a `PUT` request from the `getCoinDetails` thunk to route `/api/coins` which pings the api. An api wrapper is used query the api in two seperate transactions to retrieve general coin information (`cg.get_coin_by_id`) as well as historical market data for the coin (`cg.get_coin_ohlc_by_id`). Both responses are formatted and placed on one object to be easily incorporated into one slice of state in redux store (`data = {**coin_data, "chart_data": chart_data}`) 
+The data from the graph is fetched in the backend using a `PUT` request from the `getCoinDetails` thunk to route `/api/coins` which pings the api. An api wrapper is used query the api in two seperate transactions to retrieve general coin information (`cg.get_coin_by_id`) as well as historical market data for the coin (`cg.get_coin_ohlc_by_id`). Both responses are formatted and placed on one object to be easily incorporated into one slice of state in redux store (`data = {**coin_data, "chart_data": chart_data}`)
 
 ```py
 @coin_routes.route("/", methods=["PUT"])
@@ -199,7 +199,7 @@ def coin():
     return res
 ```
 
-The stockcharts candlestick graph requires properly formatted csv data. After the data object containing coin data and chart data is sent back to the getCoinDetail thunk, the data is converted to csv object using the `DataToCsv` function. 
+The stockcharts candlestick graph requires properly formatted csv data. After the data object containing coin data and chart data is sent back to the getCoinDetail thunk, the data is converted to csv object using the `DataToCsv` function.
 
 ```js
 //getCoinDetail thunk
@@ -255,11 +255,11 @@ export function DataToCsv(data){
 
 ### Crypto currency buying power simulator
 ***
-The buying power simulator allows the user to purchase and sell cryto currencies. We had in mind additional simulation features to scale it up including networth calculations, list displaying all purchased currencies, and the ability to add more money into the bank. The simulation dynamically updates the cash in the user slice of state as well as updating the user's cash and purchase history in the database. 
+The buying power simulator allows the user to purchase and sell cryto currencies. We had in mind additional simulation features to scale it up including networth calculations, list displaying all purchased currencies, and the ability to add more money into the bank. The simulation dynamically updates the cash in the user slice of state as well as updating the user's cash and purchase history in the database.
 
 ![](readmeImages/buyingPower.gif)
 
-The `BuyingPower` component calculates the total qty a user has of a paticular cryptocurrency upon mounting, symbol (currency page) change, or update in purchase history by subscribing to the purchase history slice of state. The purchaes history model hold positive values for purchases and negative values for sold currencies so the reducer is used to determine the difference which returns the current quantity possesed. 
+The `BuyingPower` component calculates the total qty a user has of a paticular cryptocurrency upon mounting, symbol (currency page) change, or update in purchase history by subscribing to the purchase history slice of state. The purchaes history model hold positive values for purchases and negative values for sold currencies so the reducer is used to determine the difference which returns the current quantity possesed.
 
 ```js
 useEffect(() => {
@@ -285,7 +285,7 @@ The buying power modal will disable the buy button if the user is out of money o
 ```js
 <DialogActions>
    {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
-   {bank == 0 || maxQtyToPurchase === 0 ? 
+   {bank == 0 || maxQtyToPurchase === 0 ?
    <Button onClick={buy} disabled={true} color="primary">
    Buy
    </Button>:
@@ -305,16 +305,16 @@ The buying power modal will disable the buy button if the user is out of money o
 
 ### Sparkline integration
 ***
-Sparkline integration showing 7 day snapshot of crypto currency. The sparkline line is green if the overall trend is positive and red if the overall trend is negative. The coingecko api is utilized to retrieve the live data for plotting on this graph. 
+Sparkline integration showing 7 day snapshot of crypto currency. The sparkline line is green if the overall trend is positive and red if the overall trend is negative. The coingecko api is utilized to retrieve the live data for plotting on this graph.
 
 ![sparkline](readmeImages/sparkLine.png)
 
-### List 
+### List
 ***
-The `DisplayLists` compoenent dynamically displays all the current lists that the user can create and add any crypto currency to subscribe to so the user doesn't have to search for it each time. The lists are stored in the redux store under the `list` slice of state. 
+The `DisplayLists` compoenent dynamically displays all the current lists that the user can create and add any crypto currency to subscribe to so the user doesn't have to search for it each time. The lists are stored in the redux store under the `list` slice of state.
 
 ```js
-// DisplayLists component 
+// DisplayLists component
 
 const userLists = useSelector(state => state.list.lists);
   const id = useSelector(state=> state.session.id)
@@ -378,5 +378,3 @@ The csrf token is fetched from the backend api and appended to each request for 
     },
   });
 ```
-
-

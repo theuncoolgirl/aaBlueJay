@@ -11,12 +11,12 @@ import { load_coin_names } from './store/search_coins'
 import SearchResults from './components/SearchResults'
 import FriendList from './components/FriendList'
 import { thunks } from './store/list';
-import DisplayLists from './components/DisplayLists'
 import Navigation from './components/Navigation'
 import NotFound from './components/NotFound'
 import { Container } from '@material-ui/core';
 import LoggedOutView from './components/LoggedOutView'
 import PurchaseHistory from './components/PurchaseHistory'
+import About from './components/About';
 
 function App() {
     const dispatch = useDispatch()
@@ -58,6 +58,9 @@ function App() {
                             </Route>
                             <Route path="/explore/:id">
                                 <ExploreCurrencies />
+                            </Route>
+                            <Route path = "/about">
+                                <About />
                             </Route>
                             <Route exact path="/list/:listName">
                                 <MyList />
