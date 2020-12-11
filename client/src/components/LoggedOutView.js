@@ -24,7 +24,7 @@ const LoggedOutView = () => {
                         <LoginForm />
                         <Paper className={classes.siteInfoCard} elevation={3}>
                             <Typography className={classes.title} variant='h5'>Explore the world of crypto currencies.</Typography>
-                            <Typography variant='subtitle1'>Everyone has heard of bitcoin, but did you know there are so many more? Sign up to explore all of the crypto currencies out there! You might even find some suprising ones like <a className={classes.link} href="https://dogecoin.com/">Dogecoin</a>.</Typography>
+                            <Typography variant='subtitle1'>Everyone has heard of bitcoin, but did you know there are so many more? Sign up to explore all of the crypto currencies out there! You might even find some suprising ones like <a className={classes.link} href="https://dogecoin.com/" target='_blank' rel="noopener noreferrer">Dogecoin</a>.</Typography>
                         </Paper>
                     </Route>
                 </Switch>
