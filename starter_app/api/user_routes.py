@@ -83,7 +83,6 @@ def get_csrf_token():
 @user_routes.route("/purchases/<int:id>")
 def purchase_history(id):
     purchases = Purchase.query.filter(Purchase.userId == id).all()
-    print(purchases)
     res = [purchase.to_dict() for purchase in purchases]
     return {"purchases": res}
 
@@ -109,7 +108,6 @@ def add_purchase():
     db.session.add(purchase)
     db.session.commit()
     # purchase = Purchase.query.order_by(Purchase.purchaseDate.desc()).first()
-    print("user cash ---------------", user.cash)
     return {"purchase": purchase.to_dict(), "cash": user.cash}
 
 
@@ -117,5 +115,4 @@ def add_purchase():
 def friends_load(id):
     friends = Friend.query.filter(Friend.userId == id).all()
     res = [x.friend.to_dict() for x in friends]
-    print(res)
     return {"friends": res}

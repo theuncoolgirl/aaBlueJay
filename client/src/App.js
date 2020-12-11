@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserList from './components/UsersList';
 import MyList from './components/WatchList'
@@ -29,7 +29,7 @@ function App() {
         load_all_coins()
         dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
-    }, [])
+    }, [id])
 
     return (
         <>
@@ -39,10 +39,13 @@ function App() {
                     <Container maxWidth="lg" style={{ marginTop: 40 }}>
                         <Switch>
                             <Route exact={true} path="/">
-                                <PurchaseHistory />
+                                <Redirect to="/explore/1" />
                             </Route>
                             <Route path="/friends">
                                 <FriendList />
+                            </Route>
+                            <Route path="/purchasehistory">
+                                <PurchaseHistory />
                             </Route>
                             <Route path="/users">
                                 <UserList />

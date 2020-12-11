@@ -26,7 +26,6 @@ export default function ComboBox() {
     history.push(`/coins/${coinId[0].id}`)
   }
   const handleEnter = (e) => {
-    // console.log(e)
     if (e.key === 'Enter') {
       e.preventDefault()
       const results = coins.filter(coin => {
