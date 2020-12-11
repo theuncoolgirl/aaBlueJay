@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunks } from '../store/list';
 import CurrenceyTableRow from './CurrencyTableRow';
 import DisplayLists from './DisplayLists';
-import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
+import { Table, Grid, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { useStyles } from '../styles.js';
 import NotFound from './NotFound'
 

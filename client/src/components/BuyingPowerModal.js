@@ -25,7 +25,7 @@ const BuyingPowerModal = (props) => {
         console.log('rendering')
     }, [purchases])
 
-    
+
     //functions for buying power modal to buy or sell
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
@@ -40,7 +40,7 @@ const BuyingPowerModal = (props) => {
         setSellSliderValue(0)
     }
 
-    
+
     //function to make sure user can't purchase anything if unsufficient funds
     const maxQtyToPurchase = (() => {
         if (bank > currentPrice) {
@@ -50,8 +50,8 @@ const BuyingPowerModal = (props) => {
             return 0
         }
     })()
-    
-    //set marks/labels for modal slider 
+
+    //set marks/labels for modal slider
     const marksBuy = [
         {
             value: 0,
@@ -80,7 +80,7 @@ const BuyingPowerModal = (props) => {
             label: `${qtyOfPurchase}`
         }
     ]
-    
+
 
     return (
         <div>
@@ -130,7 +130,7 @@ const BuyingPowerModal = (props) => {
                 </DialogContent>
                 <DialogActions>
                     {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
-                    {bank == 0 || maxQtyToPurchase === 0 ? 
+                    {bank === 0 || maxQtyToPurchase === 0 ?
                     <Button onClick={buy} disabled={true} color="primary">
                     Buy
                     </Button>:

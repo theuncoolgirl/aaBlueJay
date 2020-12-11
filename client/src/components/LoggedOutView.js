@@ -13,7 +13,7 @@ const LoggedOutView = () => {
         <BrowserRouter>
             <Paper className={classes.logoBar} elevation={0} style={{ justifyItems: 'center' }}>
                 {/* <Container className={classes.logoForLoggedOutView} /> */}
-                <img src='/favicon.ico' className={classes.img} />
+                <img src='/favicon.ico' className={classes.img} alt="favicon" />
             </Paper>
             <Container maxWidth="none" className={classes.background}>
                 <Switch>

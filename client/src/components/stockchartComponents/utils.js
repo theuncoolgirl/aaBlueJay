@@ -1,5 +1,5 @@
 import { csvParse } from  "d3-dsv";
-import { timeParse } from "d3-time-format";
+// import { timeParse } from "d3-time-format";
 import { Parser } from 'json2csv'
 
 function parseData2() {
