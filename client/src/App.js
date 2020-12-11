@@ -29,7 +29,7 @@ function App() {
         load_all_coins()
         dispatch(thunks.getAllUserLists(id));
         // eslint-disable-next-line
-    }, [])
+    }, [id])
 
     return (
         <>
