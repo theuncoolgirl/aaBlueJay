@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import CurrenceyTableRow from "./CurrencyTableRow";
 import { explore_all_load } from '../store/explore'
@@ -33,6 +33,7 @@ const ExploreCurrencies = () => {
 
   return (
     <>
+      <Typography variant='h4'>Explore Popular Currencies</Typography>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -47,7 +48,7 @@ const ExploreCurrencies = () => {
           </TableHead>
           <TableBody className='table--hover'>
             {rows.map((row, idx) => {
-              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false}/>
+              return < CurrenceyTableRow row={row} key={`${row.name}-${idx}`} deleteIcon={false} />
             }
             )}
           </TableBody>
