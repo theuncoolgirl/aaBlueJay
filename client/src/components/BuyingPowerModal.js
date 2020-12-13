@@ -7,10 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useStyles } from '../styles'
+import { dialogTheme } from '../styles'
+import { ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import * as RIIcons from 'react-icons/ri'
 import { addPurchaseHistory } from '../store/purchase'
+import { isWidthDown } from '@material-ui/core';
 
 const BuyingPowerModal = (props) => {
     const dispatch = useDispatch()
@@ -35,7 +38,7 @@ const BuyingPowerModal = (props) => {
 
     const sell = () => {
         //multiplying  by -1 so that the purchase history will reflect as sold or selling
-        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice*sellSliderValue*-1, sellSliderValue*-1))
+        dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * sellSliderValue * -1, sellSliderValue * -1))
         onClose()
         setSellSliderValue(0)
     }
@@ -51,14 +54,14 @@ const BuyingPowerModal = (props) => {
         }
     })()
 
-    //set marks/labels for modal slider
+    //set marks/labels for modal slider 
     const marksBuy = [
         {
             value: 0,
             label: '0'
-        },{
-            value: maxQtyToPurchase/2,
-            label: `${maxQtyToPurchase/2}`
+        }, {
+            value: maxQtyToPurchase / 2,
+            label: `${maxQtyToPurchase / 2}`
         },
         {
             value: maxQtyToPurchase,
@@ -72,8 +75,8 @@ const BuyingPowerModal = (props) => {
             label: '0'
         },
         {
-            value: qtyOfPurchase/2,
-            label: `${qtyOfPurchase/2}`
+            value: qtyOfPurchase / 2,
+            label: `${qtyOfPurchase / 2}`
         },
         {
             value: qtyOfPurchase,
@@ -83,71 +86,74 @@ const BuyingPowerModal = (props) => {
 
 
     return (
-        <div>
-            <Dialog
-                open={open}
-                onClose={onClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title" className='modal-title'><RIIcons.RiMoneyDollarCircleLine className='money-icon' /></DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        the current price is ${currentPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                    </DialogContentText>
-                    <div className={classes.slider}>
-                        <Typography id="discrete-slider-small-steps" gutterBottom>
-                            Choose Buy Qty (max {maxQtyToPurchase}):
-                        </Typography>
-                        <Slider
-                            defaultValue={0}
-                            aria-labelledby="discrete-slider-small-steps"
-                            step={0.1}
-                            marks={marksBuy}
-                            min={0}
-                            valueLabelDisplay="auto"
-                            max={maxQtyToPurchase}
-                            value={buySliderValue}
-                            onChange={(e, buyValue) => { setBuySliderValue(buyValue) }}
-                        />
-                    </div>
-                    <div className={classes.slider}>
-                        <Typography id="discrete-slider-small-steps" gutterBottom>
-                            Choose Sell Qty (max {qtyOfPurchase}):
-                        </Typography>
-                        <Slider
-                            defaultValue={0}
-                            aria-labelledby="discrete-slider-small-steps"
-                            step={0.1}
-                            marks={marksSell}
-                            min={0}
-                            valueLabelDisplay="auto"
-                            max={qtyOfPurchase}
-                            value={sellSliderValue}
-                            onChange={(e, value) => { setSellSliderValue(value) }}
-                        />
-                    </div>
-                </DialogContent>
-                <DialogActions>
-                    {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
-                    {bank === 0 || maxQtyToPurchase === 0 ?
-                    <Button onClick={buy} disabled={true} color="primary">
-                    Buy
-                    </Button>:
-                    <Button onClick={buy} color="primary">
-                    Buy
+        <ThemeProvider theme={dialogTheme}>
+            <div>
+                <Dialog
+                    open={open}
+                    onClose={onClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title" className='modal-title'><RIIcons.RiMoneyDollarCircleLine className='money-icon' /></DialogTitle>
+                    <DialogContent>
+                        <DialogContentText style={{textAlign: 'center'}} id="alert-dialog-description">
+                            THE CURRENT PRICE IS ${currentPrice.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                        </DialogContentText>
+                        <div className={classes.slider}>
+                            <Typography id="discrete-slider-small-steps" gutterBottom>
+                                Choose Buy Qty (max {maxQtyToPurchase}): <p>{buySliderValue}</p>
+                            </Typography>
+                            <Slider
+                                defaultValue={0}
+                                aria-labelledby="discrete-slider-small-steps"
+                                step={0.1}
+                                marks={marksBuy}
+                                min={0}
+                                valueLabelDisplay="off"
+                                max={maxQtyToPurchase}
+                                value={buySliderValue}
+                                onChange={(e, buyValue) => { setBuySliderValue(buyValue) }}
+                            />
+                        </div>
+                        <div className={classes.slider}>
+                            <Typography id="discrete-slider-small-steps" gutterBottom>
+                                Choose Sell Qty (max {qtyOfPurchase}): <p>{sellSliderValue}</p>
+                            </Typography>
+                            <Slider
+                                defaultValue={0}
+                                aria-labelledby="discrete-slider-small-steps"
+                                step={0.1}
+                                marks={marksSell}
+                                min={0}
+                                valueLabelDisplay="off"
+                                max={qtyOfPurchase}
+                                value={sellSliderValue}
+                                onChange={(e, value) => { setSellSliderValue(value) }}
+                            />
+                        </div>
+                    </DialogContent>
+                    <DialogActions>
+                        {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
+                        {bank == 0 || maxQtyToPurchase === 0 ?
+                            <Button onClick={buy} disabled={true} color="primary">
+                                Buy
+                    </Button> :
+                            <Button onClick={buy} color="primary">
+                                Buy
                     </Button>}
 
-                    {/*disable sell button if purchase qty is 0 */}
-                    {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>
-                        Sell
-                       </Button> :
-                        <Button onClick={sell} disabled={true} color="primary" autoFocus>
+                        {/*disable sell button if purchase qty is 0 */}
+                        {qtyOfPurchase > 0 ? <Button onClick={sell} color="primary" autoFocus>
                             Sell
+                       </Button> :
+                            <Button onClick={sell} disabled={true} color="primary" autoFocus>
+                                Sell
                        </Button>}
-                </DialogActions>
-            </Dialog>
-        </div>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        </ThemeProvider>
+
     );
 }
 
