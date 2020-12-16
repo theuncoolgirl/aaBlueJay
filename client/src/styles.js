@@ -43,6 +43,50 @@ export const useStyles = makeStyles((theme) => ({
         backgroundSize: "cover",
         margin: 0
     },
+    footerAppBar: {
+        marginTop: 40,
+        marginBottom: 0,
+        marginRight: 0,
+        marginLeft: 0,
+        padding: 0,
+        height: 40,
+        minHeight: 40
+    },
+    footerDivider: {
+        marginRight: 20,
+    },
+    footerImg: {
+        display: 'inline-block',
+        marginTop: 3,
+        marginBottom: 3,
+        marginRight: 20,
+        height: 20,
+    },
+    footerImgLink: {
+        paddingLeft: 20,
+        paddingTop: 3,
+    },
+    footerLink: {
+        textDecoration: "none",
+        color: "#3f51b5",
+        '&:hover': {
+            color: "black",
+        },
+    },
+    footerLinks: {
+        color: "black",
+        weight: "bold",
+        marginTop: "auto",
+        marginBottom: "auto",
+        marginRight: 26,
+        textDecoration: "none",
+    },
+    footerToolbar: {
+        margin: 'auto',
+        padding: 0,
+        height: 40,
+        minHeight: 40
+    },
     formButton: {
         marginTop: 15,
         marginBottom: 15,
@@ -78,7 +122,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
         marginTop: 3,
         marginBottom: 3,
-        height: 34
+        height: 34,
     },
     inputField: {
         marginTop: 8,
@@ -131,6 +175,7 @@ export const useStyles = makeStyles((theme) => ({
         marginLeft: 15,
         marginRight: 15,
         color: "black",
+        cursor: "pointer",
         weight: "bold",
         marginTop: "auto",
         marginBottom: "auto",
@@ -177,7 +222,10 @@ export const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         padding: 10,
         maxWidth: 250,
-        height: '80vh'
+        height: '60vh',
+        marginTop: 61,
+        marginRight: 'auto',
+        marginLeft: 'auto'
     },
     siteInfoCard: {
         textAlign: 'center',
