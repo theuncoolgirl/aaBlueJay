@@ -46,10 +46,11 @@ const BuyingPower = (props) => {
 
     return (
         <>
-            <Typography variant='h6'>Buying Power</Typography>
-            <Typography variant='h6'>You have $<span style={{ color: "rgba(255,0,0,0.9)" }}>{bank}</span> in your bank</Typography>
-            <Typography variant='h6'>You have <span style={{ color: "rgba(255,0,0,0.9)" }}>{qtyOfPurchase}</span> {symbol.toUpperCase()}</Typography>
-            <Button variant="contained" color="primary" onClick={handleOpen}>
+            <Typography variant='subtitle1'>Buying Power:</Typography>
+            <Typography variant='subtitle1'>You have $<span style={{ color: "rgba(63,81,181,0.9)" }}>{bank}</span> in your bank</Typography>
+            <Typography variant='subtitle2'>and</Typography>
+            <Typography variant='subtitle1'>You have <span style={{ color: "rgba(63,81,181,0.9)" }}>{qtyOfPurchase}</span> {symbol.toUpperCase()}</Typography>
+            <Button variant="contained" color="primary" onClick={handleOpen} style={{marginTop: 15}}>
                 Buy/Sell
             </Button>
             <BuyingPowerModal

@@ -158,7 +158,7 @@ const PurchaseHistory = () => {
               </Table>
             </TableContainer>
           </Grid>
-          <Grid className={classes.center} item xs={3}>
+          <Grid className={classes.center} style={{display: 'flex', justifyContent: 'center'}} item xs={3}>
             <DisplayLists />
           </Grid>
         </Grid>

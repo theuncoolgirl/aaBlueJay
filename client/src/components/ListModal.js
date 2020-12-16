@@ -73,8 +73,8 @@ export default function SimpleModal() {
   );
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" style={{ margin: 20 }} onClick={handleOpen}>
+    <div style={{display: 'flex'}}>
+      <Button variant="outlined" color="primary" style={{ marginTop: 20, marginBottom: 20, marginLeft: 'auto', marginRight: 'auto' }} onClick={handleOpen}>
         &#10003; Create List
      </Button>
       <Modal

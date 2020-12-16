@@ -17,6 +17,7 @@ import { Container } from '@material-ui/core';
 import LoggedOutView from './components/LoggedOutView'
 import PurchaseHistory from './components/PurchaseHistory'
 import About from './components/About';
+import Footer from './components/Footer';
 
 function App() {
     const dispatch = useDispatch()
@@ -71,6 +72,7 @@ function App() {
                             </Route>
                         </Switch>
                     </Container>
+                <Footer />
             </BrowserRouter >)
             }
         </>

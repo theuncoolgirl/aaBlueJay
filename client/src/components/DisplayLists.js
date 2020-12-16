@@ -46,9 +46,10 @@ const DisplayLists = () => {
                                                ))
                         : null}
           </Typography>
-          <ListModal style={{ position: 'absolute', marginTop: "30" }} />
+          
         </div>
       </Paper>
+      <ListModal />
     </>
   )
 }
