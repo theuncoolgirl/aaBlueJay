@@ -18,7 +18,6 @@ const addHistory = (purchase) => {
   }
 }
 
-
 //thunks
 export const load_purchase_history = (id) => async dispatch => {
   const res = await fetch(`/api/users/purchases/${id}`)

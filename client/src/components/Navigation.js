@@ -24,9 +24,9 @@ export default function Navigation() {
                         <NavLink to="/purchasehistory" activeclass="active" className={classes.navBarLink}>
                             <Typography underline="none" variant="caption">Purchase History</Typography>
                         </NavLink>
-                        <NavLink to="/about" activeclass="active" className={classes.navBarLink}>
+                        {/* <NavLink to="/about" activeclass="active" className={classes.navBarLink}>
                         <Typography underline="none" variant="caption">About</Typography>
-                        </NavLink>
+                        </NavLink> */}
                         <LogoutButton />
                     </div>
                 </Toolbar>

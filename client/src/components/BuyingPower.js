@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import BuyingPowerModal from './BuyingPowerModal'
 import Typography from '@material-ui/core/Typography';
+import { loadSuccessMessage } from '../store/success_message';
 
 
 const BuyingPower = (props) => {
+    const dispatch = useDispatch()
+
     const { symbol, currentPrice } = props
 
     const bank = useSelector(state => state.session.cash)
     const currentUserId = useSelector(state => state.session.id)
     const purchases = useSelector(state => state.purchase)
+    const successMessage = useSelector(state => state.success_message.message)
 
     const [qtyOfPurchase, setQtyOfPurchase] = useState(null)
 
@@ -19,6 +24,7 @@ const BuyingPower = (props) => {
 
     const handleOpen = () => {
         setOpen(true);
+        dispatch(loadSuccessMessage(null));
     };
 
     const handleClose = () => {
@@ -50,9 +56,12 @@ const BuyingPower = (props) => {
             <Typography variant='subtitle1'>You have $<span style={{ color: "rgba(63,81,181,0.9)" }}>{bank}</span> in your bank</Typography>
             <Typography variant='subtitle2'>and</Typography>
             <Typography variant='subtitle1'>You have <span style={{ color: "rgba(63,81,181,0.9)" }}>{qtyOfPurchase}</span> {symbol.toUpperCase()}</Typography>
-            <Button variant="contained" color="primary" onClick={handleOpen} style={{marginTop: 15}}>
+            <Button variant="contained" color="primary" onClick={handleOpen} style={{marginTop: 15, marginBottom: 25}}>
                 Buy/Sell
             </Button>
+            {successMessage ? (
+                <Typography variant='subtitle1' style={{ color: 'green' }}>{successMessage}</Typography>
+            ) : null}
             <BuyingPowerModal
                 onClose={handleClose}
                 open={open} bank={bank}
