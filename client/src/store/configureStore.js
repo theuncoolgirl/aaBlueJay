@@ -7,6 +7,7 @@ import list from './list'
 import search from './search_coins'
 import purchase from './purchase'
 import friends from './friends'
+import success_message from './success_message'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   list,
   search,
   purchase,
-  friends
+  friends,
+  success_message
 });
 
 const storeEnhancer = composeEnhancers(applyMiddleware(thunk));

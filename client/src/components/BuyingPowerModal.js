@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,14 +6,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useStyles } from '../styles'
-import { dialogTheme } from '../styles'
+import { useStyles } from '../styles';
+import { dialogTheme } from '../styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import * as RIIcons from 'react-icons/ri'
-import { addPurchaseHistory } from '../store/purchase'
-import { isWidthDown } from '@material-ui/core';
+import * as RIIcons from 'react-icons/ri';
+import { addPurchaseHistory } from '../store/purchase';
+import { loadSuccessMessage } from '../store/success_message';
 
 const BuyingPowerModal = (props) => {
     const dispatch = useDispatch()
@@ -33,6 +33,7 @@ const BuyingPowerModal = (props) => {
     const buy = () => {
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * buySliderValue, buySliderValue))
         onClose()
+        dispatch(loadSuccessMessage(`Success! Bought ${buySliderValue} ${(symbol).toUpperCase()} for $${(currentPrice * buySliderValue).toFixed(2)}.`))
         setBuySliderValue(0)
     }
 
@@ -40,6 +41,7 @@ const BuyingPowerModal = (props) => {
         //multiplying  by -1 so that the purchase history will reflect as sold or selling
         dispatch(addPurchaseHistory(currentUserId, symbol, currentPrice * sellSliderValue * -1, sellSliderValue * -1))
         onClose()
+        dispatch(loadSuccessMessage(`Success! Sold ${sellSliderValue} ${(symbol).toUpperCase()} for $${(currentPrice * sellSliderValue).toFixed(2)}.`))
         setSellSliderValue(0)
     }
 
@@ -134,7 +136,7 @@ const BuyingPowerModal = (props) => {
                     </DialogContent>
                     <DialogActions>
                         {/* disable buy button if there is no money in the bank or if the user doen't have enough money to buy atleast qty of 1 */}
-                        {bank == 0 || maxQtyToPurchase === 0 ?
+                        {bank === 0 || maxQtyToPurchase === 0 ?
                             <Button onClick={buy} disabled={true} color="primary">
                                 Buy
                     </Button> :
