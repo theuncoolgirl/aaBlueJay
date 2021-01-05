@@ -2,7 +2,8 @@ import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import background from './commuters.png';
 import doge from './doge.png';
 import dogeleft from './leftdoge.png';
-import logo from './logo.png'
+import logo from './logo.png';
+import github from './github.png';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -56,11 +57,16 @@ export const useStyles = makeStyles((theme) => ({
         marginRight: 20,
     },
     footerImg: {
-        display: 'inline-block',
+        backgroundImage: `url(${github})`,
+        backgroundSize: '50%',
+        backgroundRepeat: 'no-repeat',
+        display: 'block',
         marginTop: 3,
         marginBottom: 3,
         marginRight: 20,
-        height: 20,
+        marginLeft: 20,
+        height: 23,
+        width: 0.5
     },
     footerImgLink: {
         paddingLeft: 20,
@@ -251,7 +257,7 @@ export const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 650
     },
-    ownedCoinsTable:{
+    ownedCoinsTable: {
         minWidth: 300,
         maxWidth: 300
     },

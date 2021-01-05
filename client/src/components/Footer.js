@@ -22,7 +22,7 @@ export default function Footer() {
                             <a className={classes.footerLink} target="_blank" rel="noopener noreferrer" href="http://quynnsmith.com"> Quynn Smith</a>
                         </Typography>
                     </div>
-                    
+
                 </Toolbar>
             </AppBar>
         </div >
